@@ -51,7 +51,7 @@ public class Client extends JFrame
       displayArea = new JTextArea(); // create displayArea
       add( new JScrollPane( displayArea ), BorderLayout.CENTER );
 
-      setSize( 300, 150 ); // set size of window
+      setSize( 400, 200 ); // set size of window
       setVisible( true ); // show window
    } // end Client constructor
 
