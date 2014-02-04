@@ -5,6 +5,7 @@ import javax.swing.JTextField;
  * @author Rob Close
  */
 
+
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -26,6 +27,7 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -33,7 +35,12 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 public class Battleship extends javax.swing.JFrame {
-
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	// Variables declaration
 	private javax.swing.JButton connectButton;
 	private javax.swing.JButton hostButton;
@@ -67,37 +74,38 @@ public class Battleship extends javax.swing.JFrame {
 	// End of variables declaration
 
 	public Battleship() {
-
+		super("Battleship");
 		initComponents();
 
 	}
 
 	private void initComponents() {
 
-		jScrollPane1 = new javax.swing.JScrollPane();
-		jScrollPane2 = new javax.swing.JScrollPane();
-		jPanel1 = new javax.swing.JPanel();
-		jLabel1 = new javax.swing.JLabel();
+		jScrollPane1 = new JScrollPane();
+		jScrollPane2 = new JScrollPane();
+		jPanel1 = new JPanel();
+		jLabel1 = new JLabel();
 		userChatEnter = new JTextField();
 		userChatDisplay = new JTextArea();
-		jPanel2 = new javax.swing.JPanel();
-		readyButton = new javax.swing.JButton();
-		jLabel5 = new javax.swing.JLabel();
-		jLabel6 = new javax.swing.JLabel();
-		jLabel9 = new javax.swing.JLabel();
+		jPanel2 = new JPanel();
+		readyButton = new JButton();
+		jLabel5 = new JLabel();
+		jLabel6 = new JLabel();
+		jLabel9 = new JLabel();
 		hostButton = new javax.swing.JButton();
-		ipAddressEnter = new javax.swing.JTextField();
-		connectButton = new javax.swing.JButton();
+		ipAddressEnter = new JTextField();
+		connectButton = new JButton();
 		serverMessageDisplay = new javax.swing.JTextArea();
-		jPanel3 = new javax.swing.JPanel();
-		jPanel4 = new javax.swing.JPanel();
-		jPanel5 = new javax.swing.JPanel();
-		jLabel2 = new javax.swing.JLabel();
-		jLabel3 = new javax.swing.JLabel();
-		jLabel4 = new javax.swing.JLabel();
-		jLabel7 = new javax.swing.JLabel();
-		jLabel8 = new javax.swing.JLabel();
-		ipAddressEnter.setEditable(false);
+		jPanel3 = new JPanel();
+		jPanel4 = new JPanel();
+		jPanel5 = new JPanel();
+		jLabel2 = new JLabel();
+		jLabel3 = new JLabel();
+		jLabel4 = new JLabel();
+		jLabel7 = new JLabel();
+		jLabel8 = new JLabel();
+		
+		ipAddressEnter.setEditable(true);
 
 		/*
 		 * ipAddressEnter.addActionListener(new ActionListener() { // send
@@ -130,66 +138,25 @@ public class Battleship extends javax.swing.JFrame {
 		javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(
 				jPanel1);
 		jPanel1.setLayout(jPanel1Layout);
+		jPanel1Layout.setHorizontalGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel1Layout.createSequentialGroup()
+				.addContainerGap()
+				.addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING,false)
+				.addComponent(jScrollPane2)
+				.addGroup(jPanel1Layout.createSequentialGroup()
+				.addComponent(jLabel1)
+				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+				.addComponent(userChatEnter,javax.swing.GroupLayout.PREFERRED_SIZE,300,javax.swing.GroupLayout.PREFERRED_SIZE)))
+				.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)));
 		jPanel1Layout
-				.setHorizontalGroup(jPanel1Layout
-						.createParallelGroup(
-								javax.swing.GroupLayout.Alignment.LEADING)
-						.addGroup(
-								jPanel1Layout
-										.createSequentialGroup()
-										.addContainerGap()
-										.addGroup(
-												jPanel1Layout
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.TRAILING,
-																false)
-														.addComponent(
-																jScrollPane2)
-														.addGroup(
-																jPanel1Layout
-																		.createSequentialGroup()
-																		.addComponent(
-																				jLabel1)
-																		.addPreferredGap(
-																				javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																		.addComponent(
-																				userChatEnter,
-																				javax.swing.GroupLayout.PREFERRED_SIZE,
-																				300,
-																				javax.swing.GroupLayout.PREFERRED_SIZE)))
-										.addContainerGap(
-												javax.swing.GroupLayout.DEFAULT_SIZE,
-												Short.MAX_VALUE)));
-		jPanel1Layout
-				.setVerticalGroup(jPanel1Layout
-						.createParallelGroup(
-								javax.swing.GroupLayout.Alignment.LEADING)
-						.addGroup(
-								jPanel1Layout
-										.createSequentialGroup()
-										.addComponent(
-												jScrollPane2,
-												javax.swing.GroupLayout.PREFERRED_SIZE,
-												javax.swing.GroupLayout.DEFAULT_SIZE,
-												javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-												javax.swing.GroupLayout.DEFAULT_SIZE,
-												Short.MAX_VALUE)
-										.addGroup(
-												jPanel1Layout
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.LEADING)
-														.addComponent(
-																userChatEnter,
-																javax.swing.GroupLayout.Alignment.TRAILING,
-																javax.swing.GroupLayout.PREFERRED_SIZE,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																javax.swing.GroupLayout.PREFERRED_SIZE)
-														.addComponent(
-																jLabel1,
-																javax.swing.GroupLayout.Alignment.TRAILING))
-										.addContainerGap()));
+				.setVerticalGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+						.addGroup(jPanel1Layout.createSequentialGroup()
+						.addComponent(jScrollPane2,javax.swing.GroupLayout.PREFERRED_SIZE,javax.swing.GroupLayout.DEFAULT_SIZE,javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,javax.swing.GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
+						.addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+						.addComponent(userChatEnter,javax.swing.GroupLayout.Alignment.TRAILING,javax.swing.GroupLayout.PREFERRED_SIZE,javax.swing.GroupLayout.DEFAULT_SIZE,javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addComponent(jLabel1,javax.swing.GroupLayout.Alignment.TRAILING))
+						.addContainerGap()));
 
 		jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null,
 				"Control Panel", javax.swing.border.TitledBorder.CENTER,
@@ -204,14 +171,14 @@ public class Battleship extends javax.swing.JFrame {
 
 		jLabel9.setText("Host IP Address");
 
-		hostButton.setLabel("Host");
+		hostButton.setText("Host");
 		hostButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				button2ActionPerformed(evt);
+				hostButtonActionPerformed(evt);
 			}
 		});
 
-		connectButton.setLabel("Connect");
+		connectButton.setText("Connect");
 
 		serverMessageDisplay.setColumns(20);
 		serverMessageDisplay.setRows(5);
@@ -235,10 +202,11 @@ public class Battleship extends javax.swing.JFrame {
 				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addComponent(hostButton,javax.swing.GroupLayout.PREFERRED_SIZE,62,javax.swing.GroupLayout.PREFERRED_SIZE)
 				.addGroup(jPanel2Layout.createSequentialGroup()
-						.addComponent(ipAddressEnter,javax.swing.GroupLayout.PREFERRED_SIZE,115,javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addComponent(ipAddressEnter,javax.swing.GroupLayout.PREFERRED_SIZE,150,javax.swing.GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 						.addComponent(connectButton,javax.swing.GroupLayout.PREFERRED_SIZE,javax.swing.GroupLayout.DEFAULT_SIZE,javax.swing.GroupLayout.PREFERRED_SIZE)))))
-						.addGap(0, 0, Short.MAX_VALUE)));
+						//.addGap(0, 0, Short.MAX_VALUE)
+						));
 		jPanel2Layout
 				.setVerticalGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING,jPanel2Layout.createSequentialGroup()
@@ -373,18 +341,23 @@ public class Battleship extends javax.swing.JFrame {
 		pack();
 	}// </editor-fold>
 
-	private void button2ActionPerformed(java.awt.event.ActionEvent evt) {
+	private void hostButtonActionPerformed(java.awt.event.ActionEvent evt) {
+		hostButton.setEnabled(false);
 		runServer(); // run server application
+		
 	}
 
-	private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
-	}
+	private void jTextField1ActionPerformed( ActionEvent event )
+    {
+        sendData( event.getActionCommand() );
+        userChatEnter.setText( "" );
+    } // end method actionPerformed
+   // end anonymous inner class
 
 	public void runServer() {
 		try // set up server to receive connections; process connections
 		{
-			serverSocket = new ServerSocket(12345, 100);
+			serverSocket = new ServerSocket(12345);
 			// Creates a server socket and binds it to the specified local
 			// port number, with the specified backlog ServerSocket(int port,
 			// int backlog)
@@ -515,6 +488,11 @@ public class Battleship extends javax.swing.JFrame {
 	 *            the command line arguments
 	 */
 	public static void main(String args[]) {
+		
+		
+		
+		
+		
 		/* Set the Nimbus look and feel */
 		// <editor-fold defaultstate="collapsed"
 		// desc=" Look and feel setting code (optional) ">
@@ -523,7 +501,7 @@ public class Battleship extends javax.swing.JFrame {
 		 * default look and feel. For details see
 		 * http://download.oracle.com/javase
 		 * /tutorial/uiswing/lookandfeel/plaf.html
-		 */
+		*/
 		try {
 			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager
 					.getInstalledLookAndFeels()) {
@@ -553,6 +531,7 @@ public class Battleship extends javax.swing.JFrame {
 				new Battleship().setVisible(true);
 			}
 		});
+		
 	}
 
 }
