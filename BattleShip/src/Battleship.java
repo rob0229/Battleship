@@ -1,7 +1,6 @@
 
 
 
-
 import java.net.InetAddress;
 import java.io.EOFException;
 import java.io.IOException;
@@ -27,7 +26,7 @@ public class Battleship extends javax.swing.JFrame {
    private String message = ""; // message from server
    private String chatServer; // host server for this application
    private Socket client; // socket to communicate with server
-     
+     private Boolean isServer = false;
     /**
      * Creates new form Battleship
      */
@@ -247,15 +246,15 @@ public class Battleship extends javax.swing.JFrame {
 
         shipInventory.setBorder(javax.swing.BorderFactory.createTitledBorder("Ship Inventory"));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("Battleship.jpg")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("Battleship.jpg"))); // NOI18N
         jLabel2.setText("Battleship");
         jLabel2.setPreferredSize(new java.awt.Dimension(120, 60));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon("Cruiser.jpg")); // NOI18N
-        jLabel3.setText("Crusier");
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("Cruiser.jpg"))); // NOI18N
+        jLabel3.setText("Cruiser");
         jLabel3.setPreferredSize(new java.awt.Dimension(120, 60));
 
-        jLabel4.setIcon(new javax.swing.ImageIcon("Submarine.jpg")); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("Submarine.jpg"))); // NOI18N
         jLabel4.setText("Submarine");
         jLabel4.setPreferredSize(new java.awt.Dimension(120, 60));
 
@@ -263,10 +262,8 @@ public class Battleship extends javax.swing.JFrame {
         jLabel7.setText("Carrier");
         jLabel7.setPreferredSize(new java.awt.Dimension(120, 60));
 
-        jLabel8.setIcon(new javax.swing.ImageIcon("C:\\Users\\Rob\\Documents\\NetBeansProjects\\ContactEditor\\Destroyer.jpg")); // NOI18N
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("Destroyer.jpg"))); // NOI18N
         jLabel8.setText("Destroyer");
-        jLabel8.setMaximumSize(new java.awt.Dimension(60, 20));
-        jLabel8.setMinimumSize(new java.awt.Dimension(60, 20));
         jLabel8.setPreferredSize(new java.awt.Dimension(60, 20));
 
         javax.swing.GroupLayout shipInventoryLayout = new javax.swing.GroupLayout(shipInventory);
@@ -354,11 +351,15 @@ public class Battleship extends javax.swing.JFrame {
     }// </editor-fold>                        
   
     private void userChatEnterActionPerformed(java.awt.event.ActionEvent evt) {                                              
-      
+      if (isServer == true){
        sendData( evt.getActionCommand() );
         userChatEnter.setText( "" );
-        
-      
+      }
+      else{
+          sendDataClient( evt.getActionCommand() );
+        userChatEnter.setText( "" );
+      }
+  
     }                                             
 
     private void ipAddressFieldActionPerformed(java.awt.event.ActionEvent evt) {                                               
@@ -370,6 +371,7 @@ public class Battleship extends javax.swing.JFrame {
     private void hostButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
          hostButton.setEnabled(false);
         connectButton.setEnabled(false);
+        isServer = true;
 	   	  {
 	   		Runnable serverRunnable = new Runnable(){
 	   			
@@ -592,8 +594,8 @@ public class Battleship extends javax.swing.JFrame {
    private void getStreamsClient() throws IOException
    {
       // set up output stream for objects
-      output = new ObjectOutputStream( client.getOutputStream() );      
-      output.flush(); // flush output buffer to send header information
+      outputClient = new ObjectOutputStream( client.getOutputStream() );      
+      outputClient.flush(); // flush output buffer to send header information
 
       // set up input stream for objects
       input = new ObjectInputStream( client.getInputStream() );
@@ -631,8 +633,8 @@ public class Battleship extends javax.swing.JFrame {
 
       try 
       {
-         output.close(); // close output stream
-         input.close(); // close input stream
+         outputClient.close(); // close output stream
+         inputClient.close(); // close input stream
          client.close(); // close socket
       } // end try
       catch ( IOException ioException ) 
@@ -642,6 +644,19 @@ public class Battleship extends javax.swing.JFrame {
    } // end method closeConnection
    
    // manipulates displayArea in the event-dispatch thread
+private void sendDataClient( String message )
+	   {
+	      try // send object to client
+	      {
+	         outputClient.writeObject( "CLIENT>>> " + message );
+	         outputClient.flush(); // flush output to client
+	         displayMessage( "\nCLIENT>>> " + message );
+	      } // end try
+	      catch ( IOException ioException ) 
+	      {
+	         messageTextArea.append( "\nError writing object" );
+	      } // end catch
+	   } // end method sendData
 
     
     public static void main(String args[]) {
