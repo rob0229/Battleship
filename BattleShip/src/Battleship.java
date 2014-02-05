@@ -1,497 +1,650 @@
-import javax.swing.JTextField;
-
-/**
- *
- * @author Rob Close
- */
 
 
+
+
+import java.net.InetAddress;
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JFrame;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
-
-import java.awt.Color;
-import java.awt.event.KeyEvent;
-
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-
+/**
+ *
+ * @author Rob
+ */
 public class Battleship extends javax.swing.JFrame {
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	// Variables declaration
-	private javax.swing.JButton connectButton;
-	private javax.swing.JButton hostButton;
-	private javax.swing.JButton readyButton;
-	private javax.swing.JLabel jLabel1;
-	private javax.swing.JLabel jLabel2;
-	private javax.swing.JLabel jLabel3;
-	private javax.swing.JLabel jLabel4;
-	private javax.swing.JLabel jLabel5;
-	private javax.swing.JLabel jLabel6;
-	private javax.swing.JLabel jLabel7;
-	private javax.swing.JLabel jLabel8;
-	private javax.swing.JLabel jLabel9;
-	private javax.swing.JPanel jPanel1;
-	private javax.swing.JPanel jPanel2;
-	private javax.swing.JPanel jPanel3;
-	private javax.swing.JPanel jPanel4;
-	private javax.swing.JPanel jPanel5;
-	private javax.swing.JScrollPane jScrollPane1;
-	private javax.swing.JScrollPane jScrollPane2;
-	private javax.swing.JTextArea userChatDisplay;
-	private javax.swing.JTextArea serverMessageDisplay;
-	private javax.swing.JTextField userChatEnter;// user chat field
-	private javax.swing.JTextField ipAddressEnter;// ip address
-	private ObjectOutputStream output; // output stream to client
+        
+   private ObjectOutputStream output; // output stream to client
 	private ObjectInputStream input; // input stream from client
 	private ServerSocket serverSocket; // server socket
 	private Socket connection; // connection to client
 	private int counter = 1; // counter of number of connections
+        private String ipAddress;
+        private ObjectOutputStream outputClient; // output stream to server
+   private ObjectInputStream inputClient; // input stream from server
+   private String message = ""; // message from server
+   private String chatServer; // host server for this application
+   private Socket client; // socket to communicate with server
+     
+    /**
+     * Creates new form Battleship
+     */
+    public Battleship() {
+        initComponents();
+    }
 
-	// End of variables declaration
+    
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+    private void initComponents() {
 
-	public Battleship() {
-		super("Battleship");
-		initComponents();
+        messagePanel = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        userChatEnter = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        messageTextArea = new javax.swing.JTextArea();
+        controlPanel = new javax.swing.JPanel();
+        readyButton = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        ipAddressField = new java.awt.TextField();
+        disconnectButton = new javax.swing.JButton();
+        connectButton = new javax.swing.JButton();
+        hostButton = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        enemyBoard = new javax.swing.JPanel();
+        playerBoard = new javax.swing.JPanel();
+        shipInventory = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
 
-	}
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Battleship");
+        setResizable(false);
 
-	private void initComponents() {
+        messagePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Message Center", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
-		jScrollPane1 = new JScrollPane();
-		jScrollPane2 = new JScrollPane();
-		jPanel1 = new JPanel();
-		jLabel1 = new JLabel();
-		userChatEnter = new JTextField();
-		userChatDisplay = new JTextArea();
-		jPanel2 = new JPanel();
-		readyButton = new JButton();
-		jLabel5 = new JLabel();
-		jLabel6 = new JLabel();
-		jLabel9 = new JLabel();
-		hostButton = new javax.swing.JButton();
-		ipAddressEnter = new JTextField();
-		connectButton = new JButton();
-		serverMessageDisplay = new javax.swing.JTextArea();
-		jPanel3 = new JPanel();
-		jPanel4 = new JPanel();
-		jPanel5 = new JPanel();
-		jLabel2 = new JLabel();
-		jLabel3 = new JLabel();
-		jLabel4 = new JLabel();
-		jLabel7 = new JLabel();
-		jLabel8 = new JLabel();
-		
-		ipAddressEnter.setEditable(true);
+        jLabel1.setText("Message: ");
 
-		/*
-		 * ipAddressEnter.addActionListener(new ActionListener() { // send
-		 * message to client public void actionPerformed(ActionEvent event) {
-		 * sendData(event.getActionCommand()); serverMessageDisplay.setText("");
-		 * } // end method actionPerformed } // end anonymous inner class ); //
-		 * end call to addActionListener
-		 */
-		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        userChatEnter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                userChatEnterActionPerformed(evt);
+            }
+        });
 
-		jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null,
-				"Message Center", javax.swing.border.TitledBorder.CENTER,
-				javax.swing.border.TitledBorder.DEFAULT_POSITION));
+        jScrollPane2.setBorder(javax.swing.BorderFactory.createTitledBorder("Radio Room"));
 
-		jLabel1.setText("Message: ");
+        messageTextArea.setColumns(20);
+        messageTextArea.setLineWrap(true);
+        messageTextArea.setRows(5);
+        jScrollPane2.setViewportView(messageTextArea);
 
-		userChatEnter.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jTextField1ActionPerformed(evt);
-			}
-		});
+        javax.swing.GroupLayout messagePanelLayout = new javax.swing.GroupLayout(messagePanel);
+        messagePanel.setLayout(messagePanelLayout);
+        messagePanelLayout.setHorizontalGroup(
+            messagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(messagePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(messagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2)
+                    .addGroup(messagePanelLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(userChatEnter))))
+        );
+        messagePanelLayout.setVerticalGroup(
+            messagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(messagePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 436, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(messagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(userChatEnter)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
 
-		jScrollPane2.setBorder(javax.swing.BorderFactory
-				.createTitledBorder("Chat Log: "));
+        controlPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Control Panel", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.ABOVE_TOP));
 
-		userChatDisplay.setColumns(20);
-		userChatDisplay.setRows(5);
-		jScrollPane2.setViewportView(userChatDisplay);
+        readyButton.setText("Ready!");
 
-		javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(
-				jPanel1);
-		jPanel1.setLayout(jPanel1Layout);
-		jPanel1Layout.setHorizontalGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(jPanel1Layout.createSequentialGroup()
-				.addContainerGap()
-				.addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING,false)
-				.addComponent(jScrollPane2)
-				.addGroup(jPanel1Layout.createSequentialGroup()
-				.addComponent(jLabel1)
-				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-				.addComponent(userChatEnter,javax.swing.GroupLayout.PREFERRED_SIZE,300,javax.swing.GroupLayout.PREFERRED_SIZE)))
-				.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)));
-		jPanel1Layout
-				.setVerticalGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-						.addGroup(jPanel1Layout.createSequentialGroup()
-						.addComponent(jScrollPane2,javax.swing.GroupLayout.PREFERRED_SIZE,javax.swing.GroupLayout.DEFAULT_SIZE,javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,javax.swing.GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
-						.addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-						.addComponent(userChatEnter,javax.swing.GroupLayout.Alignment.TRAILING,javax.swing.GroupLayout.PREFERRED_SIZE,javax.swing.GroupLayout.DEFAULT_SIZE,javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addComponent(jLabel1,javax.swing.GroupLayout.Alignment.TRAILING))
-						.addContainerGap()));
+        jLabel5.setText("Position Ships and push when ready");
 
-		jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null,
-				"Control Panel", javax.swing.border.TitledBorder.CENTER,
-				javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font(
-						"Times New Roman", 1, 10))); // NOI18N
+        jLabel6.setText("Host Game:");
 
-		readyButton.setText("Ready!");
+        jLabel9.setText("Host IP Address");
 
-		jLabel5.setText("Position Ships and push when ready");
+        ipAddressField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ipAddressFieldActionPerformed(evt);
+            }
+        });
 
-		jLabel6.setText("Host Game:");
+        disconnectButton.setText("Disconnect");
+        disconnectButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                disconnectButtonActionPerformed(evt);
+            }
+        });
 
-		jLabel9.setText("Host IP Address");
+        connectButton.setText("Connect");
+        connectButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                connectButtonActionPerformed(evt);
+            }
+        });
 
-		hostButton.setText("Host");
-		hostButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				hostButtonActionPerformed(evt);
-			}
-		});
+        hostButton.setText("Host");
+        hostButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hostButtonActionPerformed(evt);
+            }
+        });
 
-		connectButton.setText("Connect");
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-		serverMessageDisplay.setColumns(20);
-		serverMessageDisplay.setRows(5);
-		jScrollPane1.setViewportView(serverMessageDisplay);
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 120, Short.MAX_VALUE)
+        );
 
-		javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(
-				jPanel2);
-		jPanel2.setLayout(jPanel2Layout);
-		jPanel2Layout.setHorizontalGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-			.addGroup(jPanel2Layout.createSequentialGroup()
-			.addContainerGap(115, Short.MAX_VALUE)
-			.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-					.addGroup(javax.swing.GroupLayout.Alignment.TRAILING,jPanel2Layout.createSequentialGroup().addComponent(readyButton).addGap(145,145,160))
-					.addGroup(javax.swing.GroupLayout.Alignment.TRAILING,jPanel2Layout.createSequentialGroup()
-					.addComponent(jLabel5).addGap(101,101,101))))
-		.addGroup(jPanel2Layout.createSequentialGroup().addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING,false)
-				.addComponent(jScrollPane1,javax.swing.GroupLayout.Alignment.LEADING).addGroup(jPanel2Layout.createSequentialGroup()
-				.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING,false)
-				.addComponent(jLabel9,javax.swing.GroupLayout.DEFAULT_SIZE,javax.swing.GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
-				.addComponent(jLabel6,javax.swing.GroupLayout.DEFAULT_SIZE,javax.swing.GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE))
-				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addComponent(hostButton,javax.swing.GroupLayout.PREFERRED_SIZE,62,javax.swing.GroupLayout.PREFERRED_SIZE)
-				.addGroup(jPanel2Layout.createSequentialGroup()
-						.addComponent(ipAddressEnter,javax.swing.GroupLayout.PREFERRED_SIZE,150,javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(connectButton,javax.swing.GroupLayout.PREFERRED_SIZE,javax.swing.GroupLayout.DEFAULT_SIZE,javax.swing.GroupLayout.PREFERRED_SIZE)))))
-						//.addGap(0, 0, Short.MAX_VALUE)
-						));
-		jPanel2Layout
-				.setVerticalGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING,jPanel2Layout.createSequentialGroup()
-					.addGap(20, 20, 20)
-				.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING,false)
-				.addComponent(jLabel6,javax.swing.GroupLayout.DEFAULT_SIZE,javax.swing.GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
-				.addComponent(hostButton,javax.swing.GroupLayout.PREFERRED_SIZE,0,Short.MAX_VALUE))
-				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-				.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING,false)
-				.addComponent(connectButton,javax.swing.GroupLayout.PREFERRED_SIZE,0,Short.MAX_VALUE)
-				.addComponent(jLabel9,javax.swing.GroupLayout.DEFAULT_SIZE,javax.swing.GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
-				.addComponent(ipAddressEnter,javax.swing.GroupLayout.PREFERRED_SIZE,0,Short.MAX_VALUE))
-				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-				.addComponent(jScrollPane1,javax.swing.GroupLayout.PREFERRED_SIZE,javax.swing.GroupLayout.DEFAULT_SIZE,javax.swing.GroupLayout.PREFERRED_SIZE)
-				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,363, Short.MAX_VALUE)
-				.addComponent(jLabel5,javax.swing.GroupLayout.PREFERRED_SIZE,30,javax.swing.GroupLayout.PREFERRED_SIZE)
-				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-				.addComponent(readyButton)
-				.addContainerGap()));
+        javax.swing.GroupLayout controlPanelLayout = new javax.swing.GroupLayout(controlPanel);
+        controlPanel.setLayout(controlPanelLayout);
+        controlPanelLayout.setHorizontalGroup(
+            controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(controlPanelLayout.createSequentialGroup()
+                .addContainerGap(82, Short.MAX_VALUE)
+                .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, controlPanelLayout.createSequentialGroup()
+                        .addComponent(readyButton)
+                        .addGap(163, 163, 163))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, controlPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(101, 101, 101))))
+            .addGroup(controlPanelLayout.createSequentialGroup()
+                .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(controlPanelLayout.createSequentialGroup()
+                        .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ipAddressField, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, controlPanelLayout.createSequentialGroup()
+                                .addComponent(hostButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(15, 15, 15)))
+                        .addGap(18, 18, 18)
+                        .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(disconnectButton)
+                            .addComponent(connectButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        controlPanelLayout.setVerticalGroup(
+            controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, controlPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(disconnectButton)
+                        .addComponent(hostButton)))
+                .addGap(21, 21, 21)
+                .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(ipAddressField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(connectButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(readyButton)
+                .addContainerGap())
+        );
 
-		jPanel3.setBorder(javax.swing.BorderFactory
-				.createTitledBorder("Enemy Board"));
+        enemyBoard.setBackground(new java.awt.Color(51, 204, 255));
+        enemyBoard.setBorder(javax.swing.BorderFactory.createTitledBorder("Enemy Board"));
 
-		javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(
-				jPanel3);
-		jPanel3.setLayout(jPanel3Layout);
-		jPanel3Layout.setHorizontalGroup(jPanel3Layout.createParallelGroup(
-				javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 0,
-				Short.MAX_VALUE));
-		jPanel3Layout.setVerticalGroup(jPanel3Layout.createParallelGroup(
-				javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 277,
-				Short.MAX_VALUE));
+        javax.swing.GroupLayout enemyBoardLayout = new javax.swing.GroupLayout(enemyBoard);
+        enemyBoard.setLayout(enemyBoardLayout);
+        enemyBoardLayout.setHorizontalGroup(
+            enemyBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 388, Short.MAX_VALUE)
+        );
+        enemyBoardLayout.setVerticalGroup(
+            enemyBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 377, Short.MAX_VALUE)
+        );
 
-		jPanel4.setBorder(javax.swing.BorderFactory
-				.createTitledBorder("Player Board"));
+        playerBoard.setBackground(new java.awt.Color(51, 204, 255));
+        playerBoard.setBorder(javax.swing.BorderFactory.createTitledBorder("Player Board"));
 
-		javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(
-				jPanel4);
-		jPanel4.setLayout(jPanel4Layout);
-		jPanel4Layout.setHorizontalGroup(jPanel4Layout.createParallelGroup(
-				javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 0,
-				Short.MAX_VALUE));
-		jPanel4Layout.setVerticalGroup(jPanel4Layout.createParallelGroup(
-				javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 277,
-				Short.MAX_VALUE));
-		jPanel5.setBorder(javax.swing.BorderFactory
-				.createTitledBorder("Ship Inventory"));
+        javax.swing.GroupLayout playerBoardLayout = new javax.swing.GroupLayout(playerBoard);
+        playerBoard.setLayout(playerBoardLayout);
+        playerBoardLayout.setHorizontalGroup(
+            playerBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        playerBoardLayout.setVerticalGroup(
+            playerBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
 
-		jLabel2.setIcon(new javax.swing.ImageIcon("Battleship.jpg")); // NOI18N
-		jLabel2.setText("Battleship");
-		jLabel2.setPreferredSize(new java.awt.Dimension(80, 60));
+        shipInventory.setBorder(javax.swing.BorderFactory.createTitledBorder("Ship Inventory"));
 
-		jLabel3.setIcon(new javax.swing.ImageIcon("Cruiser.jpg")); // NOI18N
-		jLabel3.setText("Crusier");
-		jLabel3.setPreferredSize(new java.awt.Dimension(60, 60));
+        jLabel2.setIcon(new javax.swing.ImageIcon("Battleship.jpg")); // NOI18N
+        jLabel2.setText("Battleship");
+        jLabel2.setPreferredSize(new java.awt.Dimension(120, 60));
 
-		jLabel4.setIcon(new javax.swing.ImageIcon("Submarine.jpg")); // NOI18N
-		jLabel4.setText("Submarine");
-		jLabel4.setPreferredSize(new java.awt.Dimension(60, 60));
+        jLabel3.setIcon(new javax.swing.ImageIcon("Cruiser.jpg")); // NOI18N
+        jLabel3.setText("Crusier");
+        jLabel3.setPreferredSize(new java.awt.Dimension(120, 60));
 
-		jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource(
-				"carrier.jpg"))); // NOI18N
-		jLabel7.setText("Carrier");
-		jLabel7.setPreferredSize(new java.awt.Dimension(100, 60));
+        jLabel4.setIcon(new javax.swing.ImageIcon("Submarine.jpg")); // NOI18N
+        jLabel4.setText("Submarine");
+        jLabel4.setPreferredSize(new java.awt.Dimension(120, 60));
 
-		jLabel8.setIcon(new javax.swing.ImageIcon("Destroyer.jpg")); // NOI18N
-		jLabel8.setText("Destroyer");
-		jLabel8.setPreferredSize(new java.awt.Dimension(40, 20));
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("carrier.jpg"))); // NOI18N
+        jLabel7.setText("Carrier");
+        jLabel7.setPreferredSize(new java.awt.Dimension(120, 60));
 
-		javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(
-				jPanel5);
-		jPanel5.setLayout(jPanel5Layout);
-		jPanel5Layout.setHorizontalGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(jPanel5Layout.createSequentialGroup().addContainerGap()
-				.addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(jPanel5Layout.createSequentialGroup().addComponent(jLabel2,javax.swing.GroupLayout.PREFERRED_SIZE,80,javax.swing.GroupLayout.PREFERRED_SIZE)
-				.addGap(31,31,31)
-				.addComponent(jLabel3,javax.swing.GroupLayout.PREFERRED_SIZE,60,javax.swing.GroupLayout.PREFERRED_SIZE)
-				.addGap(27,27,27)
-				.addComponent(jLabel4,javax.swing.GroupLayout.PREFERRED_SIZE,60,javax.swing.GroupLayout.PREFERRED_SIZE))
-				.addGroup(jPanel5Layout.createSequentialGroup().addGap(37,37,37)
-				.addComponent(jLabel8,javax.swing.GroupLayout.PREFERRED_SIZE,40,javax.swing.GroupLayout.PREFERRED_SIZE)
-				.addGap(62,62,62)
-				.addComponent(jLabel7,javax.swing.GroupLayout.PREFERRED_SIZE,100,javax.swing.GroupLayout.PREFERRED_SIZE)))
-				.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)));
-		jPanel5Layout
-				.setVerticalGroup(jPanel5Layout
-						.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-						.addGroup(jPanel5Layout.createSequentialGroup().addGap(29, 29, 29)
-						.addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING,false)
-						.addComponent(jLabel4,javax.swing.GroupLayout.DEFAULT_SIZE,20,Short.MAX_VALUE)
-						.addComponent(jLabel3,javax.swing.GroupLayout.Alignment.TRAILING,javax.swing.GroupLayout.PREFERRED_SIZE,0,Short.MAX_VALUE)
-						.addComponent(jLabel2,javax.swing.GroupLayout.Alignment.TRAILING,javax.swing.GroupLayout.PREFERRED_SIZE,0,Short.MAX_VALUE))
-						.addGap(22, 22, 22)
-						.addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING,false)
-						.addComponent(jLabel7,javax.swing.GroupLayout.PREFERRED_SIZE,0,Short.MAX_VALUE)
-						.addComponent(jLabel8,javax.swing.GroupLayout.DEFAULT_SIZE,javax.swing.GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE))
-						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)));
+        jLabel8.setIcon(new javax.swing.ImageIcon("C:\\Users\\Rob\\Documents\\NetBeansProjects\\ContactEditor\\Destroyer.jpg")); // NOI18N
+        jLabel8.setText("Destroyer");
+        jLabel8.setMaximumSize(new java.awt.Dimension(60, 20));
+        jLabel8.setMinimumSize(new java.awt.Dimension(60, 20));
+        jLabel8.setPreferredSize(new java.awt.Dimension(60, 20));
 
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(
-				getContentPane());
-		getContentPane().setLayout(layout);
-		layout.setHorizontalGroup(layout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(layout.createSequentialGroup()
-				.addContainerGap()
-				.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING,false)
-						.addComponent(jPanel1,javax.swing.GroupLayout.DEFAULT_SIZE,javax.swing.GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
-						.addComponent(jPanel2,javax.swing.GroupLayout.DEFAULT_SIZE,javax.swing.GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE))
-								.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								.addGroup(layout.createSequentialGroup()
-								.addComponent(jPanel5,javax.swing.GroupLayout.PREFERRED_SIZE,javax.swing.GroupLayout.DEFAULT_SIZE,javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addContainerGap())
-								.addComponent(jPanel4,javax.swing.GroupLayout.DEFAULT_SIZE,javax.swing.GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
-								.addComponent(jPanel3,javax.swing.GroupLayout.DEFAULT_SIZE,javax.swing.GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE))));
-		layout.setVerticalGroup(layout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING,layout.createSequentialGroup()
-				.addGap(17, 17, 17)
-				.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-					.addGroup(layout.createSequentialGroup()
-					.addComponent(jPanel3,javax.swing.GroupLayout.PREFERRED_SIZE,javax.swing.GroupLayout.DEFAULT_SIZE,javax.swing.GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-					.addComponent(jPanel4,javax.swing.GroupLayout.PREFERRED_SIZE,javax.swing.GroupLayout.DEFAULT_SIZE,javax.swing.GroupLayout.PREFERRED_SIZE))
-					.addComponent(jPanel2,javax.swing.GroupLayout.PREFERRED_SIZE,javax.swing.GroupLayout.DEFAULT_SIZE,javax.swing.GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,javax.swing.GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
-								.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING,false)
-								.addComponent(jPanel1,javax.swing.GroupLayout.DEFAULT_SIZE,javax.swing.GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
-								.addComponent(jPanel5,javax.swing.GroupLayout.DEFAULT_SIZE,javax.swing.GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE))
-								.addContainerGap()));
+        javax.swing.GroupLayout shipInventoryLayout = new javax.swing.GroupLayout(shipInventory);
+        shipInventory.setLayout(shipInventoryLayout);
+        shipInventoryLayout.setHorizontalGroup(
+            shipInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(shipInventoryLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(shipInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        shipInventoryLayout.setVerticalGroup(
+            shipInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(shipInventoryLayout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(92, 92, 92))
+        );
 
-		pack();
-	}// </editor-fold>
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Enemy Ships Remaining"));
 
-	private void hostButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		hostButton.setEnabled(false);
-		runServer(); // run server application
-		
-	}
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
 
-	private void jTextField1ActionPerformed( ActionEvent event )
-    {
-        sendData( event.getActionCommand() );
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(controlPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(messagePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(enemyBoard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(playerBoard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(shipInventory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(enemyBoard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(shipInventory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(playerBoard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(controlPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(messagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        pack();
+    }// </editor-fold>                        
+  
+    private void userChatEnterActionPerformed(java.awt.event.ActionEvent evt) {                                              
+      
+       sendData( evt.getActionCommand() );
         userChatEnter.setText( "" );
-    } // end method actionPerformed
-   // end anonymous inner class
+        
+      
+    }                                             
 
-	public void runServer() {
-		try // set up server to receive connections; process connections
-		{
-			serverSocket = new ServerSocket(12345);
-			// Creates a server socket and binds it to the specified local
-			// port number, with the specified backlog ServerSocket(int port,
-			// int backlog)
+    private void ipAddressFieldActionPerformed(java.awt.event.ActionEvent evt) {                                               
+       sendData( evt.getActionCommand() );
+       ipAddressField.setText( "" );
+       ipAddress=ipAddressField.getText();
+    }                                              
 
-			while (true) {
-				try {
-					waitForConnection(); // wait for a connection
-					getStreams(); // get input & output streams
-					processConnection(); // process connection
-				} // end try
-				catch (EOFException eofException) {
-					displayMessage("\nServer terminated connection");
-				} // end catch
-				finally {
-					closeConnection(); // close connection
-					counter++;
-				} // end finally
-			} // end while
-		} // end try
-		catch (IOException ioException) {
-			ioException.printStackTrace();
-		} // end catch
-	} // end method runServer
+    private void hostButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
+         hostButton.setEnabled(false);
+        connectButton.setEnabled(false);
+	   	  {
+	   		Runnable serverRunnable = new Runnable(){
+	   			
 
-	// wait for connection to arrive, then display connection info
-	private void waitForConnection() throws IOException {
+				@Override
+				public void run() {
+					runServer();// TODO Auto-generated method stub
+					
+				}
+   		
+	   	  };
+	   	  Thread serverThread = new Thread(serverRunnable);
+	   	  serverThread.start(); // run server application
+			
+		}
+    }                                          
 
-		displayMessage("Waiting for connection\n");
-		// It gets stuck here at this
-		// command**********************************************************************************************************************
-		connection = serverSocket.accept(); // allow server to accept connection
+    private void connectButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
+         connectButton.setEnabled(false);
+        hostButton.setEnabled(false);		 
+	   	  {
+	   		Runnable serverRunnable = new Runnable(){
+				@Override
+				public void run() {
+					runClient(ipAddress);// TODO Auto-generated method stub	
+				}		
+	   	  };
+	   	  Thread serverThread = new Thread(serverRunnable);
+	   	  serverThread.start(); // run server application			
+		}
+    }                                             
 
-		System.out.println("gets here after display message line 649");
+    private void disconnectButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                 
 
-		displayMessage("Connection " + counter + " received from: "
-				+ connection.getInetAddress().getHostName());
-	} // end method waitForConnection
+            closeConnection();
 
-	// get streams to send and receive data
-	private void getStreams() throws IOException {
+    }                                                
 
-		System.out.println("getStreams function line 658################");
-		// set up output stream for objects
-		output = new ObjectOutputStream(connection.getOutputStream());
-		output.flush(); // flush output buffer to send header information
+  // set up and run server 
+    private void runServer()
+	   {
+	      try // set up server to receive connections; process connections
+	      {
+	         serverSocket = new ServerSocket( 12345, 100 ); // create ServerSocket
 
-		// set up input stream for objects
-		input = new ObjectInputStream(connection.getInputStream());
-		displayMessage("\nGot I/O streams\n");
-	} // end method getStreams
+	         while ( true ) 
+	         {
+	            try 
+	            {
+	               waitForConnection(); // wait for a connection
+	               getStreams(); // get input & output streams
+	               processConnection(); // process connection
+	            } // end try
+	            catch ( EOFException eofException ) 
+	            {
+	               displayMessage( "\nHost terminated connection" );
+	            } // end catch
+	            finally 
+	            {
+	               closeConnection(); //  close connection
+	               counter++;
+	            } // end finally
+	         } // end while
+	      } // end try
+	      catch ( IOException ioException ) 
+	      {
+	         ioException.printStackTrace();
+	      } // end catch
+	   } // end method runServer
 
-	// process connection with client
-	private void processConnection() throws IOException {
+	   // wait for connection to arrive, then display connection info
+    private void waitForConnection() throws IOException
+	   {
+	      displayMessage( "Waiting for connection\n" );
+	      connection = serverSocket.accept(); // allow server to accept connection            
+	      displayMessage( "Connection " + counter + " received from: " +
+	         connection.getInetAddress().getHostName() );
+	   } // end method waitForConnection
 
-		String message = "Connection successful *sent from server*";
-		sendData(message); // send connection successful message
-		// enable enterField so server user can send messages
-		setTextFieldEditable(true);
+	   // get streams to send and receive data
+    private void getStreams() throws IOException
+	   {
+	      // set up output stream for objects
+	      output = new ObjectOutputStream( connection.getOutputStream() );
+	      output.flush(); // flush output buffer to send header information
 
-		do // process messages sent from client
-		{
-			try // read message and display it
-			{
-				System.out
-						.println("processConnection function line 682################");
-				message = (String) input.readObject(); // read new message
-				displayMessage("\n" + message); // display message
-			} // end try
-			catch (ClassNotFoundException classNotFoundException) {
-				displayMessage("\nUnknown object type received");
-			} // end catch
+	      // set up input stream for objects
+	      input = new ObjectInputStream( connection.getInputStream() );
 
-		} while (!message.equals("CLIENT>>> TERMINATE"));
-	} // end method processConnection
+	      displayMessage( "\nGot I/O streams\n" );
+	   } // end method getStreams
 
-	// close streams and socket
-	private void closeConnection() {
-		displayMessage("\nTerminating connection\n");
-		setTextFieldEditable(false); // disable enterField
+	   // process connection with client
+    private void processConnection() throws IOException
+	   {
+	      String message = "Connection successful, *sent from server* ";
+	      sendData( message ); // send connection successful message
 
-		try {
-			output.close(); // close output stream
-			input.close(); // close input stream
-			connection.close(); // close socket
-		} // end try
-		catch (IOException ioException) {
-			ioException.printStackTrace();
-		} // end catch
-	} // end method closeConnection
+	      // enable enterField so server user can send messages
+	      setTextFieldEditable( true );
 
-	private void sendData(String message) {
-		try // send object to client
-		{
-			output.writeObject("SERVER>>> " + message);
-			output.flush(); // flush output to client
-			displayMessage("\nSERVER>>> " + message);
-		} // end try
-		catch (IOException ioException) {
-			userChatDisplay.append("\nError writing object");
-		} // end catch
-	} // end method sendData
+	      do // process messages sent from client
+	      { 
+	         try // read message and display it
+	         {
+	            message = ( String ) input.readObject(); // read new message
+	            displayMessage( "\n" + message ); // display message
+	         } // end try
+	         catch ( ClassNotFoundException classNotFoundException ) 
+	         {
+	            displayMessage( "\nUnknown object type received" );
+	         } // end catch
 
-	private void displayMessage(final String messageToDisplay) {
+	      } while ( !message.equals( "CLIENT>>> TERMINATE" ) );
+	   } // end method processConnection
 
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() // updates displayArea
-			{
+	   // close streams and socket
+    private void closeConnection() 
+	   {
+	      displayMessage( "\nTerminating connection\n" );
+	      setTextFieldEditable( false ); // disable enterField
+                connectButton.setEnabled(true);
+                hostButton.setEnabled(true);
+	      try 
+	      {
+	         output.close(); // close output stream
+	         input.close(); // close input stream
+	         connection.close(); // close socket
+	      } // end try
+	      catch ( IOException ioException ) 
+	      {
+	         ioException.printStackTrace();
+	      } // end catch
+                        
+        //allows for multiple connections without restarting game
+             
+	   } // end method closeConnection
 
-				serverMessageDisplay.append(messageToDisplay); // append message
-			} // end method run
-		} // end anonymous inner class
-				); // end call to SwingUtilities.invokeLater
-	} // end method displayMessage
+	   // send message to client
+    private void sendData( String message )
+	   {
+	      try // send object to client
+	      {
+	         output.writeObject( "SERVER>>> " + message );
+	         output.flush(); // flush output to client
+	         displayMessage( "\nSERVER>>> " + message );
+	      } // end try
+	      catch ( IOException ioException ) 
+	      {
+	         messageTextArea.append( "\nError writing object" );
+	      } // end catch
+	   } // end method sendData
 
-	// manipulates enterField in the event-dispatch thread
-	private void setTextFieldEditable(final boolean editable) {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() // sets enterField's editability
-			{
-				userChatEnter.setEditable(editable);
-			} // end method run
-		} // end inner class
-				); // end call to SwingUtilities.invokeLater
-	} // end method setTextFieldEditable
+	   // manipulates displayArea in the event-dispatch thread
+    private void displayMessage( final String messageToDisplay )
+	   {
+	      SwingUtilities.invokeLater(
+	         new Runnable() 
+	         {
+	            public void run() // updates displayArea
+	            {
+	            	messageTextArea.append( messageToDisplay ); // append message
+	            } // end method run
+	         } // end anonymous inner class
+	      ); // end call to SwingUtilities.invokeLater
+	   } // end method displayMessage
 
-	/**
-	 * @param args
-	 *            the command line arguments
-	 */
-	public static void main(String args[]) {
-		
-		
-		
-		
+	   // manipulates enterField in the event-dispatch thread
+    private void setTextFieldEditable( final boolean editable )
+	   {
+	      SwingUtilities.invokeLater(
+	         new Runnable()
+	         {
+	            public void run() // sets enterField's editability
+	            {
+	               userChatEnter.setEditable( editable );
+	            } // end method run
+	         }  // end inner class
+	      ); // end call to SwingUtilities.invokeLater
+	   } // end method setTextFieldEditable
+
+    private void runClient(String ipAddress){
+     try // connect to server, get streams, process connection
+      {
+         connectToServer(); // create a Socket to make connection
+         getStreamsClient(); // get the input and output streams
+         processConnectionClient(); // process connection
+      } // end try
+      catch ( EOFException eofException ) 
+      {
+         displayMessage( "\nClient terminated connection" );
+      } // end catch
+      catch ( IOException ioException ) 
+      {
+         ioException.printStackTrace();
+      } // end catch
+     
+      finally 
+      {
+          System.out.println("  gets to here run client line 514  ");
+         closeConnectionClient(); // close connection
+      } // end finally
+    
+    }
+    
+     // connect to server
+   private void connectToServer() throws IOException
+   {      
+      displayMessage( "Attempting connection\n" );
+
+      // create Socket to make connection to server
+      client = new Socket( InetAddress.getByName( chatServer ), 12345 );
+
+      // display connection information
+      displayMessage( "Connected to: " + 
+         client.getInetAddress().getHostName() );
+   } // end method connectToServer
+
+   // get streams to send and receive data
+   private void getStreamsClient() throws IOException
+   {
+      // set up output stream for objects
+      output = new ObjectOutputStream( client.getOutputStream() );      
+      output.flush(); // flush output buffer to send header information
+
+      // set up input stream for objects
+      input = new ObjectInputStream( client.getInputStream() );
+
+      displayMessage( "\nGot I/O streams\n" );
+   } // end method getStreams
+
+   // process connection with server
+   private void processConnectionClient() throws IOException
+   {
+      // enable enterField so client user can send messages
+      setTextFieldEditable( true );
+
+      do // process messages sent from server
+      { 
+         try // read message and display it
+         {
+            message = ( String ) input.readObject(); // read new message
+            displayMessage( "\n" + message ); // display message
+         } // end try
+         catch ( ClassNotFoundException classNotFoundException ) 
+         {
+            displayMessage( "\nUnknown object type received" );
+         } // end catch
+
+      } while ( !message.equals( "SERVER>>> TERMINATE" ) );
+   } // end method processConnection
+
+   // close streams and socket
+  
+   private void closeConnectionClient() 
+   {
+      displayMessage( "\nClosing connection" );
+      setTextFieldEditable( false ); // disable enterField
+
+      try 
+      {
+         output.close(); // close output stream
+         input.close(); // close input stream
+         client.close(); // close socket
+      } // end try
+      catch ( IOException ioException ) 
+      {
+         ioException.printStackTrace();
+      } // end catch
+   } // end method closeConnection
+   
+   // manipulates displayArea in the event-dispatch thread
+
+    
+    public static void main(String args[]) {
 		
 		/* Set the Nimbus look and feel */
 		// <editor-fold defaultstate="collapsed"
@@ -534,4 +687,33 @@ public class Battleship extends javax.swing.JFrame {
 		
 	}
 
+    
+
+
+    // Variables declaration - do not modify                     
+    private javax.swing.JButton connectButton;
+    private javax.swing.JPanel controlPanel;
+    private javax.swing.JButton disconnectButton;
+    private javax.swing.JPanel enemyBoard;
+    private javax.swing.JButton hostButton;
+    private java.awt.TextField ipAddressField;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JPanel messagePanel;
+    private javax.swing.JTextArea messageTextArea;
+    private javax.swing.JPanel playerBoard;
+    private javax.swing.JButton readyButton;
+    private javax.swing.JPanel shipInventory;
+    private javax.swing.JTextField userChatEnter;
+    // End of variables declaration                   
 }
