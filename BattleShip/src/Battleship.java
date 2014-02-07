@@ -1,6 +1,36 @@
 
 
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Toolkit;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DragGestureEvent;
+import java.awt.dnd.DragGestureListener;
+import java.awt.dnd.DragSource;
+import java.awt.dnd.DropTarget;
+import java.awt.dnd.DropTargetAdapter;
+import java.awt.dnd.DropTargetDropEvent;
+import java.io.IOException;
+import java.net.URL;
+import java.awt.Container;
+
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+import javax.swing.TransferHandler;
+import javax.swing.TransferHandler.TransferSupport;
+import javax.swing.border.TitledBorder;
 import java.net.InetAddress;
 import java.io.EOFException;
 import java.io.IOException;
@@ -9,31 +39,41 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import javax.swing.SwingUtilities;
+
 /**
  *
  * @author Rob
  */
 public class Battleship extends javax.swing.JFrame {
         
-   private ObjectOutputStream output; // output stream to client
+        private ObjectOutputStream output; // output stream to client
 	private ObjectInputStream input; // input stream from client
 	private ServerSocket serverSocket; // server socket
 	private Socket connection; // connection to client
 	private int counter = 1; // counter of number of connections
         private String ipAddress;
         private ObjectOutputStream outputClient; // output stream to server
-   private ObjectInputStream inputClient; // input stream from server
-   private String message = ""; // message from server
-   private String chatServer; // host server for this application
-   private Socket client; // socket to communicate with server
-     private Boolean isServer = false;
+        private ObjectInputStream inputClient; // input stream from server
+        private String message = ""; // message from server
+        private String chatServer; // host server for this application
+        private Socket client; // socket to communicate with server
+        private Boolean isServer = false;
+        
+        
+        Ship carrier = new Ship();
+        Ship battleship = new Ship();
+        Ship sub = new Ship();
+        Ship destroyer = new Ship();
+        Ship crusier = new Ship();
+        
+   
+     
     /**
      * Creates new form Battleship
      */
     public Battleship() {
         initComponents();
     }
-
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
@@ -102,7 +142,7 @@ public class Battleship extends javax.swing.JFrame {
             messagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(messagePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 436, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(messagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(userChatEnter)
@@ -156,7 +196,7 @@ public class Battleship extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 120, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout controlPanelLayout = new javax.swing.GroupLayout(controlPanel);
@@ -223,21 +263,22 @@ public class Battleship extends javax.swing.JFrame {
         enemyBoard.setLayout(enemyBoardLayout);
         enemyBoardLayout.setHorizontalGroup(
             enemyBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 388, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         enemyBoardLayout.setVerticalGroup(
             enemyBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 377, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         playerBoard.setBackground(new java.awt.Color(51, 204, 255));
         playerBoard.setBorder(javax.swing.BorderFactory.createTitledBorder("Player Board"));
+        playerBoard.setPreferredSize(new java.awt.Dimension(12, 400));
 
         javax.swing.GroupLayout playerBoardLayout = new javax.swing.GroupLayout(playerBoard);
         playerBoard.setLayout(playerBoardLayout);
         playerBoardLayout.setHorizontalGroup(
             playerBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 388, Short.MAX_VALUE)
         );
         playerBoardLayout.setVerticalGroup(
             playerBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -251,7 +292,7 @@ public class Battleship extends javax.swing.JFrame {
         jLabel2.setPreferredSize(new java.awt.Dimension(120, 60));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("Cruiser.jpg"))); // NOI18N
-        jLabel3.setText("Cruiser");
+        jLabel3.setText("Crusier");
         jLabel3.setPreferredSize(new java.awt.Dimension(120, 60));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("Submarine.jpg"))); // NOI18N
@@ -264,6 +305,8 @@ public class Battleship extends javax.swing.JFrame {
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("Destroyer.jpg"))); // NOI18N
         jLabel8.setText("Destroyer");
+        jLabel8.setMaximumSize(new java.awt.Dimension(60, 20));
+        jLabel8.setMinimumSize(new java.awt.Dimension(60, 20));
         jLabel8.setPreferredSize(new java.awt.Dimension(60, 20));
 
         javax.swing.GroupLayout shipInventoryLayout = new javax.swing.GroupLayout(shipInventory);
@@ -278,7 +321,7 @@ public class Battleship extends javax.swing.JFrame {
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         shipInventoryLayout.setVerticalGroup(
             shipInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -286,7 +329,7 @@ public class Battleship extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(51, 51, 51)
@@ -306,7 +349,7 @@ public class Battleship extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 377, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -314,37 +357,35 @@ public class Battleship extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(15, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(controlPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(messagePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(enemyBoard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(playerBoard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(playerBoard, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(shipInventory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(shipInventory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(enemyBoard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(controlPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(enemyBoard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(shipInventory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(playerBoard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(controlPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(messagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(messagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(shipInventory, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(playerBoard, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
@@ -410,9 +451,100 @@ public class Battleship extends javax.swing.JFrame {
 
     }                                                
 
-  // set up and run server 
-    private void runServer()
-	   {
+    
+    
+    
+    
+    
+    
+    /*Start of server Methods*/ 
+    
+    //new MyDropTargetListener(playerBoard);//this must be done or we wont be able to drop any image onto the empty panel
+       
+    class MyDropTargetListener extends DropTargetAdapter {
+
+    private DropTarget dropTarget;
+    private JPanel p;
+
+    
+    
+    
+    public MyDropTargetListener(JPanel panel) {
+        p = panel;
+        dropTarget = new DropTarget(panel, DnDConstants.ACTION_COPY, this, true, null);
+
+        
+        String test = "@@h";
+    
+    
+    if(test.charAt(0) == '@' && test.charAt(1) == '@'){
+                
+    }
+        
+        
+    }
+
+    @Override
+    public void drop(DropTargetDropEvent event) {
+        try {
+            DropTarget test = (DropTarget) event.getSource();
+            Component ca = (Component) test.getComponent();
+            Point dropPoint = ca.getMousePosition();
+            Transferable tr = event.getTransferable();
+
+            if (event.isDataFlavorSupported(DataFlavor.imageFlavor)) {
+                Icon ico = (Icon) tr.getTransferData(DataFlavor.imageFlavor);
+
+                if (ico != null) {
+
+                    p.add(new JLabel(ico));
+                    p.revalidate();
+                    p.repaint();
+                    event.dropComplete(true);
+                }
+            } else {
+                event.rejectDrop();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            event.rejectDrop();
+        }
+    }
+}
+
+class MyDragGestureListener implements DragGestureListener {
+
+    @Override
+    public void dragGestureRecognized(DragGestureEvent event) {
+        JLabel label = (JLabel) event.getComponent();
+        final Icon ico = label.getIcon();
+
+
+        Transferable transferable = new Transferable() {
+            @Override
+            public DataFlavor[] getTransferDataFlavors() {
+                return new DataFlavor[]{DataFlavor.imageFlavor};
+            }
+
+            
+            public boolean isDataFlavorSupported(DataFlavor flavor) {
+                if (!isDataFlavorSupported(flavor)) {
+                    return false;
+                }
+                return true;
+            }
+
+            @Override
+            public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException, IOException {
+                return ico;
+            }
+        };
+        event.startDrag(null, transferable);
+    }
+}
+    
+    // set up and run server 
+    private void runServer(){
 	      try // set up server to receive connections; process connections
 	      {
 	         serverSocket = new ServerSocket( 12345, 100 ); // create ServerSocket
@@ -443,8 +575,7 @@ public class Battleship extends javax.swing.JFrame {
 	   } // end method runServer
 
 	   // wait for connection to arrive, then display connection info
-    private void waitForConnection() throws IOException
-	   {
+    private void waitForConnection() throws IOException{
 	      displayMessage( "Waiting for connection\n" );
 	      connection = serverSocket.accept(); // allow server to accept connection            
 	      displayMessage( "Connection " + counter + " received from: " +
@@ -452,8 +583,7 @@ public class Battleship extends javax.swing.JFrame {
 	   } // end method waitForConnection
 
 	   // get streams to send and receive data
-    private void getStreams() throws IOException
-	   {
+    private void getStreams() throws IOException{
 	      // set up output stream for objects
 	      output = new ObjectOutputStream( connection.getOutputStream() );
 	      output.flush(); // flush output buffer to send header information
@@ -465,8 +595,7 @@ public class Battleship extends javax.swing.JFrame {
 	   } // end method getStreams
 
 	   // process connection with client
-    private void processConnection() throws IOException
-	   {
+    private void processConnection() throws IOException{
 	      String message = "Connection successful, *sent from server* ";
 	      sendData( message ); // send connection successful message
 
@@ -489,8 +618,7 @@ public class Battleship extends javax.swing.JFrame {
 	   } // end method processConnection
 
 	   // close streams and socket
-    private void closeConnection() 
-	   {
+    private void closeConnection() {
 	      displayMessage( "\nTerminating connection\n" );
 	      setTextFieldEditable( false ); // disable enterField
                 connectButton.setEnabled(true);
@@ -511,8 +639,7 @@ public class Battleship extends javax.swing.JFrame {
 	   } // end method closeConnection
 
 	   // send message to client
-    private void sendData( String message )
-	   {
+    private void sendData( String message ) {
 	      try // send object to client
 	      {
 	         output.writeObject( "SERVER>>> " + message );
@@ -526,8 +653,7 @@ public class Battleship extends javax.swing.JFrame {
 	   } // end method sendData
 
 	   // manipulates displayArea in the event-dispatch thread
-    private void displayMessage( final String messageToDisplay )
-	   {
+    private void displayMessage( final String messageToDisplay ){
 	      SwingUtilities.invokeLater(
 	         new Runnable() 
 	         {
@@ -540,8 +666,7 @@ public class Battleship extends javax.swing.JFrame {
 	   } // end method displayMessage
 
 	   // manipulates enterField in the event-dispatch thread
-    private void setTextFieldEditable( final boolean editable )
-	   {
+    private void setTextFieldEditable( final boolean editable ){
 	      SwingUtilities.invokeLater(
 	         new Runnable()
 	         {
@@ -553,6 +678,7 @@ public class Battleship extends javax.swing.JFrame {
 	      ); // end call to SwingUtilities.invokeLater
 	   } // end method setTextFieldEditable
 
+           //set up and run client
     private void runClient(String ipAddress){
      try // connect to server, get streams, process connection
       {
@@ -577,9 +703,8 @@ public class Battleship extends javax.swing.JFrame {
     
     }
     
-     // connect to server
-   private void connectToServer() throws IOException
-   {      
+           // connect to server
+   private void connectToServer() throws IOException{      
       displayMessage( "Attempting connection\n" );
 
       // create Socket to make connection to server
@@ -590,9 +715,8 @@ public class Battleship extends javax.swing.JFrame {
          client.getInetAddress().getHostName() );
    } // end method connectToServer
 
-   // get streams to send and receive data
-   private void getStreamsClient() throws IOException
-   {
+           // get streams to send and receive data
+   private void getStreamsClient() throws IOException{
       // set up output stream for objects
       outputClient = new ObjectOutputStream( client.getOutputStream() );      
       outputClient.flush(); // flush output buffer to send header information
@@ -603,9 +727,8 @@ public class Battleship extends javax.swing.JFrame {
       displayMessage( "\nGot I/O streams\n" );
    } // end method getStreams
 
-   // process connection with server
-   private void processConnectionClient() throws IOException
-   {
+           // process connection with server
+   private void processConnectionClient() throws IOException{
       // enable enterField so client user can send messages
       setTextFieldEditable( true );
 
@@ -624,10 +747,8 @@ public class Battleship extends javax.swing.JFrame {
       } while ( !message.equals( "SERVER>>> TERMINATE" ) );
    } // end method processConnection
 
-   // close streams and socket
-  
-   private void closeConnectionClient() 
-   {
+           // close streams and socket
+   private void closeConnectionClient()  {
       displayMessage( "\nClosing connection" );
       setTextFieldEditable( false ); // disable enterField
 
@@ -643,9 +764,8 @@ public class Battleship extends javax.swing.JFrame {
       } // end catch
    } // end method closeConnection
    
-   // manipulates displayArea in the event-dispatch thread
-private void sendDataClient( String message )
-	   {
+           // manipulates displayArea in the event-dispatch thread
+   private void sendDataClient( String message ){
 	      try // send object to client
 	      {
 	         outputClient.writeObject( "CLIENT>>> " + message );
@@ -657,9 +777,9 @@ private void sendDataClient( String message )
 	         messageTextArea.append( "\nError writing object" );
 	      } // end catch
 	   } // end method sendData
-
-    
-    public static void main(String args[]) {
+/*end of server Methods*/ 
+    //Main Method
+   public static void main(String args[]){
 		
 		/* Set the Nimbus look and feel */
 		// <editor-fold defaultstate="collapsed"
