@@ -37,7 +37,7 @@ public class DragImage extends JComponent implements MouseMotionListener {
   }
 
   public static void main(String[] args) {
-    String imageFile = "Invincible_Class_Fast_Battleship.jpg";
+    String imageFile = "Battleship.jpg";
     // Turn off double buffering
     RepaintManager.currentManager(null).setDoubleBufferingEnabled(false);
 
@@ -58,7 +58,7 @@ public class DragImage extends JComponent implements MouseMotionListener {
 
     //Set the frame icon to an image loaded from a file.
     
-    java.net.URL imgURL = DragImage.class.getResource("Invincible_Class_Fast_Battleship.jpg");
+    java.net.URL imgURL = DragImage.class.getResource("Battleship.jpg");
     toframe.setIconImage(new ImageIcon(imgURL).getImage());
     
     

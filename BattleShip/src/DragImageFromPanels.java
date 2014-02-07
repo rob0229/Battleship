@@ -79,14 +79,14 @@ public class DragImageFromPanels extends JFrame {
         
         
         //create panel for player interface
-        JPanel panel1 = createEmptyJPanel("Game Board Area", 800, 800);
+        JPanel panel1 = createEmptyJPanel("Game Board Area", 400, 400);
         frame.add(panel1, BorderLayout.CENTER);
         frame.setBackground(Color.red);
-        JPanel enemyPanel = createEmptyJPanel("Enemy", 800, 400);
+        JPanel enemyPanel = createEmptyJPanel("Enemy", 400, 200);
       //  enemyPanel.setBackground(Color.red);
         frame.add(panel1, BorderLayout.NORTH);
         
-        JPanel playerPanel = createEmptyJPanel("Player", 800, 400);
+        JPanel playerPanel = createEmptyJPanel("Player", 400, 200);
         frame.add(panel1, BorderLayout.CENTER);
        // playerPanel.setBackground(Color.blue);
         
@@ -164,14 +164,14 @@ public class DragImageFromPanels extends JFrame {
     	 final JPanel shipPanel = new JPanel() {
              @Override
              public Dimension getPreferredSize() {
-                 return new Dimension(800, 100);
+                 return new Dimension(400, 100);
              }
          };
     	
     	
     	int imageWidth = 120;
     	int imageHeight = 60;
-    	String bsImageFile = "Invincible_Class_Fast_Battleship.jpg";
+    	String bsImageFile = "Battleship.jpg";
     	
     	
     	Image bsImage = Toolkit.getDefaultToolkit().getImage(DragImage.class.getResource(bsImageFile));

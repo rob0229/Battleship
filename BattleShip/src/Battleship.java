@@ -1,6 +1,6 @@
 
 
-
+import java.awt.Graphics;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -59,6 +59,7 @@ public class Battleship extends javax.swing.JFrame {
         private Socket client; // socket to communicate with server
         private Boolean isServer = false;
         
+        private Square[][] board; // board
         
         Ship carrier = new Ship();
         Ship battleship = new Ship();
@@ -75,9 +76,16 @@ public class Battleship extends javax.swing.JFrame {
         initComponents();
     }
     
+    
+    
+    
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
+    	
+    	
 
         messagePanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -106,7 +114,7 @@ public class Battleship extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Battleship");
-        setResizable(false);
+        setResizable(true);
 
         messagePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Message Center", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
@@ -165,6 +173,8 @@ public class Battleship extends javax.swing.JFrame {
             }
         });
 
+        
+        
         disconnectButton.setText("Disconnect");
         disconnectButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -391,6 +401,9 @@ public class Battleship extends javax.swing.JFrame {
         pack();
     }// </editor-fold>                        
   
+    
+    
+    
     private void userChatEnterActionPerformed(java.awt.event.ActionEvent evt) {                                              
       if (isServer == true){
        sendData( evt.getActionCommand() );
@@ -778,6 +791,62 @@ class MyDragGestureListener implements DragGestureListener {
 	      } // end catch
 	   } // end method sendData
 /*end of server Methods*/ 
+   
+   
+   
+
+   
+   // private inner class for the squares on the board
+   private class Square extends JPanel 
+   {
+      private String mark; // mark to be drawn in this square
+      private int location; // location of square
+   
+      public Square( String squareMark, int squareLocation )
+      {
+         mark = squareMark; // set mark for this square
+         location = squareLocation; // set location of this square
+/*
+         addMouseListener( 
+            new MouseAdapter() 
+            {
+               public void mouseReleased( MouseEvent e )
+               {
+                  setCurrentSquare( Square.this ); // set current square
+
+                  // send location of this square
+                  sendClickedSquare( getSquareLocation() );
+               } // end method mouseReleased
+            } // end anonymous inner class
+         ); // end call to addMouseListener
+         	      */
+      } // end Square constructor
+
+
+      // return preferred size of Square
+      public Dimension getPreferredSize() 
+      { 
+         return new Dimension( 35, 35 ); // return preferred size
+      } // end method getPreferredSize
+
+      // return minimum size of Square
+      public Dimension getMinimumSize() 
+      {
+         return getPreferredSize(); // return preferred size
+      } // end method getMinimumSize
+
+      // draw Square
+      public void paintComponent( Graphics g )
+      {
+         super.paintComponent( g );
+
+         g.drawRect( 0, 0, 34, 34 ); // draw square
+         g.drawString( mark, 11, 20 ); // draw mark   
+      } // end method paintComponent
+   } // end inner-class Square
+   
+   
+   
     //Main Method
    public static void main(String args[]){
 		
