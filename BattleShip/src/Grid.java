@@ -26,33 +26,55 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ExecutorService;
 
 public class Grid extends JFrame {
-	private JPanel boardPanel; // panel for board
+	private JPanel playerPanel; 
+	private JPanel enemyPanel; // panel for board
 	private JPanel panel2; // panel to hold board
-	private Square[][] board; // board
+	private Square[][] playerGrid; // board
+	private Square[][] enemyGrid;
 
 	public Grid(){ 
-		boardPanel = new JPanel(); // set up panel for squares in board
-	    boardPanel.setLayout( new GridLayout( 10, 10, 0, 0 ) );
-	
-	    board = new Square[ 10 ][ 10 ]; // create board
-	
+		playerPanel = new JPanel(); // set up panel for squares in board
+	    playerPanel.setLayout( new GridLayout( 10, 10, 0, 0 ) );	
+	    playerGrid = new Square[10][10]; // create Grid
+	    
+	    enemyPanel = new JPanel(); // set up panel for squares in board
+	    enemyPanel.setLayout( new GridLayout( 10, 10, 0, 0 ) );	
+	    enemyGrid = new Square[10][10]; // create Grid
+	    
+	    playerPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Player Board"));
+	    enemyPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Enemy Board"));
 	    // loop over the rows in the board
-	    for ( int row = 0; row < board.length; row++ ) 
+	    for ( int row = 0; row < playerGrid.length; row++ ) 
 	    {
 	       // loop over the columns in the board
-	       for ( int column = 0; column < board[ row ].length; column++ ) 
+	       for ( int column = 0; column < playerGrid[ row ].length; column++ ) 
 	       {
 	          // create square
-	          board[ row ][ column ] = new Square( " ", row * 3 + column );
-	          boardPanel.add( board[ row ][ column ] ); // add square       
+	          playerGrid[ row ][ column ] = new Square( " ", row, column);
+	          playerPanel.add( playerGrid[ row ][ column ] ); // add square       
 	       } // end inner for
 	    } // end outer for
 	    
+	    
+	    // loop over the rows in the board
+	    for ( int row = 0; row < enemyGrid.length; row++ ) 
+	    {
+	       // loop over the columns in the board
+	       for ( int column = 0; column < enemyGrid[ row ].length; column++ ) 
+	       {
+	          // create square
+	    	   enemyGrid[ row ][ column ] = new Square( " ",row, column);
+	          enemyPanel.add( enemyGrid[ row ][ column ] ); // add square       
+	       } // end inner for
+	    } // end outer for
+	    
+	    
 	    panel2 = new JPanel(); // set up panel to contain boardPanel
-	    panel2.add( boardPanel); // add board panel
+	    panel2.add( playerPanel); // add board panel
+	    panel2.add(enemyPanel);
 	    add(panel2); // add container panel
 	      
-	    setSize( 600, 550 ); // set size of window
+	    setSize( 1000, 1000 ); // set size of window
 	    setVisible( true ); // show window
 	      
 	}
@@ -60,14 +82,17 @@ public class Grid extends JFrame {
 	   // private inner class for the squares on the board
 	   private class Square extends JPanel 
 	   {
-	      private String mark; // mark to be drawn in this square
-	      private int location; // location of square
+	      private String contents; // mark to be drawn in this square
+	      private int xCord;
+	      private int yCord;// location of square
 	   
-	      public Square( String squareMark, int squareLocation )
+	      public Square( String squareContents, int x, int y )
 	      {
-	         mark = squareMark; // set mark for this square
-	         location = squareLocation; // set location of this square
-/*
+	    	  contents = squareContents; // set mark for this square
+	    	 
+	    	  xCord = x;// set location of this square 
+	    	  yCord = y;// set location of this square
+
 	         addMouseListener( 
 	            new MouseAdapter() 
 	            {
@@ -75,19 +100,33 @@ public class Grid extends JFrame {
 	               {
 	                  setCurrentSquare( Square.this ); // set current square
 
-	                  // send location of this square
-	                  sendClickedSquare( getSquareLocation() );
 	               } // end method mouseReleased
+
+				private void sendClickedSquare(Object squareLocation) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				private Object getSquareLocation() {
+					Square curr = new Square(contents, xCord, yCord);
+					return curr;
+				}
+
+				private void setCurrentSquare(Square square) {
+	
+					System.out.println("The square x = "+xCord+" y = "+ yCord);
+					
+				}
 	            } // end anonymous inner class
 	         ); // end call to addMouseListener
-	         	      */
+	         	      
 	      } // end Square constructor
 
 
 	      // return preferred size of Square
 	      public Dimension getPreferredSize() 
 	      { 
-	         return new Dimension( 35, 35 ); // return preferred size
+	         return new Dimension( 31, 31 ); // return preferred size
 	      } // end method getPreferredSize
 
 	      // return minimum size of Square
@@ -101,8 +140,8 @@ public class Grid extends JFrame {
 	      {
 	         super.paintComponent( g );
 
-	         g.drawRect( 0, 0, 34, 34 ); // draw square
-	         g.drawString( mark, 11, 20 ); // draw mark   
+	         g.drawRect( 0, 0, 30, 30 ); // draw square
+	         //g.drawString( contents, 11, 20 ); // draw mark   
 	      } // end method paintComponent
 	   } // end inner-class Square
 	
