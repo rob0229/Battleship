@@ -141,10 +141,10 @@ public class DragImageFromPanels extends JFrame {
                     return false;
                 }
 
-                Transferable tansferable = support.getTransferable();
+                Transferable transferable = support.getTransferable();
                 Icon ico;
                 try {
-                    ico = (Icon) tansferable.getTransferData(DataFlavor.imageFlavor);
+                    ico = (Icon) transferable.getTransferData(DataFlavor.imageFlavor);
                 } catch (Exception e) {
                     e.printStackTrace();
                     return false;

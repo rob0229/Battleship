@@ -532,7 +532,7 @@ public class Battleship extends JFrame {
     }
 }
 
-class MyDragGestureListener implements DragGestureListener {
+    class MyDragGestureListener implements DragGestureListener {
 
     @Override
     public void dragGestureRecognized(DragGestureEvent event) {
