@@ -1,7 +1,9 @@
+package testFiles;
 
 
-import java.awt.BorderLayout;
-import java.awt.Component;
+
+
+
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
@@ -40,6 +42,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.TransferHandler;
 import javax.swing.TransferHandler.TransferSupport;
 import javax.swing.border.TitledBorder;
+
 
 import java.util.Formatter;
 import java.util.Scanner;
@@ -165,87 +168,9 @@ public class Grid extends JFrame {
 	}
 	
 	
-	class MyDropTargetListener extends DropTargetAdapter {
+	
 
-	    private DropTarget dropTarget;
-	    private JPanel p;
-
-	    public MyDropTargetListener(JPanel dropPanel) {
-	        p = dropPanel;
-	        dropTarget = new DropTarget(dropPanel, DnDConstants.ACTION_COPY, this, true, null);
-
-	    }
-
-	    @Override
-	    public void drop(DropTargetDropEvent event) {
-	    	Point dropPoint;
-	        try {
-	            DropTarget test = (DropTarget) event.getSource();
-	            Component ca = (Component) test.getComponent();
-	            
-	            dropPoint = ca.getMousePosition();
-	            droppedAt = dropPoint;
-	            
-	            //need to call a method here that determines the square the ship was dropped in so that the image file for the square
-	            //can be updated with the appropriate image
-	            System.out.println("Drop point is " + dropPoint);
-     
-	            //data that is transfered to new panel (ship image file)
-	            Transferable tr = event.getTransferable();
-
-	            //checks that the data being dragged is an imageFlavor
-	            if (event.isDataFlavorSupported(DataFlavor.imageFlavor)) {
-	                Icon ico = (Icon) tr.getTransferData(DataFlavor.imageFlavor);
-
-	                if (ico != null) {
-
-	                    p.add(new JLabel(ico));
-	                    p.revalidate();
-	                    p.repaint();
-	                    event.dropComplete(true);
-	                }
-	            } else {
-	                event.rejectDrop();
-	            }
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	            event.rejectDrop();
-	        }
-	     
-	    }
-   
-	}
-
-	class MyDragGestureListener implements DragGestureListener {
-
-	    @Override
-	    public void dragGestureRecognized(DragGestureEvent event) {
-	        JLabel label = (JLabel) event.getComponent();
-	        final Icon ico = label.getIcon();
-
-
-	        Transferable transferable = new Transferable() {
-	            @Override
-	            public DataFlavor[] getTransferDataFlavors() {
-	                return new DataFlavor[]{DataFlavor.imageFlavor};
-	            }
-
-	            @Override
-	            public boolean isDataFlavorSupported(DataFlavor flavor) {
-	                if (!isDataFlavorSupported(flavor)) {
-	                    return false;
-	                }
-	                return true;
-	            }
-
-	            @Override
-	            public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException, IOException {
-	                return ico;
-	            }
-	        };
-	        event.startDrag(null, transferable);
-	    }
-	}
+	
 	
 	
 	   // private inner class for the squares on the board
@@ -320,10 +245,7 @@ public class Grid extends JFrame {
 	         g.drawString( contents, 11, 20 ); // draw contents  
 	     } // end method paintComponent
 	      
-	     
-	      
-	      
-	      
+      
 	   } // end inner-class Square
 	
 	   
@@ -334,8 +256,8 @@ public class Grid extends JFrame {
 		   
 		   
 		   if (x > 6 && x < 32 ){
-		//	   playerGrid[0][0].setCurrentSquare() = "S";
-			  // playerGrid[0][0].paintComponent((Battleship.jpg));
+		
+			   playerGrid[0][0].setContents("S");
 			   System.out.println("CONTENTS ARE "+ playerGrid[0][0].contents);
 			   repaint();
 			   
@@ -351,9 +273,6 @@ public class Grid extends JFrame {
    
 		   
 	   }
-	   
-	   
-	   
 	   
 	   
 	

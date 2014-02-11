@@ -22,7 +22,6 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.awt.Container;
-
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.Icon;
@@ -39,14 +38,18 @@ import javax.swing.SwingUtilities;
 import javax.swing.TransferHandler;
 import javax.swing.TransferHandler.TransferSupport;
 import javax.swing.border.TitledBorder;
+
+
+
 import java.net.InetAddress;
 import java.io.EOFException;
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import javax.swing.SwingUtilities;
+
+
+
 
 /**
  *
@@ -297,7 +300,7 @@ public class Battleship extends JFrame {
 	          // create squares	    	
 	        playerGrid[ r ][ col ] = new Square( " ",r, col);
 	        playerPanel.add( playerGrid[ r ][ col ] ); // add square  
-          
+	        new MyDropTargetListener(playerGrid[r][col], r , col);
 	       }
 	    } 
         
@@ -355,6 +358,15 @@ public class Battleship extends JFrame {
                 .addComponent(crusierImageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(124, 124, 124))
         );
+        
+        //Adds drag listener to ship inventory panel
+        MyDragGestureListener dlistener = new MyDragGestureListener();
+        DragSource ds1 = new DragSource();    
+        ds1.createDefaultDragGestureRecognizer(battleshipImageLabel, DnDConstants.ACTION_COPY, dlistener);
+        ds1.createDefaultDragGestureRecognizer(carrierImageLabel, DnDConstants.ACTION_COPY, dlistener);
+        ds1.createDefaultDragGestureRecognizer(crusierImageLabel, DnDConstants.ACTION_COPY, dlistener);
+        ds1.createDefaultDragGestureRecognizer(destroyerImageLabel, DnDConstants.ACTION_COPY, dlistener);
+        ds1.createDefaultDragGestureRecognizer(submarineImageLabel, DnDConstants.ACTION_COPY, dlistener);
 
         //
         enemyRemainingPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Enemy Ships Remaining"));
@@ -410,6 +422,10 @@ public class Battleship extends JFrame {
         );
     
       
+        
+    
+        
+        
 	 // loop over the rows in the playerBoard
 	   
        // setSize( 900, 1000 ); // set size of window
@@ -483,86 +499,9 @@ public class Battleship extends JFrame {
     
     //new MyDropTargetListener(playerBoard);//this must be done or we wont be able to drop any image onto the empty panel
        
-    class MyDropTargetListener extends DropTargetAdapter {
-
-    private DropTarget dropTarget;
-    private JPanel p;
    
-    public MyDropTargetListener(JPanel panel) {
-        p = panel;
-        dropTarget = new DropTarget(panel, DnDConstants.ACTION_COPY, this, true, null);
 
-        
-        String test = "@@h";
-    
-    
-    if(test.charAt(0) == '@' && test.charAt(1) == '@'){
-    	System.out.println("That message is an attack coordinate :" + test);
-                
-    }
-        
-        
-    }
-
-    @Override
-    public void drop(DropTargetDropEvent event) {
-        try {
-            DropTarget test = (DropTarget) event.getSource();
-            Component ca = (Component) test.getComponent();
-            Point dropPoint = ca.getMousePosition();
-            Transferable tr = event.getTransferable();
-
-            if (event.isDataFlavorSupported(DataFlavor.imageFlavor)) {
-                Icon ico = (Icon) tr.getTransferData(DataFlavor.imageFlavor);
-
-                if (ico != null) {
-
-                    p.add(new JLabel(ico));
-                    p.revalidate();
-                    p.repaint();
-                    event.dropComplete(true);
-                }
-            } else {
-                event.rejectDrop();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            event.rejectDrop();
-        }
-    }
-}
-
-    class MyDragGestureListener implements DragGestureListener {
-
-    @Override
-    public void dragGestureRecognized(DragGestureEvent event) {
-        JLabel label = (JLabel) event.getComponent();
-        final Icon ico = label.getIcon();
-
-
-        Transferable transferable = new Transferable() {
-            @Override
-            public DataFlavor[] getTransferDataFlavors() {
-                return new DataFlavor[]{DataFlavor.imageFlavor};
-            }
-
-            
-            public boolean isDataFlavorSupported(DataFlavor flavor) {
-                if (!isDataFlavorSupported(flavor)) {
-                    return false;
-                }
-                return true;
-            }
-
-            @Override
-            public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException, IOException {
-                return ico;
-            }
-        };
-        event.startDrag(null, transferable);
-    }
-}
-    
+   
 // set up and run server 
     private void runServer(){
 	      try // set up server to receive connections; process connections
@@ -803,71 +742,6 @@ public class Battleship extends JFrame {
    
 
    
-// private inner class for the squares on the board
-   private class Square extends JPanel 
-   {
-      private String contents; // mark to be drawn in this square
-      private int xCord;
-      private int yCord;// location of square
-   
-      public Square( String squareContents, int x, int y )
-      {
-    	  contents = squareContents; // set mark for this square
-    	 
-    	  xCord = x;// set location of this square 
-    	  yCord = y;// set location of this square
-
-         addMouseListener( 
-            new MouseAdapter() 
-            {
-               public void mouseReleased( MouseEvent e )
-               {
-                  setCurrentSquare( Square.this ); // set current square
-
-               } // end method mouseReleased
-
-			private void sendClickedSquare(Object squareLocation) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			private Object getSquareLocation() {
-				Square curr = new Square(contents, xCord, yCord);
-				return curr;
-			}
-
-			private void setCurrentSquare(Square square) {
-
-				System.out.println("The square x = " + xCord + " y = "+ yCord);
-				
-			}
-            } // end anonymous inner class
-         ); // end call to addMouseListener
-         	      
-      } // end Square constructor
-
-
-      // return preferred size of Square
-      public Dimension getPreferredSize() 
-      { 
-         return new Dimension( 31, 31 ); // return preferred size
-      } // end method getPreferredSize
-
-      // return minimum size of Square
-      public Dimension getMinimumSize() 
-      {
-         return getPreferredSize(); // return preferred size
-      } // end method getMinimumSize
-
-      // draw Square
-      public void paintComponent( Graphics g )
-      {
-         super.paintComponent( g );
-
-         g.drawRect( 0, 0, 30, 30 ); // draw square
-         //g.drawString( contents, 11, 20 ); // draw mark   
-      } // end method paintComponent
-   } // end inner-class Square
 
    
    

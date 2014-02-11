@@ -1,5 +1,5 @@
 
-public class getDropSquare {
+public class GetDropSquare {
 
 	/**
 	 * @param args

@@ -1,3 +1,4 @@
+package testFiles;
 // Fig. 24.7: Client.java
 // Client that reads and displays information sent from a Server.
 import java.io.EOFException;

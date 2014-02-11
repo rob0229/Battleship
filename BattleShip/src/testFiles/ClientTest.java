@@ -1,6 +1,8 @@
+package testFiles;
 // Fig. 24.8: ClientTest.java
 // Test the Client class.
 import javax.swing.JFrame;
+
 
 public class ClientTest 
 {
