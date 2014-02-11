@@ -21,7 +21,6 @@ import java.awt.dnd.DropTargetAdapter;
 import java.awt.dnd.DropTargetDropEvent;
 import java.io.IOException;
 import java.net.URL;
-import java.awt.Container;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -30,7 +29,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.TransferHandler;
-import javax.swing.TransferHandler.TransferSupport;
 import javax.swing.border.TitledBorder;
 
 public class DragImageFromPanels extends JFrame {

@@ -1,31 +1,20 @@
 
 
-import java.awt.Graphics;
-import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.Point;
-import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.Transferable;
-import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.dnd.DnDConstants;
-import java.awt.dnd.DragGestureEvent;
-import java.awt.dnd.DragGestureListener;
 import java.awt.dnd.DragSource;
-import java.awt.dnd.DropTarget;
-import java.awt.dnd.DropTargetAdapter;
-import java.awt.dnd.DropTargetDropEvent;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.io.EOFException;
 import java.io.IOException;
-import java.net.URL;
-import java.awt.Container;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.InetAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
+
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -35,18 +24,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.SwingUtilities;
-import javax.swing.TransferHandler;
-import javax.swing.TransferHandler.TransferSupport;
 import javax.swing.border.TitledBorder;
-
-
-
-import java.net.InetAddress;
-import java.io.EOFException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.ServerSocket;
-import java.net.Socket;
 
 
 
@@ -70,7 +48,7 @@ public class Battleship extends JFrame {
         private Socket client; // socket to communicate with server
         private Boolean isServer = false;     
         private Square[][] enemyGrid; //
-        private Square[][] playerGrid; //
+        private PlayerGrid playerGrid; //
         
         Ship carrier = new Ship();
         Ship battleship = new Ship();
@@ -92,10 +70,11 @@ public class Battleship extends JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
     	   
-    	playerGrid = new Square[10][10];    
+    	playerPanel = new JPanel();   
+    	playerGrid = new PlayerGrid(playerPanel);    
     	enemyGrid = new Square[10][10];
     	enemyPanel = new JPanel();
-        playerPanel = new JPanel();
+       
         
         messagePanel = new JPanel();
         jLabel1 = new JLabel();
@@ -121,9 +100,7 @@ public class Battleship extends JFrame {
         battleshipImageLabel = new JLabel();
         enemyRemainingPanel = new JPanel();
 
-    
-        
-        
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Battleship");
         setResizable(false);
@@ -282,27 +259,9 @@ public class Battleship extends JFrame {
         playerPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Player Board"));
         playerPanel.setLayout(new GridLayout(10,10,0,0));
         
-        //creates enemyGrid
-        for ( int row = 0; row < enemyGrid.length; row++ ) 
-	    {
-	       for ( int column = 0; column < enemyGrid[ row ].length; column++ ) 
-	       {
-	          // create squares
-	    	   enemyGrid[ row ][ column ] = new Square( " ",row, column);
-	          enemyPanel.add( enemyGrid[ row ][ column ] ); // add square       
-	       } 
-	    }   
-        
+       
         //creates playerGrid
-        for ( int r = 0; r < playerGrid.length; r++ ) { 
-	       for ( int col = 0; col < playerGrid[ r ].length; col++ ) 
-	       {
-	          // create squares	    	
-	        playerGrid[ r ][ col ] = new Square( " ",r, col);
-	        playerPanel.add( playerGrid[ r ][ col ] ); // add square  
-	        new MyDropTargetListener(playerGrid[r][col], r , col);
-	       }
-	    } 
+       
         
       
         
@@ -325,7 +284,7 @@ public class Battleship extends JFrame {
         destroyerImageLabel.setText("Destroyer");
         destroyerImageLabel.setPreferredSize(new java.awt.Dimension(60, 20));
 
-        battleshipImageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("Battleship.jpg"))); // NOI18N
+        battleshipImageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("Battleship.png"))); // NOI18N
         battleshipImageLabel.setText("Battleship");
         battleshipImageLabel.setPreferredSize(new java.awt.Dimension(120, 60));
 
@@ -422,14 +381,7 @@ public class Battleship extends JFrame {
         );
     
       
-        
-    
-        
-        
-	 // loop over the rows in the playerBoard
-	   
-       // setSize( 900, 1000 ); // set size of window
-       // setVisible( true ); // show window
+   
         
         pack();
     }// </editor-fold>                        
