@@ -1,5 +1,7 @@
+import javax.swing.JLabel;
 
-public class Ship {
+
+public class Ship extends JLabel {
 	 private String nameOfShip =" ";
 	    private int hitPoints=0;
 	    private int xCord=0, yCord=0;

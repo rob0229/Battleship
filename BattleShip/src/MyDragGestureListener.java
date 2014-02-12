@@ -15,6 +15,7 @@ class MyDragGestureListener implements DragGestureListener {
     @Override
     public void dragGestureRecognized(DragGestureEvent event) {
         JLabel label = (JLabel) event.getComponent();
+      
         final Icon ico = label.getIcon();
 
 
@@ -32,8 +33,9 @@ class MyDragGestureListener implements DragGestureListener {
                 return true;
             }
 
-            @Override
+           // @Override
             public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException, IOException {
+            	System.out.println("Icon is " + ico.toString());
                 return ico;
             }
         };

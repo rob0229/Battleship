@@ -34,7 +34,40 @@ import javax.swing.border.TitledBorder;
  * @author Rob
  */
 public class Battleship extends JFrame {
-        
+	
+	 // Variables declaration -                     
+    private javax.swing.JButton connectButton;
+    private javax.swing.JPanel controlPanel;
+    private javax.swing.JButton disconnectButton;
+    private javax.swing.JPanel enemyPanel;
+    private javax.swing.JButton hostButton;
+    private java.awt.TextField ipAddressField;
+    private javax.swing.JLabel messageLabel1;
+    private javax.swing.JLabel battleshipImageLabel;
+    private javax.swing.JLabel crusierImageLabel;
+    private javax.swing.JLabel submarineImageLabel;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel hostGameLabel;
+    private javax.swing.JLabel carrierImageLabel;
+    private javax.swing.JLabel destroyerImageLabel;
+    private javax.swing.JLabel hostIPAdressLabel9;
+    private javax.swing.JPanel informationPanel;
+    private javax.swing.JPanel enemyRemainingPanel;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JPanel messagePanel;
+    private javax.swing.JTextArea messageTextArea;
+    private javax.swing.JPanel playerPanel;
+    private javax.swing.JButton readyButton;
+    private javax.swing.JPanel shipInventory;
+    private javax.swing.JTextField userChatEnter;     
+    private EnemyGrid enemyGrid; //
+    private PlayerGrid playerGrid; //
+    Ship carrier = new Ship();
+    Ship battleship = new Ship();
+    Ship sub = new Ship();
+    Ship destroyer = new Ship();
+    Ship crusier = new Ship();
+    //Server and Client Variables
         private ObjectOutputStream output; // output stream to client
         private ObjectInputStream input; // input stream from client
         private ServerSocket serverSocket; // server socket
@@ -47,16 +80,6 @@ public class Battleship extends JFrame {
         private String chatServer; // host server for this application
         private Socket client; // socket to communicate with server
         private Boolean isServer = false;     
-        private Square[][] enemyGrid; //
-        private PlayerGrid playerGrid; //
-        
-        Ship carrier = new Ship();
-        Ship battleship = new Ship();
-        Ship sub = new Ship();
-        Ship destroyer = new Ship();
-        Ship crusier = new Ship();
-        
-   
      
     /**
      * Creates new form Battleship
@@ -71,21 +94,19 @@ public class Battleship extends JFrame {
     private void initComponents() {
     	   
     	playerPanel = new JPanel();   
-    	playerGrid = new PlayerGrid(playerPanel);    
-    	enemyGrid = new Square[10][10];
+    	playerGrid = new PlayerGrid(playerPanel);
     	enemyPanel = new JPanel();
-       
-        
+    	enemyGrid = new EnemyGrid(enemyPanel);   
         messagePanel = new JPanel();
-        jLabel1 = new JLabel();
+        messageLabel1 = new JLabel();
         userChatEnter = new JTextField();
         jScrollPane2 = new JScrollPane();
         messageTextArea = new JTextArea();
         controlPanel = new JPanel();
         readyButton = new JButton();
         jLabel5 = new JLabel();
-        jLabel6 = new JLabel();
-        jLabel9 = new JLabel();
+        hostGameLabel = new JLabel();
+        hostIPAdressLabel9 = new JLabel();
         ipAddressField = new java.awt.TextField();
         disconnectButton = new JButton();
         connectButton = new JButton();
@@ -107,7 +128,7 @@ public class Battleship extends JFrame {
 
         messagePanel.setBorder(BorderFactory.createTitledBorder(null, "Message Center", TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION));
 
-        jLabel1.setText("Message: ");
+        messageLabel1.setText("Message: ");
 
         userChatEnter.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -131,7 +152,7 @@ public class Battleship extends JFrame {
                 .addGroup(messagePanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2)
                     .addGroup(messagePanelLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(messageLabel1)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(userChatEnter))))
         );
@@ -143,7 +164,7 @@ public class Battleship extends JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(messagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(userChatEnter)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(messageLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         controlPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Control Panel", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.ABOVE_TOP));
@@ -152,9 +173,9 @@ public class Battleship extends JFrame {
 
         jLabel5.setText("Position Ships and push when ready");
 
-        jLabel6.setText("Host Game:");
+        hostGameLabel.setText("Host Game:");
 
-        jLabel9.setText("Host IP Address");
+        hostIPAdressLabel9.setText("Host IP Address");
 
         ipAddressField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -210,8 +231,8 @@ public class Battleship extends JFrame {
                         .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(controlPanelLayout.createSequentialGroup()
                                 .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(hostIPAdressLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(hostGameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
                                 .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(ipAddressField, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -236,7 +257,7 @@ public class Battleship extends JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, controlPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(hostGameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(disconnectButton)
                         .addComponent(hostButton)))
@@ -244,7 +265,7 @@ public class Battleship extends JFrame {
                 .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(ipAddressField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(hostIPAdressLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(connectButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(informationPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -254,16 +275,11 @@ public class Battleship extends JFrame {
                 .addComponent(readyButton))
         );
         
+        
         enemyPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Enemy Board"));
         enemyPanel.setLayout(new GridLayout(10,10,0,0));
         playerPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Player Board"));
         playerPanel.setLayout(new GridLayout(10,10,0,0));
-        
-       
-        //creates playerGrid
-       
-        
-      
         
         //Ship Panel Layout
         shipInventory.setBorder(javax.swing.BorderFactory.createTitledBorder("Ship Inventory"));
@@ -327,9 +343,10 @@ public class Battleship extends JFrame {
         ds1.createDefaultDragGestureRecognizer(destroyerImageLabel, DnDConstants.ACTION_COPY, dlistener);
         ds1.createDefaultDragGestureRecognizer(submarineImageLabel, DnDConstants.ACTION_COPY, dlistener);
 
-        //
+        //populate this panel with ship images and turn ren once they have been destroyed
         enemyRemainingPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Enemy Ships Remaining"));
 
+        
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(enemyRemainingPanel);
         enemyRemainingPanel.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -411,12 +428,9 @@ public class Battleship extends JFrame {
         isServer = true;
 	   	  {
 	   		Runnable serverRunnable = new Runnable(){
-	   			
-
 				@Override
 				public void run() {
-					runServer();// TODO Auto-generated method stub
-					
+					runServer();// TODO Auto-generated method stub				
 				}
    		
 	   	  };
@@ -425,7 +439,7 @@ public class Battleship extends JFrame {
 			
 		}
     }                                          
-
+  
     private void connectButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
          connectButton.setEnabled(false);
         hostButton.setEnabled(false);		 
@@ -448,12 +462,7 @@ public class Battleship extends JFrame {
     }                                                
 
     /*Start of server Methods*/ 
-    
-    //new MyDropTargetListener(playerBoard);//this must be done or we wont be able to drop any image onto the empty panel
-       
-   
 
-   
 // set up and run server 
     private void runServer(){
 	      try // set up server to receive connections; process connections
@@ -744,30 +753,5 @@ public class Battleship extends JFrame {
     
 
 
-    // Variables declaration - do not modify                     
-    private javax.swing.JButton connectButton;
-    private javax.swing.JPanel controlPanel;
-    private javax.swing.JButton disconnectButton;
-    private javax.swing.JPanel enemyPanel;
-    private javax.swing.JButton hostButton;
-    private java.awt.TextField ipAddressField;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel battleshipImageLabel;
-    private javax.swing.JLabel crusierImageLabel;
-    private javax.swing.JLabel submarineImageLabel;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel carrierImageLabel;
-    private javax.swing.JLabel destroyerImageLabel;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel informationPanel;
-    private javax.swing.JPanel enemyRemainingPanel;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JPanel messagePanel;
-    private javax.swing.JTextArea messageTextArea;
-    private javax.swing.JPanel playerPanel;
-    private javax.swing.JButton readyButton;
-    private javax.swing.JPanel shipInventory;
-    private javax.swing.JTextField userChatEnter;
-    // End of variables declaration                   
+                      
 }

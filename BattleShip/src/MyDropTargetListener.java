@@ -28,6 +28,7 @@ class MyDropTargetListener extends DropTargetAdapter {
 	        try {
 	            DropTarget test = (DropTarget) event.getSource();
 	            Component ca = (Component) test.getComponent();
+	            System.out.println(ca.getName());
 	            
 	            dropPoint = ca.getMousePosition();
 	            
