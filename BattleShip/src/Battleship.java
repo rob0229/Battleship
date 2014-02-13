@@ -12,7 +12,6 @@ import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -278,9 +277,10 @@ public class Battleship extends JFrame {
         
         enemyPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Enemy Board"));
         enemyPanel.setLayout(new GridLayout(10,10,0,0));
-        playerPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Player Board"));
-        playerPanel.setLayout(new GridLayout(10,10,0,0));
         
+        playerPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Player Board"));
+        //playerPanel.setLayout(new GridLayout(10,10,0,0));
+        playerPanel.setLayout(null);
         //Ship Panel Layout
         shipInventory.setBorder(javax.swing.BorderFactory.createTitledBorder("Ship Inventory"));
 

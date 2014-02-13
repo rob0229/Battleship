@@ -8,16 +8,17 @@ public class PlayerGrid {
 	
 	public PlayerGrid(JPanel playerPanel){
 		
- playerPanel.setBackground(Color.black);
+// playerPanel.setBackground(Color.black);
 		playerGrid = new Square[10][10]; 
 		 for ( int r = 0; r < playerGrid.length; r++ ) { 
 		       for ( int col = 0; col < playerGrid[ r ].length; col++ ) 
 		       {
 		          // create squares	    	
 		        playerGrid[ r ][ col ] = new Square( " ",r, col);
-		        playerPanel.add( playerGrid[ r ][ col ] ); // add square  
+		       // playerPanel.add( playerGrid[ r ][ col ] ); // add square  
 		     
-		        new MyDropTargetListener(playerGrid[r][col], r , col);
+		        //new MyDropTargetListener(playerGrid[r][col], r , col);
+		        new MyDropTargetListener(playerPanel);
 		       }
 		} 
 	}

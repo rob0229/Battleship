@@ -16,7 +16,7 @@ class MyDropTargetListener extends DropTargetAdapter {
 	    private DropTarget dropTarget;
 	    private JPanel p;
 
-	    public MyDropTargetListener(JPanel dropPanel, int x, int y) {
+	    public MyDropTargetListener(JPanel dropPanel) {
 	        p = dropPanel;
 	        dropTarget = new DropTarget(dropPanel, DnDConstants.ACTION_COPY, this, true, null);
 
@@ -28,8 +28,6 @@ class MyDropTargetListener extends DropTargetAdapter {
 	        try {
 	            DropTarget test = (DropTarget) event.getSource();
 	            Component ca = (Component) test.getComponent();
-	            System.out.println(ca.getName());
-	            
 	            dropPoint = ca.getMousePosition();
 	            
 	            
@@ -45,8 +43,10 @@ class MyDropTargetListener extends DropTargetAdapter {
 	                Icon ico = (Icon) tr.getTransferData(DataFlavor.imageFlavor);
 
 	                if (ico != null) {
-
-	                    p.add(new JLabel(ico));
+	                	
+	                	JLabel shipDragged = new JLabel(ico);
+	                	p.setBounds(dropPoint.x, dropPoint.y, 150, 50);
+	                    p.add(shipDragged);
 	                    p.revalidate();
 	                    p.repaint();
 	                    event.dropComplete(true);
