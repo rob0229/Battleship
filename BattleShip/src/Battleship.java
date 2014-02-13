@@ -1,5 +1,3 @@
-
-
 import java.awt.GridLayout;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragSource;
@@ -25,9 +23,6 @@ import javax.swing.LayoutStyle;
 import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 
-
-
-
 /**
  *
  * @author Rob
@@ -47,7 +42,7 @@ public class Battleship extends JFrame {
     private javax.swing.JLabel submarineImageLabel;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel hostGameLabel;
-    private javax.swing.JLabel carrierImageLabel;
+    private static javax.swing.JLabel carrierImageLabel;
     private javax.swing.JLabel destroyerImageLabel;
     private javax.swing.JLabel hostIPAdressLabel9;
     private javax.swing.JPanel informationPanel;
@@ -55,7 +50,7 @@ public class Battleship extends JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel messagePanel;
     private javax.swing.JTextArea messageTextArea;
-    private javax.swing.JPanel playerPanel;
+    private JPanel playerPanel;
     private javax.swing.JButton readyButton;
     private javax.swing.JPanel shipInventory;
     private javax.swing.JTextField userChatEnter;     
@@ -92,10 +87,7 @@ public class Battleship extends JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
     	   
-    	playerPanel = new JPanel();   
-    	playerGrid = new PlayerGrid(playerPanel);
-    	enemyPanel = new JPanel();
-    	enemyGrid = new EnemyGrid(enemyPanel);   
+    	
         messagePanel = new JPanel();
         messageLabel1 = new JLabel();
         userChatEnter = new JTextField();
@@ -124,9 +116,14 @@ public class Battleship extends JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Battleship");
         setResizable(false);
-
+        
+        //Creates player panel and enemy panel with listeners
+        playerPanel = new JPanel();   
+    	playerGrid = new PlayerGrid(playerPanel);
+    	enemyPanel = new JPanel();
+    	enemyGrid = new EnemyGrid(enemyPanel);   
+              
         messagePanel.setBorder(BorderFactory.createTitledBorder(null, "Message Center", TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION));
-
         messageLabel1.setText("Message: ");
 
         userChatEnter.addActionListener(new ActionListener() {
@@ -147,20 +144,20 @@ public class Battleship extends JFrame {
         messagePanelLayout.setHorizontalGroup(
             messagePanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(messagePanelLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                //.addGap(16, 16, 16)
                 .addGroup(messagePanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2)
                     .addGroup(messagePanelLayout.createSequentialGroup()
                         .addComponent(messageLabel1)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        //.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(userChatEnter))))
         );
         messagePanelLayout.setVerticalGroup(
             messagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(messagePanelLayout.createSequentialGroup()
-                .addContainerGap()
+                //.addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                //.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(messagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(userChatEnter)
                     .addComponent(messageLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -212,7 +209,7 @@ public class Battleship extends JFrame {
         informationPanel.setLayout(informationPanelLayout);
         informationPanelLayout.setHorizontalGroup(
             informationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            //.addGap(0, 0, Short.MAX_VALUE)
         );
         informationPanelLayout.setVerticalGroup(
             informationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -275,12 +272,16 @@ public class Battleship extends JFrame {
         );
         
         
+      
         enemyPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Enemy Board"));
         enemyPanel.setLayout(new GridLayout(10,10,0,0));
         
         playerPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Player Board"));
-        //playerPanel.setLayout(new GridLayout(10,10,0,0));
+      
+        //allows ships to be dropped anywhere on panel
         playerPanel.setLayout(null);
+        
+        
         //Ship Panel Layout
         shipInventory.setBorder(javax.swing.BorderFactory.createTitledBorder("Ship Inventory"));
 
@@ -312,7 +313,7 @@ public class Battleship extends JFrame {
                 .addContainerGap()
                 .addGroup(shipInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(crusierImageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(submarineImageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(submarineImageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)                
                     .addComponent(carrierImageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(destroyerImageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(battleshipImageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))

@@ -65,7 +65,14 @@ public class Grid extends JFrame {
     	int imageHeight = 60;
     	String bsImageFile = "Battleship.jpg";
 		
-		panel = new JPanel(); // set up panel to contain boardPanel
+		panel = new JPanel(){
+			Image image = Toolkit.getDefaultToolkit().getImage("oceanGrid.png");
+			public void paintComponent( Graphics g )
+        {
+             super.paintComponent(g);
+             g.drawImage( image, 0, 0, this );
+        }	
+    	}; // set up panel to contain boardPanel
 		shipPanel = new JPanel();		
 		battleshipImageLabel = new JLabel();
 			
@@ -90,7 +97,7 @@ public class Grid extends JFrame {
 	       {
 	          // create square
 	          playerGrid[ row ][ column ] = new Square( "-", row, column);
-	          playerPanel.add( playerGrid[ row ][ column ] ); // add square       
+	          //playerPanel.add( playerGrid[ row ][ column ] ); // add square       
 	       } // end inner for
 	    } // end outer for
 	    
@@ -103,7 +110,7 @@ public class Grid extends JFrame {
 	       for ( int column = 0; column < enemyGrid[ row ].length; column++ ) 
 	       {
 	          // create square
-	    	   enemyGrid[ row ][ column ] = new Square( " ",row, column);
+	    	  enemyGrid[ row ][ column ] = new Square( " ",row, column);
 	          enemyPanel.add( enemyGrid[ row ][ column ] ); // add square       
 	       } // end inner for
 	    } // end outer for

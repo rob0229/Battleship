@@ -1,6 +1,5 @@
 import javax.swing.JPanel;
 
-
 public class EnemyGrid {
 
 	private Square[][] enemyGrid;
@@ -18,6 +17,5 @@ public class EnemyGrid {
 	          enemyPanel.add( enemyGrid[ row ][ column ] ); // add square       
 	       } 
 	    }   
-
 	}	
 }

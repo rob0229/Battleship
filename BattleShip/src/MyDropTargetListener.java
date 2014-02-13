@@ -12,22 +12,25 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 class MyDropTargetListener extends DropTargetAdapter {
-
+	
+		private int shipLength =100, shipWidth=20;
 	    private DropTarget dropTarget;
 	    private JPanel p;
-
+	    private Point dropPoint;
+	    private Point gridPoint;
+	    
 	    public MyDropTargetListener(JPanel dropPanel) {
 	        p = dropPanel;
-	        dropTarget = new DropTarget(dropPanel, DnDConstants.ACTION_COPY, this, true, null);
-
+	        dropTarget = new DropTarget(dropPanel, DnDConstants.ACTION_MOVE, this, true, null);
+	        
 	    }
 
 	    @Override
 	    public void drop(DropTargetDropEvent event) {
-	    	Point dropPoint;
+	    	
 	        try {
-	            DropTarget test = (DropTarget) event.getSource();
-	            Component ca = (Component) test.getComponent();
+	            DropTarget shipDropped = (DropTarget) event.getSource();
+	            Component ca = (Component) shipDropped.getComponent();
 	            dropPoint = ca.getMousePosition();
 	            
 	            
@@ -45,7 +48,7 @@ class MyDropTargetListener extends DropTargetAdapter {
 	                if (ico != null) {
 	                	
 	                	JLabel shipDragged = new JLabel(ico);
-	                	p.setBounds(dropPoint.x, dropPoint.y, 150, 50);
+	                	shipDragged.setBounds(dropPoint.x, dropPoint.y, shipLength, shipWidth);
 	                    p.add(shipDragged);
 	                    p.revalidate();
 	                    p.repaint();
