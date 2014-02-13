@@ -35,7 +35,7 @@ class MyDragGestureListener implements DragGestureListener {
 
            // @Override
             public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException, IOException {
-            	System.out.println("Icon is " + ico.toString());
+            	
                 return ico;
             }
         };
