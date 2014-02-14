@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 public class PlayerGrid {
 	private Square[][] playerGrid;
 	
-	public PlayerGrid(JPanel playerPanel){
+	public PlayerGrid(){
 		
 		
 		playerGrid = new Square[10][10]; 
@@ -17,7 +17,7 @@ public class PlayerGrid {
 		       for ( int col = 0; col < playerGrid[ r ].length; col++ ) 
 		       {		          	    	
 		        playerGrid[ r ][ col ] = new Square( " ",r, col);
-		        new MyDropTargetListener(playerPanel);
+		        
 		       }
 		} 
 	}

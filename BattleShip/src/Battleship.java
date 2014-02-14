@@ -1,4 +1,7 @@
+import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragSource;
 import java.awt.event.ActionEvent;
@@ -10,6 +13,7 @@ import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -19,7 +23,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.LayoutStyle;
 import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 
@@ -118,11 +121,21 @@ public class Battleship extends JFrame {
         setResizable(false);
         
         //Creates player panel and enemy panel with listeners
-        playerPanel = new JPanel();   
-    	playerGrid = new PlayerGrid(playerPanel);
+        playerPanel = new JPanel(){
+        	Image image = Toolkit.getDefaultToolkit().getImage("oceanGrid.png");
+            public void paintComponent( Graphics g )
+            {
+                 super.paintComponent(g);
+                 g.drawImage( image, 0, 0, this );
+            }	
+       
+        	
+        	
+        };   
+    	playerGrid = new PlayerGrid();
     	enemyPanel = new JPanel();
     	enemyGrid = new EnemyGrid(enemyPanel);   
-              
+    	new MyDropTargetListener(playerPanel);      
         messagePanel.setBorder(BorderFactory.createTitledBorder(null, "Message Center", TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION));
         messageLabel1.setText("Message: ");
 
