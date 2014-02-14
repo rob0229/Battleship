@@ -24,7 +24,7 @@ class MyDropTargetListener extends DropTargetAdapter {
 	    Ship sub = new Ship();
 	    Ship destroyer = new Ship();
 	    Ship crusier = new Ship();
-	    int maxX, maxY, minY;
+	    int maxX,minX, maxY, minY;
    
 	    public MyDropTargetListener(JPanel dropPanel) {
 	        p = dropPanel;
@@ -52,6 +52,7 @@ class MyDropTargetListener extends DropTargetAdapter {
 	                System.out.println("String is " + draggedShip);
 	                if (ico != null) {
 	                	
+	                	getShip();
 	                	getSquareDropped(dropPoint);
 	                	JLabel shipDragged = new JLabel(ico);
 	                	shipDragged.setBounds(dropPoint.x, dropPoint.y, shipLength, shipWidth);
@@ -59,7 +60,7 @@ class MyDropTargetListener extends DropTargetAdapter {
 	                    p.revalidate();
 	                    p.repaint();
 	                    event.dropComplete(true);
-	                     
+	                   
 	                    
 	                    
 	                }
@@ -83,28 +84,58 @@ class MyDropTargetListener extends DropTargetAdapter {
 	    
 	    private void getShip(){
 	    	//determines panel boundry for specific ships
-	    	 if( draggedShip == "file:/P:/git/Battleship/BattleShip/bin/carrier.jpg"){
-		        	maxX =260;
+	    	
+	    	//This value changes depending on which computer I am on...
+	    	 if( draggedShip.equals("file:/C:/Users/Rob/git/Battleship/BattleShip/bin/Battleship.png")){
+		        	maxX =240;
 		        	maxY =290;
 		        	minY = 20;
+		        	minX = 8;
 
 		        }
-	    	
+	    	 else if( draggedShip.equals("file:/C:/Users/Rob/git/Battleship/BattleShip/bin/carrier.jpg")){
+		        	maxX =230;
+		        	maxY =290;
+		        	minY = 20;
+		        	minX = 8;
+		        }
+	    	 else if( draggedShip.equals("file:/C:/Users/Rob/git/Battleship/BattleShip/bin/Cruiser.jpg")){
+		        	maxX =250;
+		        	maxY =290;
+		        	minY = 20;
+		        	minX = 8;
+		        }
+	    	 else if( draggedShip.equals("file:/C:/Users/Rob/git/Battleship/BattleShip/bin/Destroyer.jpg")){
+		        	maxX =250;
+		        	maxY =290;
+		        	minY = 20;
+		        	minX = 8;
+		        }
+	    	 else if( draggedShip.equals("file:/C:/Users/Rob/git/Battleship/BattleShip/bin/Submarine.jpg")){
+		        	maxX =250;
+		        	maxY =290;
+		        	minY = 20;
+		        	minX = 8;
+		        }
+	    	 else
+	    		 System.out.println("The ship is not recognized and will not move correctly");
 	    }
 	    
 	    
 	    
 	    private void getSquareDropped(Point point){
 			Point grid;
-			int x,x2,y2, y;
+			int x, x2, y2, y;
 			
 			x = (int) point.getX();
 			y = (int) point.getY();
 			
-			
-			
+			//Keeps ship placement inside boarders of panel
 			if (x>maxX){	
 				x=maxX;	
+			}
+			if (x<minX){	
+				x=minX;	
 			}
 			if(y>maxY){
 				y=maxY;
@@ -113,12 +144,26 @@ class MyDropTargetListener extends DropTargetAdapter {
 				y=minY;
 			}
 			
+			//write code to set ship in grid correctly here
+			
+			//write code to prevent multile placement of each ship here
+			
+			//write code to rotate ship image here with right click
+			
+			//write code to ensure ship is not overlapped here
+			
+			//write code to reposition ship on player board here
+			
+			//write code to enter ship into gridArray here
 			
 			x2 = x/30;
 			y2 = y/30;
+			//test code **************************************************************************
+			System.out.println("X = "+ x + " y = "+ y);
+			System.out.println("X2 = "+ x2 + " y2 = "+ y2);
 			point.setLocation(x, y);
-			 grid = new Point(x2,y2);
-			 System.out.println("Grid is "+ grid);
+			grid = new Point(x2,y2);
+			System.out.println("Grid is "+ grid);
 			 
 			
 		}
