@@ -107,8 +107,7 @@ public class Battleship extends JFrame {
         disconnectButton = new JButton();
         connectButton = new JButton();
         hostButton = new JButton();
-        informationPanel = new JPanel();
-        
+        informationPanel = new JPanel();      
         shipInventory = new JPanel();
         crusierImageLabel = new JLabel();
         submarineImageLabel = new JLabel();
@@ -134,13 +133,16 @@ public class Battleship extends JFrame {
         setResizable(false);
 
         //Creates player panel with backGround image
-        playerPanel = new JPanel()
-        {     	
-        public void paintComponent(Graphics d){   		
+        playerPanel = new JPanel();
+        
+       // paints grid background but causes shadows of entire JFrame to appear under oceanGrid.png
+       /* {     	
+        public void paintComponent(Graphics d)
+        {   		
     		d.drawImage(image,20,30,300,300,null);
         	}
         };
-         
+         */
         //Allows ships to be dropped on PlayerPanel
     	new MyDropTargetListener(playerPanel); 
           
@@ -187,7 +189,7 @@ public class Battleship extends JFrame {
                     .addComponent(messageLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
-        controlPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Control Panel", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.ABOVE_TOP));
+        controlPanel.setBorder(BorderFactory.createTitledBorder(null, "Control Panel", TitledBorder.CENTER, TitledBorder.ABOVE_TOP));
 
         readyButton.setText("Ready!");
 

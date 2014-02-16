@@ -24,8 +24,8 @@ class MyDropTargetListener extends DropTargetAdapter {
 	    Ship sub = new Ship();
 	    Ship destroyer = new Ship();
 	    Ship crusier = new Ship();
-	    int maxX,minX, maxY, minY;
-   
+	    private int maxX,minX, maxY, minY;
+	    private int x, x2, y2, y;
 	    public MyDropTargetListener(JPanel dropPanel) {
 	        p = dropPanel;
 	        dropTarget = new DropTarget(dropPanel, DnDConstants.ACTION_MOVE, this, true, null);
@@ -48,8 +48,7 @@ class MyDropTargetListener extends DropTargetAdapter {
 	            if (event.isDataFlavorSupported(DataFlavor.imageFlavor)) {
 	                Icon ico = (Icon) tr.getTransferData(DataFlavor.imageFlavor);
 	                draggedShip = ico.toString();
-	                System.out.println("Icon Object is " + ico.toString());
-	                System.out.println("String is " + draggedShip);
+	                
 	                if (ico != null) {
 	                	
 	                	
@@ -135,7 +134,7 @@ class MyDropTargetListener extends DropTargetAdapter {
 	    
 	    private void getSquareDropped(Point point){
 			Point grid;
-			int x, x2, y2, y;
+			
 			
 			x = (int) point.getX();
 			y = (int) point.getY();
@@ -154,20 +153,20 @@ class MyDropTargetListener extends DropTargetAdapter {
 			if(y<minY){
 				y=minY;
 			}
+			//converts drop point to grid square
 			x2 = (x-20)/30;
 			y2 = (y-35)/30;
-			//write code to set ship in grid correctly here
+			
+			// alters drop point to set ship in grid correctly 
 			x = (x2*30)+20;
 			y = (y2*30)+35;
 			
+	
+			
+			//write code to prevent multiple placement of each ship here
 			
 			
 			
-			
-			
-			
-			
-			//write code to prevent multile placement of each ship here
 			
 			//write code to rotate ship image here with right click
 			

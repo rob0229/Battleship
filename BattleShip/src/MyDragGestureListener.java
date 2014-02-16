@@ -15,9 +15,12 @@ class MyDragGestureListener implements DragGestureListener {
     @Override
     public void dragGestureRecognized(DragGestureEvent event) {
         JLabel shipGrabbed = (JLabel) event.getComponent();
-      
+     
         final Icon ico = shipGrabbed.getIcon();
-
+        System.out.println("MyDragGestureListener line 20 ico.toString() = " + ico.toString());
+			//if(ico.toString().equals( "file:/C:/Users/Rob/git/Battleship/BattleShip/bin/Battleship.png")){
+				shipGrabbed.setVisible(false);		
+			//}
 
         Transferable transferable = new Transferable() {
             @Override
