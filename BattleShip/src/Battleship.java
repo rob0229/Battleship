@@ -1,7 +1,6 @@
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragSource;
 import java.awt.event.ActionEvent;
@@ -14,6 +13,7 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -23,6 +23,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.LayoutStyle;
 import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 
@@ -59,11 +60,12 @@ public class Battleship extends JFrame {
     private javax.swing.JTextField userChatEnter;     
     private EnemyGrid enemyGrid; //
     private PlayerGrid playerGrid; //
-    Ship carrier = new Ship();
-    Ship battleship = new Ship();
-    Ship sub = new Ship();
-    Ship destroyer = new Ship();
-    Ship crusier = new Ship();
+    private Ship carrier = new Ship();
+    private Ship battleship = new Ship();
+    private Ship sub = new Ship();
+    private Ship destroyer = new Ship();
+    private Ship crusier = new Ship();
+    
     //Server and Client Variables
         private ObjectOutputStream output; // output stream to client
         private ObjectInputStream input; // input stream from client
@@ -77,7 +79,7 @@ public class Battleship extends JFrame {
         private String chatServer; // host server for this application
         private Socket client; // socket to communicate with server
         private Boolean isServer = false;     
-     
+        Image image;
     /**
      * Creates new form Battleship
      */
@@ -87,7 +89,7 @@ public class Battleship extends JFrame {
     
     
        @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+    // <editor-fold default state="collapsed" desc="Generated Code">                          
     private void initComponents() {
     	   
     	
@@ -114,28 +116,37 @@ public class Battleship extends JFrame {
         destroyerImageLabel = new JLabel();
         battleshipImageLabel = new JLabel();
         enemyRemainingPanel = new JPanel();
+        playerGrid = new PlayerGrid();
+    	enemyPanel = new JPanel(); 
 
-
+        try{
+    		image = ImageIO.read(this.getClass().getResource("oceanGrid.png"));
+    	}
+    	catch(IOException e){
+    		System.out.println("Image read error");
+    		
+    	}		
+        
+        
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Battleship");
+        setIconImage(image);
         setResizable(false);
-        
-        //Creates player panel and enemy panel with listeners
-        playerPanel = new JPanel(){
-        	Image image = Toolkit.getDefaultToolkit().getImage("oceanGrid.png");
-            public void paintComponent( Graphics g )
-            {
-                 super.paintComponent(g);
-                 g.drawImage( image, 0, 0, this );
-            }	
-       
-        	
-        	
-        };   
-    	playerGrid = new PlayerGrid();
-    	enemyPanel = new JPanel();
+
+        //Creates player panel with backGround image
+        playerPanel = new JPanel()
+        {     	
+        public void paintComponent(Graphics d){   		
+    		d.drawImage(image,20,30,300,300,null);
+        	}
+        };
+         
+        //Allows ships to be dropped on PlayerPanel
+    	new MyDropTargetListener(playerPanel); 
+          
+    	//creates enemy panel with grid of Square objects
     	enemyGrid = new EnemyGrid(enemyPanel);   
-    	new MyDropTargetListener(playerPanel);      
+         
         messagePanel.setBorder(BorderFactory.createTitledBorder(null, "Message Center", TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION));
         messageLabel1.setText("Message: ");
 
@@ -157,20 +168,20 @@ public class Battleship extends JFrame {
         messagePanelLayout.setHorizontalGroup(
             messagePanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(messagePanelLayout.createSequentialGroup()
-                //.addGap(16, 16, 16)
+                .addGap(16, 16, 16)
                 .addGroup(messagePanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2)
                     .addGroup(messagePanelLayout.createSequentialGroup()
                         .addComponent(messageLabel1)
-                        //.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(userChatEnter))))
         );
         messagePanelLayout.setVerticalGroup(
             messagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(messagePanelLayout.createSequentialGroup()
-                //.addContainerGap()
+                .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
-                //.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(messagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(userChatEnter)
                     .addComponent(messageLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -222,7 +233,7 @@ public class Battleship extends JFrame {
         informationPanel.setLayout(informationPanelLayout);
         informationPanelLayout.setHorizontalGroup(
             informationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            //.addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         informationPanelLayout.setVerticalGroup(
             informationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -290,10 +301,9 @@ public class Battleship extends JFrame {
         enemyPanel.setLayout(new GridLayout(10,10,0,0));
         
         playerPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Player Board"));
-      
+       
         //allows ships to be dropped anywhere on panel
         playerPanel.setLayout(null);
-        
         
         //Ship Panel Layout
         shipInventory.setBorder(javax.swing.BorderFactory.createTitledBorder("Ship Inventory"));
@@ -312,7 +322,7 @@ public class Battleship extends JFrame {
 
         destroyerImageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("Destroyer.jpg"))); // NOI18N
         destroyerImageLabel.setText("Destroyer");
-        destroyerImageLabel.setPreferredSize(new java.awt.Dimension(60, 20));
+        destroyerImageLabel.setPreferredSize(new java.awt.Dimension(60, 60));
 
         battleshipImageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("Battleship.png"))); // NOI18N
         battleshipImageLabel.setText("Battleship");
@@ -357,7 +367,7 @@ public class Battleship extends JFrame {
         ds1.createDefaultDragGestureRecognizer(destroyerImageLabel, DnDConstants.ACTION_COPY, dlistener);
         ds1.createDefaultDragGestureRecognizer(submarineImageLabel, DnDConstants.ACTION_COPY, dlistener);
 
-        //populate this panel with ship images and turn ren once they have been destroyed
+        //populate this panel with ship images and turn red once they have been destroyed
         enemyRemainingPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Enemy Ships Remaining"));
 
         
@@ -407,14 +417,11 @@ public class Battleship extends JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(shipInventory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(playerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))))
+                            .addComponent(playerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-    
-      
-   
-        
-        pack();
+        setSize(1000,1000);
+        //pack();
     }// </editor-fold>                        
   
   

@@ -59,8 +59,9 @@ class MyDropTargetListener extends DropTargetAdapter {
 	                	
 	                	shipDragged.setBounds(dropPoint.x, dropPoint.y, shipLength, shipWidth);
 	                    p.add(shipDragged);
-	                    p.revalidate();
-	                    p.repaint();
+	                  
+	                   // p.repaint();
+	                   // p.invalidate();
 	                    event.dropComplete(true);
 	                   
 	                    
@@ -75,7 +76,7 @@ class MyDropTargetListener extends DropTargetAdapter {
 	        }
 	        //TEST CODE*******************************************************************************************************************************
 	        System.out.println("Drop point is " + dropPoint);
-       
+	        p.repaint();
 	    }
 	    
 	    
@@ -84,6 +85,7 @@ class MyDropTargetListener extends DropTargetAdapter {
 	    	
 	    	//This value changes depending on which computer I am on...
 	    	 if( draggedShip.equals("file:/C:/Users/Rob/git/Battleship/BattleShip/bin/Battleship.png")){
+	    		 
 		        	maxX =240;
 		        	maxY =290;
 		        	minY = 20;
@@ -138,6 +140,7 @@ class MyDropTargetListener extends DropTargetAdapter {
 			x = (int) point.getX();
 			y = (int) point.getY();
 			
+			
 			//Keeps ship placement inside boarders of panel
 			if (x>maxX){	
 				x=maxX;	
@@ -151,8 +154,18 @@ class MyDropTargetListener extends DropTargetAdapter {
 			if(y<minY){
 				y=minY;
 			}
-			
+			x2 = (x-20)/30;
+			y2 = (y-35)/30;
 			//write code to set ship in grid correctly here
+			x = (x2*30)+20;
+			y = (y2*30)+35;
+			
+			
+			
+			
+			
+			
+			
 			
 			//write code to prevent multile placement of each ship here
 			
@@ -164,8 +177,7 @@ class MyDropTargetListener extends DropTargetAdapter {
 			
 			//write code to enter ship into gridArray here
 			
-			x2 = x/30;
-			y2 = y/30;
+			
 			//test code **************************************************************************
 			System.out.println("X = "+ x + " y = "+ y);
 			System.out.println("X2 = "+ x2 + " y2 = "+ y2);
