@@ -17,7 +17,7 @@ int orient = 0;
 		maxY = getShipInfo.getMaxY();
 		ship = getShipInfo.getShip();
 		orient = getShipInfo.getOrientation();//0 horizontal, 1 vertical
-		
+		Boolean validDrop = true;
 		
 		
 		//Keeps ship placement inside boarders of panel
@@ -46,79 +46,157 @@ int orient = 0;
 		
 		//write code to prevent multiple placement of each ship here
 		if(getShipInfo.getShip().equals("Battleship") && orient == 0){
-
-			for(int i =0; i<4; i++){
-				Battleship.playerGrid.setGridContents(x2+i, y2, "B");
+			
+			for(int i =0; i<2; i++){
+				if(Battleship.playerGrid.getGridContents(x2+i, y2) != null){
+					validDrop = false; 
+				}
 			}
+			
+			if(validDrop){
+				for(int i =0; i<4; i++){
+					Battleship.playerGrid.setGridContents(x2+i, y2, "B");
+				}
+			}
+			else
+				System.out.println("You cannot place the ship there");
 		}
 			
 		if(getShipInfo.getShip().equals("Battleship") && orient == 1){
-
-			for(int i =0; i<4; i++){
-				Battleship.playerGrid.setGridContents(x2, y2+i, "B");
-			}
-		}
-		
 			
+			for(int i =0; i<2; i++){
+				if(Battleship.playerGrid.getGridContents(x2, y2+i) != null){
+					validDrop = false; 
+				}
+				
+			}
+			if(validDrop){
+				for(int i =0; i<4; i++){
+					Battleship.playerGrid.setGridContents(x2, y2+i, "B");
+				}
+			}
+		
+		}	
 		if(getShipInfo.getShip().equals("Carrier") && orient == 0){
-
-			for(int i =0; i<5; i++){
-				Battleship.playerGrid.setGridContents(x2+i, y2, "C");
+			
+			for(int i =0; i<2; i++){
+				if(Battleship.playerGrid.getGridContents(x2+i, y2) != null){
+					validDrop = false; 
+				}
+			}
+			if(validDrop){
+				for(int i =0; i<5; i++){
+					Battleship.playerGrid.setGridContents(x2+i, y2, "C");
+				}
 			}
 		}
-			
 		if(getShipInfo.getShip().equals("Carrier") && orient == 1){
-
-			for(int i =0; i<5; i++){
-				Battleship.playerGrid.setGridContents(x2, y2+i, "C");
-			}
-		}
 			
+			for(int i =0; i<2; i++){
+				if(Battleship.playerGrid.getGridContents(x2, y2+i) != null){
+					validDrop = false; 
+				}	
+			}
+			if(validDrop){
+				for(int i =0; i<5; i++){
+					Battleship.playerGrid.setGridContents(x2, y2+i, "C");
+				}
+			}
+		}	
 		if(getShipInfo.getShip().equals("Cruiser") && orient == 0){
-
-			for(int i =0; i<4; i++){
-				Battleship.playerGrid.setGridContents(x2+i, y2, "Z");
+			
+			for(int i =0; i<2; i++){
+				if(Battleship.playerGrid.getGridContents(x2+i, y2) != null){
+					validDrop = false; 
+				}
+			}
+			if(validDrop){
+				for(int i =0; i<4; i++){
+					Battleship.playerGrid.setGridContents(x2+i, y2, "Z");
+				}
 			}
 		}
-			
 		if(getShipInfo.getShip().equals("Cruiser") && orient == 1){
-
-			for(int i =0; i<4; i++){
-				Battleship.playerGrid.setGridContents(x2, y2+i, "Z");
-			}
-		}
 			
+			for(int i =0; i<2; i++){
+				if(Battleship.playerGrid.getGridContents(x2, y2+i) != null){
+					validDrop = false; 
+				}
+				
+			}
+			if(validDrop){
+				for(int i =0; i<4; i++){
+					Battleship.playerGrid.setGridContents(x2, y2+i, "Z");
+				}
+			}
+		}	
 		if(getShipInfo.getShip().equals("Submarine") && orient == 0){
-
-			for(int i =0; i<3; i++){
-				Battleship.playerGrid.setGridContents(x2+i, y2, "S");
-			}
-		}
 			
+			for(int i =0; i<2; i++){
+				if(Battleship.playerGrid.getGridContents(x2+i, y2) != null){
+					validDrop = false; 
+				}
+			}
+			if(validDrop){
+				for(int i =0; i<3; i++){
+					Battleship.playerGrid.setGridContents(x2+i, y2, "S");
+				}
+			}
+		}	
 		if(getShipInfo.getShip().equals("Submarine") && orient == 1){
-
-			for(int i =0; i<3; i++){
-				Battleship.playerGrid.setGridContents(x2, y2+i, "S");
-			}
-		}
-		
-		if(getShipInfo.getShip().equals("Destroyer") && orient == 0){
-
-			for(int i =0; i<2; i++){
-				Battleship.playerGrid.setGridContents(x2+i, y2, "D");
-			}
-		}
 			
-		if(getShipInfo.getShip().equals("Destroyer") && orient == 1){
-
 			for(int i =0; i<2; i++){
-				Battleship.playerGrid.setGridContents(x2, y2+i, "D");
+				if(Battleship.playerGrid.getGridContents(x2, y2+i) != null){
+					validDrop = false; 
+				}
+				
 			}
+			if(validDrop){
+				for(int i =0; i<3; i++){
+					Battleship.playerGrid.setGridContents(x2, y2+i, "S");
+				}
+			}
+		}
+		if(getShipInfo.getShip().equals("Destroyer") && orient == 0){
+			
+			for(int i =0; i<2; i++){
+				if(Battleship.playerGrid.getGridContents(x2+i, y2) != null){
+					validDrop = false; 
+				}
+			}
+			
+			if(validDrop){
+				for(int i =0; i<2; i++){
+					Battleship.playerGrid.setGridContents(x2+i, y2, "D");
+				}
+			}
+		}	
+		if(getShipInfo.getShip().equals("Destroyer") && orient == 1){
+			
+			for(int i =0; i<2; i++){
+				if(Battleship.playerGrid.getGridContents(x2, y2+i) != null){
+					validDrop = false; 
+				}
+				
+			}
+			if(validDrop){
+				for(int i =0; i<2; i++){
+					Battleship.playerGrid.setGridContents(x2, y2+i, "D");
+				}
+			}
+			else
+				System.out.println("You cannot place the ship there");
+	
 		}	
 			
 		//write code to rotate ship image here with right click
 		
+		
+		
 		//write code to ensure ship is not overlapped here
+		
+		
+		
 		
 		//write code to reposition ship on player board here
 		

@@ -29,7 +29,7 @@ import javax.swing.border.TitledBorder;
 
 /**
  *
- * @author Rob
+ * @author Rob and Charlie
  */
 public class Battleship extends JFrame {
 	

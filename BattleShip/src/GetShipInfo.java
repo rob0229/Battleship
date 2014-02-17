@@ -7,7 +7,7 @@ public class GetShipInfo {
 		// This value changes depending on which computer I am on...
 		// Sets layout information for each ship
 		if (draggedShip
-				.equals("file:/C:/Users/Rob/git/Battleship/BattleShip/bin/Battleship.png")) {
+				.equals("file:/P:/git/Battleship/BattleShip/bin/Battleship.png")) {
 			maxX = 229;
 			maxY = 320;
 			minY = 20;
@@ -17,7 +17,7 @@ public class GetShipInfo {
 			ship = "Battleship";
 
 		} else if (draggedShip
-				.equals("file:/C:/Users/Rob/git/Battleship/BattleShip/bin/Carrier.png")) {
+				.equals("file:/P:/git/Battleship/BattleShip/bin/carrier.jpg")) {
 			maxX = 199;
 			maxY = 320;
 			minY = 20;
@@ -27,7 +27,7 @@ public class GetShipInfo {
 			ship = "Carrier";
 
 		} else if (draggedShip
-				.equals("file:/C:/Users/Rob/git/Battleship/BattleShip/bin/Cruiser.png")) {
+				.equals("file:/P:/git/Battleship/BattleShip/bin/Cruiser.jpg")) {
 			maxX = 229;
 			maxY = 320;
 			minY = 20;
@@ -36,7 +36,7 @@ public class GetShipInfo {
 			shipWidth = 28;
 			ship = "Cruiser";
 		} else if (draggedShip
-				.equals("file:/C:/Users/Rob/git/Battleship/BattleShip/bin/Destroyer.png")) {
+				.equals("file:/P:/git/Battleship/BattleShip/bin/Destroyer.jpg")) {
 			maxX = 289;
 			maxY = 320;
 			minY = 20;
@@ -45,7 +45,7 @@ public class GetShipInfo {
 			shipWidth = 28;
 			ship = "Destroyer";
 		} else if (draggedShip
-				.equals("file:/C:/Users/Rob/git/Battleship/BattleShip/bin/Submarine.png")) {
+				.equals("file:/P:/git/Battleship/BattleShip/bin/Submarine.jpg")) {
 			maxX = 260;
 			maxY = 320;
 			minY = 20;
