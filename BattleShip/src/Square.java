@@ -10,9 +10,10 @@ import javax.swing.JPanel;
 // private inner class for the squares on the board
    public class Square extends JPanel 
    {
-      private String contents; // mark to be drawn in this square
+      private String contents; // either unknown, hit, or miss... should display an image of the same...
       private int xCord;
       private int yCord;// location of square
+      private boolean played; // square played or not
    
       public Square( String squareContents, int x, int y )
       {
@@ -20,6 +21,8 @@ import javax.swing.JPanel;
     	 
     	  xCord = x;// set location of this square 
     	  yCord = y;// set location of this square
+    	  
+    	  played = false;
 
          addMouseListener( 
             new MouseAdapter() 
@@ -69,6 +72,12 @@ import javax.swing.JPanel;
          super.paintComponent( g );
 
          g.drawRect( 0, 0, 30, 30 ); // draw square
-         //g.drawString( contents, 11, 20 ); // draw mark   
+         g.drawString( contents, 11, 20 ); // draw mark   
       } // end method paintComponent
+      
+      public boolean getPlayed()
+      {
+    	  return played;
+      }
+
    } // end inner-class Square

@@ -11,7 +11,10 @@ public class Ship extends JLabel {
 	 * @param args
 	 */
 
-	    
+	    public Ship(int hitPoints)
+	    {
+	    	this.hitPoints = hitPoints;
+	    }
 	   
 	    
 	    
