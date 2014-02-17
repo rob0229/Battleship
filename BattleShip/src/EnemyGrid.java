@@ -1,3 +1,5 @@
+import java.awt.Color;
+
 import javax.swing.JPanel;
 
 public class EnemyGrid {
@@ -14,6 +16,7 @@ public class EnemyGrid {
 	       {
 	          // create squares
 	    	   enemyGrid[ row ][ column ] = new Square( " ",row, column);
+	    	   enemyGrid[row][column].setBackground(Color.blue);
 	          enemyPanel.add( enemyGrid[ row ][ column ] ); // add square       
 	       } 
 	    }   

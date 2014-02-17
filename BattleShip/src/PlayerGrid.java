@@ -1,30 +1,26 @@
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Toolkit;
-
-import javax.swing.JPanel;
-
 
 public class PlayerGrid {
-	private Square[][] playerGrid;
-	
-	public PlayerGrid(){
-		
-		
-		playerGrid = new Square[10][10]; 
-		 for ( int r = 0; r < playerGrid.length; r++ ) { 
-		       for ( int col = 0; col < playerGrid[ r ].length; col++ ) 
-		       {		          	    	
-		        playerGrid[ r ][ col ] = new Square( " ",r, col);
-		        
-		       }
-		} 
+	private String[][] playerGrid;
+
+	public PlayerGrid() {
+
+		playerGrid = new String[10][10];
+
+		for (int r = 0; r < playerGrid.length; r++) {
+			for (int col = 0; col < playerGrid[r].length; col++) {
+				playerGrid[r][col] = null;
+
+			}
+		}
+
 	}
+
+	public String getGridContents(int x, int y) {
+		return playerGrid[x][y];
+	}
+
+	public void setGridContents(int x, int y, String str) {
+		playerGrid[x][y] = str;
+	}
+
 }
-	
-
-
-
-
-

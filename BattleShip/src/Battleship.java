@@ -58,13 +58,9 @@ public class Battleship extends JFrame {
     private javax.swing.JButton readyButton;
     private javax.swing.JPanel shipInventory;
     private javax.swing.JTextField userChatEnter;     
-    private EnemyGrid enemyGrid; //
-    private PlayerGrid playerGrid; //
-    private Ship carrier = new Ship();
-    private Ship battleship = new Ship();
-    private Ship sub = new Ship();
-    private Ship destroyer = new Ship();
-    private Ship crusier = new Ship();
+    private static EnemyGrid enemyGrid; //
+    protected static PlayerGrid playerGrid; //
+    
     
     //Server and Client Variables
         private ObjectOutputStream output; // output stream to client
@@ -133,16 +129,16 @@ public class Battleship extends JFrame {
         setResizable(false);
 
         //Creates player panel with backGround image
-        playerPanel = new JPanel();
+        playerPanel = new JPanel()
         
        // paints grid background but causes shadows of entire JFrame to appear under oceanGrid.png
-       /* {     	
+        {     	
         public void paintComponent(Graphics d)
         {   		
     		d.drawImage(image,20,30,300,300,null);
         	}
         };
-         */
+         
         //Allows ships to be dropped on PlayerPanel
     	new MyDropTargetListener(playerPanel); 
           
@@ -399,8 +395,8 @@ public class Battleship extends JFrame {
                     .addComponent(playerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(shipInventory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(enemyRemainingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(shipInventory, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(enemyRemainingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -422,8 +418,8 @@ public class Battleship extends JFrame {
                             .addComponent(playerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        setSize(1000,1000);
-        //pack();
+   
+       pack();
     }// </editor-fold>                        
   
   
@@ -550,14 +546,17 @@ public class Battleship extends JFrame {
 	         try // read message and display it
 	         {
 	            message = ( String ) input.readObject(); // read new message
-	            displayMessage( "\n" + message ); // display message
+	            
+	            
+	            
+	            displayMessage( "\nPLAYER 2>>> " + message ); // display message
 	         } // end try
 	         catch ( ClassNotFoundException classNotFoundException ) 
 	         {
 	            displayMessage( "\nUnknown object type received" );
 	         } // end catch
 
-	      } while ( !message.equals( "CLIENT>>> TERMINATE" ) );
+	      } while ( !message.equals( "TERMINATE" ) );
 	   } // end method processConnection
 
 	   // close streams and socket
@@ -582,12 +581,12 @@ public class Battleship extends JFrame {
 	   } // end method closeConnection
 
 	   // send message to client
-    private void sendData( String message ) {
+    public void sendData( String message ) {
 	      try // send object to client
 	      {
-	         output.writeObject( "SERVER>>> " + message );
+	         output.writeObject(message );
 	         output.flush(); // flush output to client
-	         displayMessage( "\nSERVER>>> " + message );
+	         displayMessage( "\nPLAYER 1>>> " + message );
 	      } // end try
 	      catch ( IOException ioException ) 
 	      {
@@ -680,14 +679,17 @@ public class Battleship extends JFrame {
          try // read message and display it
          {
             message = ( String ) input.readObject(); // read new message
-            displayMessage( "\n" + message ); // display message
+            
+            
+            
+            displayMessage( "\n\nPLAYER 1>>> " + message ); // display message
          } // end try
          catch ( ClassNotFoundException classNotFoundException ) 
          {
             displayMessage( "\nUnknown object type received" );
          } // end catch
 
-      } while ( !message.equals( "SERVER>>> TERMINATE" ) );
+      } while ( !message.equals( "TERMINATE" ) );
    } // end method processConnection
 
            // close streams and socket
@@ -708,12 +710,12 @@ public class Battleship extends JFrame {
    } // end method closeConnection
    
            // manipulates displayArea in the event-dispatch thread
-   private void sendDataClient( String message ){
+   public void sendDataClient( String message ){
 	      try // send object to client
 	      {
-	         outputClient.writeObject( "CLIENT>>> " + message );
+	         outputClient.writeObject( message );
 	         outputClient.flush(); // flush output to client
-	         displayMessage( "\nCLIENT>>> " + message );
+	         displayMessage( "\nPLAYER 2>>> " + message );
 	      } // end try
 	      catch ( IOException ioException ) 
 	      {
@@ -721,13 +723,6 @@ public class Battleship extends JFrame {
 	      } // end catch
 	   } // end method sendData
 /*end of server Methods*/ 
-   
-   
-   
-
-   
-
-   
    
     //Main Method
    public static void main(String args[]){
