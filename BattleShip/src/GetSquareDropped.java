@@ -274,19 +274,13 @@ public class GetSquareDropped {
 			return false;
 	
 	}
-	
-	
-	
-	
-	
-	
-	public int getX(){
-		
+
+	public int getX(){		
 		return x;
 	}
+	
 	public int getY(){
-		return y;
-		
+		return y;		
 	}
 	
 

@@ -1,16 +1,19 @@
 import java.awt.Point;
 
+import javax.swing.JLabel;
+
 
 public class Gameplay {
 	public static int remainingShips;
-	public boolean turn;
+	public static  boolean turn;
+	static JLabel hitLabel = new JLabel();
+	static JLabel missLabel = new JLabel();
 	
-	
-	Ship battleship;
-	Ship carrier;
-	Ship crusier;
-	Ship sub;
-	Ship destroyer;
+	 Ship battleship;
+	 Ship carrier;
+	 Ship crusier;
+	 Ship sub;
+	 Ship destroyer;
 	
 	public Gameplay()
 	{
@@ -21,65 +24,100 @@ public class Gameplay {
 		destroyer = new Ship(2);
 		
 		remainingShips = 5;
+		
+		
 	}
 	
 	public String Translate(String message)
 	{
-		if(turn == false && Battleship.gameStart == true)
+		hitLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("hitLabel.jpg")));
+		missLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("missLabel.jpg")));
+		char a = message.charAt(2);
+		char b = message.charAt(4);
+
+		int x = Character.getNumericValue(a);
+		int y = Character.getNumericValue(b);
+		
+		
+		//if(turn == false && Battleship.gameStart == true)
+		if(true)
 		{
-			if(message.charAt(0) == '@' && message.charAt(0) == message.charAt(1))
-			{
-				//int x = Integer.valueOf(Character.toString(message.charAt(3)));
-				//int y = Integer.valueOf(Character.toString(message.charAt(5)));
-			
-				int x = Integer.valueOf(message.charAt(3));
-				int y = Integer.valueOf(message.charAt(5));
-				
-				String s = Battleship.playerGrid.getGridContents(x,y);
-				if(s == "B")
+				if(message.charAt(0) == '@' &&  message.charAt(1) == '@')
 				{
-					battleship.setHP(battleship.getHP() - 1);
-					if(battleship.getHP() == 0)
+
+					
+					String s = Battleship.playerGrid.getGridContents(x,y);
+					if(s == "B")
 					{
-						if(remainingShips == 0)
+						System.out.println("Hit battleship x = " + x + " y = " + y);
+						battleship.setHP(battleship.getHP() - 1);
+						if(battleship.getHP() == 0)
 						{
-							return("You win"); // edit
+							if(remainingShips == 0)
+							{
+								return("You win"); // edit
+							}
+							else
+								return("^^0");
 						}
 						else
-							return("^^,0");
+							return("!!"+ String.valueOf(x)+","+ String.valueOf(y));
 					}
-					else
-						return("Hit!");
-				}
+					else if (s == "~"){
+						Battleship.playerGrid.setGridContents(x,y,"M");
+						Battleship.playerPanel.setBounds(x,y,28, 28);
+						Battleship.playerPanel.add(missLabel);				
+						Battleship.playerPanel.repaint();
+						Battleship.playerPanel.revalidate();
 						
-			}
-			else if(message.charAt(0) == '!' && message.charAt(0) == message.charAt(1))
-			{
-				// Hit
-				
-			}
-			else if(message.charAt(0) == '?' && message.charAt(0) == message.charAt(1))
-			{
-				//
-				
-			}
-			else if(message.charAt(0) == '#' && message.charAt(0) == message.charAt(1))
-			{
-				// ready
-			}
-			else if(message.charAt(0) == '^' && message.charAt(0) == message.charAt(1))
-			{
-				// sunk
-			}
+					}
+				return null;
+					
+				}
+				else if(message.charAt(0) == '!' && message.charAt(1) == '!')
+				{
+					// Hit
+					
+					Battleship.enemyGrid.setGridContents(Integer.valueOf(message.charAt(3)), Integer.valueOf(message.charAt(5)), "H");
+					Battleship.enemyPanel.setBounds(Integer.valueOf(message.charAt(5)), Integer.valueOf(message.charAt(5)),	28, 28);
+					Battleship.enemyPanel.add(hitLabel);				
+					Battleship.enemyPanel.repaint();
+					Battleship.enemyPanel.revalidate();
+					
+				}
+				else if(message.charAt(0) == '?' && message.charAt(0) == message.charAt(1))
+				{
+					//
+					
+				}
+				else if(message.charAt(0) == '#' && message.charAt(0) == message.charAt(1))
+				{
+					// ready
+				}
+				else if(message.charAt(0) == '^' && message.charAt(0) == message.charAt(1))
+				{
+					// sunk
+					
+					
+				}
+				else 
+					return message;
 		}
+		
 		//if it is players turn, just display message to console and do nothing with it. The enemy should not be able to send an event message 
 		//since its not his turn
-		if(turn == true)
+		else if(turn == true){
+			System.out.println("turn is true line 96 Gameplay");
 			return(message);
+		}
+		//default case just returns the message for display in message area
 		
-		//default case just returns the message for display to screen
-		else 
-			return(message);		
+		else{	
+			System.out.println("default return line 101 Gameplay.java");
+			return(message);	
+		}
+		//return "error in gamePlay";
+		return "default return, should never get here";
 	}
 	
 
@@ -102,11 +140,10 @@ public class Gameplay {
 			if(Battleship.enemyGrid.getGridContents(x2, y2) == "~"){
 				return "@@" + String.valueOf(x2)+","+ String.valueOf(y2);
 			}
-			
-			
-			
-		
-		return "";
+			else {
+				System.out.println("you already picked that square, try again");
+				return "Something went wrong in the attack function";
+			}
 	}
 	
 	

@@ -35,17 +35,17 @@ import javax.swing.border.TitledBorder;
  * @author Rob and Charley
  */
 public class Battleship extends JFrame {
-	
+	Gameplay game = new Gameplay();
 	 // Variables declaration -
 	protected Boolean allShipsPlaced = false;
 	public boolean playerReady;
 	public boolean enemyReady;
-	public static Boolean gameStart = false;
+	public static Boolean gameStart = true;
 	private Boolean isServer = false;
     private JButton connectButton;
     private JPanel controlPanel;
     private JButton disconnectButton;
-    private JPanel enemyPanel;
+    public static JPanel enemyPanel;
     private JButton hostButton;
     private TextField ipAddressField;
     private JLabel messageLabel1;
@@ -63,7 +63,7 @@ public class Battleship extends JFrame {
     private JScrollPane jScrollPane2;
     private JPanel messagePanel;
     private JTextArea messageTextArea;
-    private JPanel playerPanel;
+    static JPanel playerPanel;
     private JButton readyButton;
     private JPanel shipInventory;
     private JTextField userChatEnter;     
@@ -96,8 +96,7 @@ public class Battleship extends JFrame {
        @SuppressWarnings("unchecked")
     // <editor-fold default state="collapsed" desc="Generated Code">                          
     private void initComponents() {
-    	   
-    	
+    	   	
         messagePanel = new JPanel();
         messageLabel1 = new JLabel();
         userChatEnter = new JTextField();
@@ -131,8 +130,7 @@ public class Battleship extends JFrame {
     		System.out.println("Image read error");
     		
     	}		
-        
-        
+             
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Battleship");
         setIconImage(image);
@@ -147,6 +145,7 @@ public class Battleship extends JFrame {
         	}
         };
          
+        //creates Player Panel with background image
         enemyPanel = new JPanel()
         {
         public void paintComponent(Graphics d)
@@ -163,9 +162,16 @@ public class Battleship extends JFrame {
     			{
     				public void mouseClicked( MouseEvent e )
     				{
-    					if(gameStart){//iiff connected do this
-    						sendData(Gameplay.attack(e.getPoint()));
-    						System.out.println("The grid attack is " + Gameplay.attack(e.getPoint()));
+    					if(gameStart){//if connected do this
+    						
+    						String message = Gameplay.attack(e.getPoint());
+    						//ensures the grid square has not been chosen before
+    						if(message != null){
+	    						sendData(message);
+	    						System.out.println("The grid attack is " + Gameplay.attack(e.getPoint()));
+    						}
+    						else
+    							displayMessage("You already chose that square, try again");
     					}
     					
 
@@ -257,6 +263,7 @@ public class Battleship extends JFrame {
         hostButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
             	isServer = true;
+            	Gameplay.turn = true;
                 hostButtonActionPerformed(evt);
             }
         });
@@ -585,7 +592,7 @@ public class Battleship extends JFrame {
     private void processConnection() throws IOException{
 	      String message = "Connection successful, *sent from server* ";
 	      sendData( message ); // send connection successful message
-
+	     
 	      // enable enterField so server user can send messages
 	      setTextFieldEditable( true );
 
@@ -593,11 +600,17 @@ public class Battleship extends JFrame {
 	      { 
 	         try // read message and display it
 	         {
+	        
 	            message = ( String ) input.readObject(); // read new message
+	            //filters the string message to determine if it is a game event or just a user message.
+	            //if it is a game event, Gameplay class handles it.
+	            System.out.println("Gets to processConnection ");
+	            message = game.Translate(message);
+	            System.out.println("Gets past message filter in processConnection");
 	            
-	            
-	            
-	            displayMessage( "\nPLAYER 2>>> " + message ); // display message
+	            //if (message != null){
+	            	displayMessage( "\nPLAYER 2>>> " + message ); // display message
+	            //}
 	         } // end try
 	         catch ( ClassNotFoundException classNotFoundException ) 
 	         {
@@ -632,7 +645,7 @@ public class Battleship extends JFrame {
     public void sendData( String message ) {
 	      try // send object to client
 	      {
-	         output.writeObject(message );
+	         output.writeObject(message);
 	         output.flush(); // flush output to client
 	         displayMessage( "\nPLAYER 1>>> " + message );
 	      } // end try
@@ -687,7 +700,7 @@ public class Battleship extends JFrame {
      
       finally 
       {
-          System.out.println("  gets to here run client line 514  ");
+          System.out.println("  gets to here run client line 701  ");
          closeConnectionClient(); // close connection
       } // end finally
     
@@ -728,7 +741,14 @@ public class Battleship extends JFrame {
          {
             message = ( String ) input.readObject(); // read new message
             
-            
+            //filters the string message to determine if it is a game event or just a user message.
+            //if it is a game event, Gameplay class handles it.
+            System.out.println("Gets to processConnectionClient ");
+            message = game.Translate(message);
+            System.out.println("Gets past message filter in processConnectionClient ");
+           // if (message != null){
+            	displayMessage( "\nPLAYER 2>>> " + message ); // display message
+            //}
             
             displayMessage( "\n\nPLAYER 1>>> " + message ); // display message
          } // end try
