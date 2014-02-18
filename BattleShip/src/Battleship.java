@@ -41,13 +41,14 @@ public class Battleship extends JFrame {
     private javax.swing.JButton hostButton;
     private java.awt.TextField ipAddressField;
     private javax.swing.JLabel messageLabel1;
-    private javax.swing.JLabel battleshipImageLabel;
-    private javax.swing.JLabel crusierImageLabel;
-    private javax.swing.JLabel submarineImageLabel;
+    protected static javax.swing.JLabel battleshipImageLabel;
+    protected static javax.swing.JLabel cruiserImageLabel;
+    protected static javax.swing.JLabel submarineImageLabel;
+    protected static javax.swing.JLabel carrierImageLabel;
+    protected static javax.swing.JLabel destroyerImageLabel;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel hostGameLabel;
-    private static javax.swing.JLabel carrierImageLabel;
-    private javax.swing.JLabel destroyerImageLabel;
+   
     private javax.swing.JLabel hostIPAdressLabel9;
     private javax.swing.JPanel informationPanel;
     private javax.swing.JPanel enemyRemainingPanel;
@@ -105,7 +106,7 @@ public class Battleship extends JFrame {
         hostButton = new JButton();
         informationPanel = new JPanel();      
         shipInventory = new JPanel();
-        crusierImageLabel = new JLabel();
+        cruiserImageLabel = new JLabel();
         submarineImageLabel = new JLabel();
         carrierImageLabel = new JLabel();
         destroyerImageLabel = new JLabel();
@@ -306,9 +307,9 @@ public class Battleship extends JFrame {
         //Ship Panel Layout
         shipInventory.setBorder(javax.swing.BorderFactory.createTitledBorder("Ship Inventory"));
 
-        crusierImageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("Cruiser.jpg"))); // NOI18N
-        crusierImageLabel.setText("Crusier");
-        crusierImageLabel.setPreferredSize(new java.awt.Dimension(120, 60));
+        cruiserImageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("Cruiser.jpg"))); // NOI18N
+        cruiserImageLabel.setText("Crusier");
+        cruiserImageLabel.setPreferredSize(new java.awt.Dimension(120, 60));
 
         submarineImageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("Submarine.jpg"))); // NOI18N
         submarineImageLabel.setText("Submarine");
@@ -333,7 +334,7 @@ public class Battleship extends JFrame {
             .addGroup(shipInventoryLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(shipInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(crusierImageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cruiserImageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(submarineImageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)                
                     .addComponent(carrierImageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(destroyerImageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -352,7 +353,7 @@ public class Battleship extends JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(carrierImageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(crusierImageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cruiserImageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(124, 124, 124))
         );
         
@@ -361,7 +362,7 @@ public class Battleship extends JFrame {
         DragSource ds1 = new DragSource();    
         ds1.createDefaultDragGestureRecognizer(battleshipImageLabel, DnDConstants.ACTION_COPY, dlistener);
         ds1.createDefaultDragGestureRecognizer(carrierImageLabel, DnDConstants.ACTION_COPY, dlistener);
-        ds1.createDefaultDragGestureRecognizer(crusierImageLabel, DnDConstants.ACTION_COPY, dlistener);
+        ds1.createDefaultDragGestureRecognizer(cruiserImageLabel, DnDConstants.ACTION_COPY, dlistener);
         ds1.createDefaultDragGestureRecognizer(destroyerImageLabel, DnDConstants.ACTION_COPY, dlistener);
         ds1.createDefaultDragGestureRecognizer(submarineImageLabel, DnDConstants.ACTION_COPY, dlistener);
 

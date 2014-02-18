@@ -8,7 +8,7 @@ public class PlayerGrid {
 
 		for (int r = 0; r < playerGrid.length; r++) {
 			for (int col = 0; col < playerGrid[r].length; col++) {
-				playerGrid[r][col] = null;
+				playerGrid[r][col] = "~";
 
 			}
 		}
