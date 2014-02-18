@@ -38,10 +38,10 @@ import javax.swing.border.TitledBorder;
  */
 public class Battleship extends JFrame {
 	Gameplay game = new Gameplay();
-	protected Boolean allShipsPlaced = false;
-	public boolean playerReady;
-	public boolean enemyReady;
-	public static Boolean gameStart = true;
+	protected boolean allShipsPlaced = false;
+	public static boolean playerReady;
+	public static boolean enemyReady;
+	public static boolean gameStarted = false;
 	private Boolean isServer = false;
     private JButton connectButton;
     private JPanel controlPanel;
@@ -63,13 +63,13 @@ public class Battleship extends JFrame {
     private JPanel enemyRemainingPanel;
     private JScrollPane jScrollPane2;
     private JPanel messagePanel;
-    private JTextArea messageTextArea;
+    private static JTextArea messageTextArea;
     static JPanel playerPanel;
-    private JButton readyButton;
+    public static JButton readyButton;
     public static JButton randomButton;
     private JPanel shipInventory;
     private JTextField userChatEnter;     
-    protected static EnemyGrid2 enemyGrid; //
+    protected static EnemyGrid enemyGrid; //
     protected static PlayerGrid playerGrid; //
     
     
@@ -123,7 +123,7 @@ public class Battleship extends JFrame {
         battleshipImageLabel = new JLabel();
         enemyRemainingPanel = new JPanel();
         playerGrid = new PlayerGrid();
-        enemyGrid = new EnemyGrid2();
+        enemyGrid = new EnemyGrid();
     	enemyPanel = new JPanel(); 
 
         try{
@@ -166,13 +166,14 @@ public class Battleship extends JFrame {
     				public void mouseClicked( MouseEvent e )
     				{
 
-    					if(gameStart){//if connected do this
+    					if(gameStarted){//if connected do this
     						
 //github.com/rob0229/Battleship.git
     						String message = Gameplay.attack(e.getPoint());
     						//ensures the grid square has not been chosen before
     						if(message != null){
 	    						sendData(message);
+	    						Gameplay.playerTurn = false;
 	    						System.out.println("The grid attack is " + Gameplay.attack(e.getPoint()));
     						}
     						else
@@ -224,11 +225,12 @@ public class Battleship extends JFrame {
         );
 
         controlPanel.setBorder(BorderFactory.createTitledBorder(null, "Control Panel", TitledBorder.CENTER, TitledBorder.ABOVE_TOP));
-
+    	readyButton.setEnabled(false);
         readyButton.setText("Ready!");
         readyButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
             	readyButtonActionPerformed(evt);
+            	
         
             }
         });
@@ -268,6 +270,7 @@ public class Battleship extends JFrame {
             	//if user enters ip address and clicks connect, the value in ipAddress
             	//will be updated before a call to the connect function
             	//ipAddressFieldActionPerformed(evt);
+            	Gameplay.playerTurn = false;          
                 connectButtonActionPerformed(evt);
             }
         });
@@ -276,7 +279,7 @@ public class Battleship extends JFrame {
         hostButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
             	isServer = true;
-            	Gameplay.turn = true;
+            	Gameplay.playerTurn = true;
                 hostButtonActionPerformed(evt);
             }
         });
@@ -506,8 +509,12 @@ public class Battleship extends JFrame {
     	System.out.println("All ships placed = "+GetSquareDropped.allShipsPlaced());
     	//check that all ships are placed
     	if(GetSquareDropped.allShipsPlaced()){
-    	playerReady = true;
-    	readyButton.setEnabled(false);
+	    	playerReady = true;
+	    	readyButton.setEnabled(false);
+	    	if(enemyReady == true){
+	    		gameStarted = true;
+	    	}
+	    	sendData("###");
     	}
     	
     }
@@ -521,8 +528,7 @@ public class Battleship extends JFrame {
     	int randomX = randInt(21, 319);
     	int randomY = randInt(30, 300);
     	
-    	//set Battleship
-    	
+    	//set Battleship  	
     	while(bsD == false){
     		JLabel randBSLabel = new JLabel();
     		randBSLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(ConstantData.bsImage)));
@@ -610,6 +616,7 @@ public class Battleship extends JFrame {
 					dD = true;
 		    	}
     	}
+    	readyButton.setEnabled(true);
 		
 	}
     
@@ -773,7 +780,7 @@ public class Battleship extends JFrame {
 	   } // end method sendData
 
 	   // manipulates displayArea in the event-dispatch thread
-    private void displayMessage( final String messageToDisplay ){
+    public static void displayMessage( final String messageToDisplay ){
 	      SwingUtilities.invokeLater(
 	         new Runnable() 
 	         {

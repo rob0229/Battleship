@@ -17,7 +17,7 @@ class MyDropTargetListener extends DropTargetAdapter {
 	private JPanel p;
 	private static Point dropPoint;
 	String draggedShip;
-	
+	int shipsPlaced = 0;
 	public MyDropTargetListener(JPanel dropPanel) {
 
 		p = dropPanel;
@@ -60,6 +60,12 @@ class MyDropTargetListener extends DropTargetAdapter {
 						p.repaint();
 						p.revalidate();
 						event.dropComplete(true);
+						shipsPlaced++;
+						
+						if(shipsPlaced ==5){
+							Battleship.readyButton.setEnabled(true);
+						}
+						
 					
 					}
 				}
