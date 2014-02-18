@@ -7,7 +7,7 @@ public class GetShipInfo {
 		// This value changes depending on which computer I am on...
 		// Sets layout information for each ship
 		if (draggedShip
-				.equals(ConstantData.battleShip) || draggedShip.equals(ConstantData.pbs)) {
+				.equals(ConstantData.battleShip) || draggedShip.equals(ConstantData.pbs) ||draggedShip.equals("battleShip") ) {
 			maxX = 229;
 			maxY = 320;
 			minY = 20;
@@ -17,7 +17,7 @@ public class GetShipInfo {
 			ship = "Battleship";
 
 		} else if (draggedShip
-				.equals(ConstantData.carrier) || draggedShip.equals(ConstantData.pca)) {
+				.equals(ConstantData.carrier) || draggedShip.equals(ConstantData.pca)||draggedShip.equals("carrier")) {
 			maxX = 199;
 			maxY = 320;
 			minY = 20;
@@ -27,7 +27,7 @@ public class GetShipInfo {
 			ship = "Carrier";
 
 		} else if (draggedShip
-				.equals(ConstantData.cruiser) || draggedShip.equals(ConstantData.pcr)) {
+				.equals(ConstantData.cruiser) || draggedShip.equals(ConstantData.pcr)||draggedShip.equals("cruiser")) {
 			maxX = 229;
 			maxY = 320;
 			minY = 20;
@@ -36,7 +36,7 @@ public class GetShipInfo {
 			shipWidth = 28;
 			ship = "Cruiser";
 		} else if (draggedShip
-				.equals(ConstantData.destroyer) || draggedShip.equals(ConstantData.pd)) {
+				.equals(ConstantData.destroyer) || draggedShip.equals(ConstantData.pd)||draggedShip.equals("destroyer")) {
 			maxX = 289;
 			maxY = 320;
 			minY = 20;
@@ -45,7 +45,7 @@ public class GetShipInfo {
 			shipWidth = 28;
 			ship = "Destroyer";
 		} else if (draggedShip
-				.equals(ConstantData.submarine) || draggedShip.equals(ConstantData.ps)) {
+				.equals(ConstantData.submarine) || draggedShip.equals(ConstantData.ps)||draggedShip.equals("sub")) {
 			maxX = 260;
 			maxY = 320;
 			minY = 20;
