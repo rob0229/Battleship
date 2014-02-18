@@ -42,7 +42,8 @@ public class Battleship extends JFrame {
 	public static boolean playerReady;
 	public static boolean enemyReady;
 	public static boolean gameStarted = false;
-	private Boolean isServer = false;
+	public static boolean isServer = false;
+	public static boolean playerTurn = false;
     private JButton connectButton;
     private JPanel controlPanel;
     private JButton disconnectButton;
@@ -165,16 +166,23 @@ public class Battleship extends JFrame {
     			{
     				public void mouseClicked( MouseEvent e )
     				{
-
+    					System.out.println("GameStarted = "+ gameStarted);
+    					System.out.println("Is Server = "+isServer+" Player turn = " + playerTurn);
     					if(gameStarted){//if connected do this
-    						
-//github.com/rob0229/Battleship.git
     						String message = Gameplay.attack(e.getPoint());
     						//ensures the grid square has not been chosen before
     						if(message != null){
-	    						sendData(message);
-	    						Gameplay.playerTurn = false;
-	    						System.out.println("The grid attack is " + Gameplay.attack(e.getPoint()));
+    							if(isServer && playerTurn ){
+    								sendData(message);
+    								playerTurn = false;
+    							}
+    							else if(isServer == false && playerTurn){
+    								sendDataClient(message);
+    								playerTurn = false;
+    							}
+    							//System.out.println("(not a GEM) The grid attack is " + Gameplay.attack(e.getPoint())+ " turn = " + Gameplay.playerTurn);
+	    						
+	    						
     						}
     						else
     							displayMessage("You already chose that square, try again");
@@ -244,7 +252,7 @@ public class Battleship extends JFrame {
 
 			
         });
-
+        randomButton.setEnabled(false);
         jLabel5.setText("Position Ships and push when ready");
 
         hostGameLabel.setText("Host Game:");
@@ -270,7 +278,7 @@ public class Battleship extends JFrame {
             	//if user enters ip address and clicks connect, the value in ipAddress
             	//will be updated before a call to the connect function
             	//ipAddressFieldActionPerformed(evt);
-            	Gameplay.playerTurn = false;          
+            	playerTurn = false;          
                 connectButtonActionPerformed(evt);
             }
         });
@@ -279,7 +287,7 @@ public class Battleship extends JFrame {
         hostButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
             	isServer = true;
-            	Gameplay.playerTurn = true;
+            	playerTurn = true;
                 hostButtonActionPerformed(evt);
             }
         });
@@ -514,7 +522,12 @@ public class Battleship extends JFrame {
 	    	if(enemyReady == true){
 	    		gameStarted = true;
 	    	}
-	    	sendData("###");
+	    	if(isServer){
+	    		sendData("###");
+	    	}
+	    	else if(isServer == false){
+	    		sendDataClient("###");
+	    	}
     	}
     	
     }
@@ -621,9 +634,11 @@ public class Battleship extends JFrame {
 	}
     
     private void hostButtonActionPerformed(ActionEvent evt) {                                           
-         hostButton.setEnabled(false);
+        hostButton.setEnabled(false);
         connectButton.setEnabled(false);
+        randomButton.setEnabled(true);
         isServer = true;
+        playerTurn = true;
 	   	  {
 	   		Runnable serverRunnable = new Runnable(){
 				@Override
@@ -640,7 +655,8 @@ public class Battleship extends JFrame {
   
     private void connectButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
          connectButton.setEnabled(false);
-        hostButton.setEnabled(false);		 
+        hostButton.setEnabled(false);	
+        randomButton.setEnabled(true);
 	   	  {
 	   		Runnable serverRunnable = new Runnable(){
 				@Override
@@ -716,7 +732,6 @@ public class Battleship extends JFrame {
     private void processConnection() throws IOException{
 	      String message = "Connection successful, *sent from server* ";
 	      sendData( message ); // send connection successful message
-	     
 	      // enable enterField so server user can send messages
 	      setTextFieldEditable( true );
 
@@ -728,13 +743,9 @@ public class Battleship extends JFrame {
 	            message = ( String ) input.readObject(); // read new message
 	            //filters the string message to determine if it is a game event or just a user message.
 	            //if it is a game event, Gameplay class handles it.
-	            System.out.println("Gets to processConnection ");
+	          
 	            message = game.Translate(message);
-	            System.out.println("Gets past message filter in processConnection");
-	            
-	            //if (message != null){
-	            	displayMessage( "\nPLAYER 2>>> " + message ); // display message
-	            //}
+	            System.out.println("message = "+ message);
 	         } // end try
 	         catch ( ClassNotFoundException classNotFoundException ) 
 	         {
@@ -867,14 +878,10 @@ public class Battleship extends JFrame {
             
             //filters the string message to determine if it is a game event or just a user message.
             //if it is a game event, Gameplay class handles it.
-            System.out.println("Gets to processConnectionClient ");
+           
             message = game.Translate(message);
-            System.out.println("Gets past message filter in processConnectionClient ");
-           // if (message != null){
-            	displayMessage( "\nPLAYER 2>>> " + message ); // display message
-            //}
+  
             
-            displayMessage( "\n\nPLAYER 1>>> " + message ); // display message
          } // end try
          catch ( ClassNotFoundException classNotFoundException ) 
          {
