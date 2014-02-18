@@ -53,6 +53,7 @@ class MyDropTargetListener extends DropTargetAdapter {
 					GetSquareDropped getSquareDropped = new GetSquareDropped(dropPoint, draggedShip);
 					//If a drop is valid(determined in GetSquareDropped Class) adds image to player panel
 					if(GetSquareDropped.validDrop){
+						Battleship.randomButton.setEnabled(false);
 						JLabel shipDragged = new JLabel(ico);
 						shipDragged.setBounds(getSquareDropped.getX(), getSquareDropped.getY(),	getShipInfo.getShipLength(), getShipInfo.getShipWidth());
 						p.add(shipDragged);				
