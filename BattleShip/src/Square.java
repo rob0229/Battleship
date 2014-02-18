@@ -44,7 +44,7 @@ import javax.swing.JPanel;
 			}
 
 			private void setCurrentSquare(Square square) {
-
+				//Battleship.sendData("@@"+xCord + ","+yCord);
 				System.out.println("The square x = " + xCord + " y = "+ yCord);
 				
 			}

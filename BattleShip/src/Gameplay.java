@@ -1,9 +1,10 @@
+import java.awt.Point;
+
 
 public class Gameplay {
 	public static int remainingShips;
 	public boolean turn;
-	public boolean playerready;
-	public boolean enemyready;
+	
 	
 	Ship battleship;
 	Ship carrier;
@@ -24,7 +25,7 @@ public class Gameplay {
 	
 	public String Translate(String message)
 	{
-		if(turn == false)
+		if(turn == false && Battleship.gameStart == true)
 		{
 			if(message.charAt(0) == '@' && message.charAt(0) == message.charAt(1))
 			{
@@ -71,12 +72,43 @@ public class Gameplay {
 				// sunk
 			}
 		}
+		//if it is players turn, just display message to console and do nothing with it. The enemy should not be able to send an event message 
+		//since its not his turn
+		if(turn == true)
+			return(message);
 		
-		return("blah");
-		
+		//default case just returns the message for display to screen
+		else 
+			return(message);		
 	}
 	
-	//if(playerready = true && playerready == enemyready)
+
+	//returns a string with the attack coordinates of players click on enemy board
+	public static String attack(Point pt){
+		
+			int x = (int) pt.getX();
+			int y = (int) pt.getY();
+			
+			
+			//converts drop point to grid square
+			int x2 = (x-21)/30;
+			int y2 = (y-32)/30;
+		
+			// alters drop point to set ship in grid correctly 
+			x = (x2*30)+21;
+			y = (y2*30)+32;
+			
+			
+			if(Battleship.enemyGrid.getGridContents(x2, y2) == "~"){
+				return "@@" + String.valueOf(x2)+","+ String.valueOf(y2);
+			}
+			
+			
+			
+		
+		return "";
+	}
+	
 	
 	
 }

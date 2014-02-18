@@ -6,11 +6,11 @@ public class GetSquareDropped {
 	String ship;
 	int orient = 0;
 	static Boolean validDrop = true;
-	Boolean bsPlaced= false;
-	Boolean carrierPlaced = false;
-	Boolean destroyerPlaced = false;
-	Boolean cruiserPlaced = false;
-	Boolean subPlaced = false;
+	static Boolean bsPlaced= false;
+	static Boolean carrierPlaced = false;
+	static Boolean destroyerPlaced = false;
+	static Boolean cruiserPlaced = false;
+	static Boolean subPlaced = false;
 
 
 
@@ -255,9 +255,7 @@ public class GetSquareDropped {
 		//test code **************************************************************************
 	
 		point.setLocation(x, y);
-		
-		System.out.println(x2 + " " + y2);
-		
+
 		for(int i = 0; i < 10; i++)
 		{
 			System.out.println();
@@ -269,7 +267,13 @@ public class GetSquareDropped {
 	}
 	
 	
+	public static Boolean allShipsPlaced(){
+		if (bsPlaced && cruiserPlaced && carrierPlaced && subPlaced && destroyerPlaced)
+			return true;	
+		else
+			return false;
 	
+	}
 	
 	
 	

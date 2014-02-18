@@ -47,6 +47,7 @@ class MyDropTargetListener extends DropTargetAdapter {
 				draggedShip = ico.toString();
 				
 				GetShipInfo getShipInfo = new GetShipInfo(draggedShip);
+			
 				if (ico != null) {
 					//determines and corrects square ship is dropped on
 					GetSquareDropped getSquareDropped = new GetSquareDropped(dropPoint, draggedShip);
