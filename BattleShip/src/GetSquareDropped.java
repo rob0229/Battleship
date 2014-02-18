@@ -16,7 +16,9 @@ public class GetSquareDropped {
 
 	public GetSquareDropped(Point point, String draggedShip){
 	 GetShipInfo getShipInfo = new GetShipInfo(draggedShip);
-
+	 
+	//resets valid drop for each call since it is static
+			validDrop = true;
 		x = (int) point.getX();
 		y = (int) point.getY();
 		minX = getShipInfo.getMinX();
@@ -52,6 +54,7 @@ public class GetSquareDropped {
 		
 
 		
+		
 		//Prevents ships from being placed on top of each other
 		if(getShipInfo.getShip().equals("Battleship") && orient == 0){
 			
@@ -74,7 +77,7 @@ public class GetSquareDropped {
 			
 		if(getShipInfo.getShip().equals("Battleship") && orient == 1){
 			
-			for(int i =0; i<2; i++){
+			for(int i =0; i<4; i++){
 				if(Battleship.playerGrid.getGridContents(x2, y2+i) != "~"){
 					validDrop = false; 
 				}
@@ -93,7 +96,7 @@ public class GetSquareDropped {
 		
 		if(getShipInfo.getShip().equals("Carrier") && orient == 0){
 			
-			for(int i =0; i<2; i++){
+			for(int i =0; i<5; i++){
 				if(Battleship.playerGrid.getGridContents(x2+i, y2) != "~"){
 					validDrop = false; 
 				}
@@ -111,7 +114,7 @@ public class GetSquareDropped {
 		
 		if(getShipInfo.getShip().equals("Carrier") && orient == 1){
 			
-			for(int i =0; i<2; i++){
+			for(int i =0; i<5; i++){
 				if(Battleship.playerGrid.getGridContents(x2, y2+i) != "~"){
 					validDrop = false; 
 				}	
@@ -129,7 +132,7 @@ public class GetSquareDropped {
 		
 		if(getShipInfo.getShip().equals("Cruiser") && orient == 0){
 			
-			for(int i =0; i<2; i++){
+			for(int i =0; i<4; i++){
 				if(Battleship.playerGrid.getGridContents(x2+i, y2) != "~"){
 					validDrop = false; 
 				}
@@ -146,7 +149,7 @@ public class GetSquareDropped {
 		}
 		if(getShipInfo.getShip().equals("Cruiser") && orient == 1){
 			
-			for(int i =0; i<2; i++){
+			for(int i =0; i<4; i++){
 				if(Battleship.playerGrid.getGridContents(x2, y2+i) != "~"){
 					validDrop = false; 
 				}
@@ -164,7 +167,7 @@ public class GetSquareDropped {
 		}	
 		if(getShipInfo.getShip().equals("Submarine") && orient == 0){
 			
-			for(int i =0; i<2; i++){
+			for(int i =0; i<3; i++){
 				if(Battleship.playerGrid.getGridContents(x2+i, y2) != "~"){
 					validDrop = false; 
 				}
@@ -182,7 +185,7 @@ public class GetSquareDropped {
 		
 		if(getShipInfo.getShip().equals("Submarine") && orient == 1){
 			
-			for(int i =0; i<2; i++){
+			for(int i =0; i<3; i++){
 				if(Battleship.playerGrid.getGridContents(x2, y2+i) != "~"){
 					validDrop = false; 
 				}
@@ -264,6 +267,7 @@ public class GetSquareDropped {
 				System.out.print(" " + Battleship.playerGrid.getGridContents(j,i) + " ");
 			}
 		}
+		
 	}
 	
 	
