@@ -38,7 +38,6 @@ import javax.swing.border.TitledBorder;
  */
 public class Battleship extends JFrame {
 	Gameplay game = new Gameplay();
-	 // Variables declaration -
 	protected Boolean allShipsPlaced = false;
 	public boolean playerReady;
 	public boolean enemyReady;
