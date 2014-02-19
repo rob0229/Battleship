@@ -109,8 +109,8 @@ public class Gameplay {
 					} 
 				
 				
-						Battleship.displayMessage("\nThats a HIT!");
-						return("!!"+String.valueOf(x2) + "," + String.valueOf(y2));
+					Battleship.displayMessage("\nThats a HIT!");
+					return("!!"+String.valueOf(x2) + "," + String.valueOf(y2));
 				
 				}
 				// Hit Cruiser
@@ -139,21 +139,19 @@ public class Gameplay {
 						Battleship.gameStarted=false;
 						return(">>>");	
 					} 
-					else 
-					{
-						Battleship.displayMessage("\nThats a HIT!");
-						return("!!"+String.valueOf(x2) + "," + String.valueOf(y2));
-					}
-			}
+					
+					Battleship.displayMessage("\nThats a HIT!");
+					return("!!"+String.valueOf(x2) + "," + String.valueOf(y2));
+				}
 
-			// Hit Submarine
-			else if (pGridContents == "S") 
-			{
-				JLabel hitLabel = new JLabel();
-				 JLabel missLabel = new JLabel();
-				hitLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(
+				// Hit Submarine
+				else if (pGridContents == "S") 
+				{
+					JLabel hitLabel = new JLabel();
+					JLabel missLabel = new JLabel();
+					hitLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 						"hitLabel.jpg")));
-				missLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(
+					missLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 						"missLabel.jpg")));
 					subHP--;
 					
@@ -172,11 +170,10 @@ public class Gameplay {
 						Battleship.gameStarted=false;
 						return(">>>");	
 					} 
-					else 
-					{
-						Battleship.displayMessage("\nThats a HIT!");
-						return("!!"+String.valueOf(x2) + "," + String.valueOf(y2));
-					}
+					
+					Battleship.displayMessage("\nThats a HIT!");
+					return("!!"+String.valueOf(x2) + "," + String.valueOf(y2));
+					
 				}
 			// Hit Destroyer
 			else if (pGridContents == "D") 
@@ -205,11 +202,10 @@ public class Gameplay {
 						Battleship.gameStarted=false;
 						return(">>>");	
 					} 
-					else 
-					{
-						Battleship.displayMessage("\nThats a HIT!");
-						return("!!"+String.valueOf(x2) + "," + String.valueOf(y2));
-					}
+					
+					Battleship.displayMessage("\nThats a HIT!");
+				return("!!"+String.valueOf(x2) + "," + String.valueOf(y2));
+					
 				}
 			// enemy missed
 			else if (pGridContents == "~") 
@@ -221,17 +217,17 @@ public class Gameplay {
 				missLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 						"missLabel.jpg")));
 					// displays on playerGrid enemy shots
-					Battleship.playerGrid.setGridContents(x, y, "M");
-					missLabel.setBounds(x2, y2, 28, 28);
-					Battleship.playerPanel.add(missLabel);
-					Battleship.playerPanel.repaint();
-					Battleship.playerPanel.revalidate();
+				Battleship.playerGrid.setGridContents(x, y, "M");
+				missLabel.setBounds(x2, y2, 28, 28);
+				Battleship.playerPanel.add(missLabel);
+				Battleship.playerPanel.repaint();
+				Battleship.playerPanel.revalidate();
 					// returns message to enemy that they missed
-					Battleship.displayMessage("\nThey Missed Us!");
-					return("??"+String.valueOf(x2) + "," + String.valueOf(y2));
+				Battleship.displayMessage("\nThey Missed Us!");
+			return("??"+String.valueOf(x2) + "," + String.valueOf(y2));
 					
 			}
-				Battleship.playerTurn = true;
+		Battleship.playerTurn = true;
 		}
 		
 		
@@ -248,11 +244,11 @@ public class Gameplay {
 
 		// Hit
 		else if (l == '!' && m == '!') {
-			JLabel hitLabel = new JLabel();
-			 JLabel missLabel = new JLabel();
-			hitLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(
+				JLabel hitLabel = new JLabel();
+				JLabel missLabel = new JLabel();
+				hitLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 					"hitLabel.jpg")));
-			missLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(
+				missLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 					"missLabel.jpg")));
 
 					Battleship.enemyGrid.setGridContents(x, y, "H");
@@ -261,7 +257,7 @@ public class Gameplay {
 					Battleship.enemyPanel.repaint();
 					Battleship.enemyPanel.revalidate();
 					Battleship.displayMessage("\nYou got HIT!");
-
+				return null;
 		} 
 		else if (l == '?' && m == '?') {
 			JLabel hitLabel = new JLabel();
@@ -277,7 +273,7 @@ public class Gameplay {
 					Battleship.enemyPanel.repaint();
 					Battleship.enemyPanel.revalidate();
 					Battleship.displayMessage("\nThey MISSED!");
-
+				return null;
 				}
 				// sunk
 		else if (l == '^' && m == '^') {
@@ -295,7 +291,7 @@ public class Gameplay {
 					Battleship.enemyPanel.repaint();
 					Battleship.enemyPanel.revalidate();
 					Battleship.displayMessage("\nThey sank your ship!!!");
-
+				return null;
 		}
 		else if (l == '>' && m == '>'&& n == '>') {
 			 JLabel hitLabel = new JLabel();
@@ -311,7 +307,7 @@ public class Gameplay {
 					Battleship.enemyPanel.revalidate();
 					Battleship.gameStarted = false;
 					Battleship.displayMessage("\nYOU WIN!!!!!!");
-
+				return null;
 				}
 
 			//Battleship.playerTurn = false;
@@ -329,6 +325,7 @@ public class Gameplay {
 						Battleship.gameStarted = true;
 					}
 					Battleship.displayMessage( "\nOpponent is Ready!" );
+				return null;	
 			}
 
 		
@@ -337,21 +334,17 @@ public class Gameplay {
 		// nothing
 		// with it. The enemy should not be able to send a GEM
 		// since its not his turn
-		else if (Battleship.playerTurn == true && Battleship.gameStarted == true) {
-			if(Battleship.isServer)
-			Battleship.displayMessage( "\nPLAYER 1>>> " + message ); // display message message;
-			else
-				Battleship.displayMessage( "\nPLAYER 2>>> " + message ); // display message message;
-		}
-
-		//if the message is not a GEM it gets displayed
-
-			if(Battleship.isServer)
-				Battleship.displayMessage( "\nPLAYER 1>>> " + message ); // display message message;
-			else
-				Battleship.displayMessage( "\nPLAYER 2>>> " + message ); // display message message;
-			
 		
+		if(Battleship.isServer){
+			Battleship.displayMessage( "\nPLAYER 1>>> " + message ); // display message message;
+			return null;
+		}
+		else{
+			Battleship.displayMessage( "\nPLAYER 2>>> " + message ); // display message message;
+			return null;
+		}
+		
+	
 	}
 		
 			
