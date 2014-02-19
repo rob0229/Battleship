@@ -742,10 +742,7 @@ public class Battleship extends JFrame {
 	            //if it is a game event, Gameplay class handles it.
 	          
 	            message = game.Translate(message);
-	            if(message!=null){
-	            	System.out.println("Message Sent f/ server = "+ message);
-	            	sendData(message);
-	            }	
+	            
 	            
 	         } // end try
 	         catch ( ClassNotFoundException classNotFoundException ) 
@@ -880,10 +877,7 @@ public class Battleship extends JFrame {
             //if it is a game event, Gameplay class handles it.
            
             message = game.Translate(message);
-            if(message!=null){
-            	System.out.println("Client message sent = "+ message);
-            	sendDataClient(message);
-            }
+            
             
          } // end try
          catch ( ClassNotFoundException classNotFoundException ) 

@@ -3,7 +3,7 @@ import java.awt.Point;
 import javax.swing.JLabel;
 
 public class Gameplay {
-	public static int remainingShips;
+	public static int remainingShips = 5;
 	int battleshipHP = 4;
 	 int carrierHP = 5;
 	 int cruiserHP = 4;
@@ -257,7 +257,7 @@ public class Gameplay {
 					Battleship.enemyPanel.repaint();
 					Battleship.enemyPanel.revalidate();
 					Battleship.displayMessage("\nYou got HIT!");
-				return null;
+				return "-";
 		} 
 		else if (l == '?' && m == '?') {
 			JLabel hitLabel = new JLabel();
@@ -273,7 +273,7 @@ public class Gameplay {
 					Battleship.enemyPanel.repaint();
 					Battleship.enemyPanel.revalidate();
 					Battleship.displayMessage("\nThey MISSED!");
-				return null;
+				return "-";
 				}
 				// sunk
 		else if (l == '^' && m == '^') {
@@ -291,7 +291,7 @@ public class Gameplay {
 					Battleship.enemyPanel.repaint();
 					Battleship.enemyPanel.revalidate();
 					Battleship.displayMessage("\nThey sank your ship!!!");
-				return null;
+				return "-";
 		}
 		else if (l == '>' && m == '>'&& n == '>') {
 			 JLabel hitLabel = new JLabel();
@@ -307,7 +307,7 @@ public class Gameplay {
 					Battleship.enemyPanel.revalidate();
 					Battleship.gameStarted = false;
 					Battleship.displayMessage("\nYOU WIN!!!!!!");
-				return null;
+				return "-";
 				}
 
 			//Battleship.playerTurn = false;
@@ -325,7 +325,7 @@ public class Gameplay {
 						Battleship.gameStarted = true;
 					}
 					Battleship.displayMessage( "\nOpponent is Ready!" );
-				return null;	
+				return "-";	
 			}
 
 		
@@ -337,11 +337,11 @@ public class Gameplay {
 		
 		if(Battleship.isServer){
 			Battleship.displayMessage( "\nPLAYER 1>>> " + message ); // display message message;
-			return null;
+			return "-";
 		}
 		else{
 			Battleship.displayMessage( "\nPLAYER 2>>> " + message ); // display message message;
-			return null;
+			return "-";
 		}
 		
 	
@@ -366,7 +366,7 @@ public class Gameplay {
 
 		if(Battleship.enemyGrid.getGridContents(x2, y2) != "~"){
 			Battleship.displayMessage("\nYou already picked that square, try again");
-			return null;
+			return "-";
 		}
 		if (Battleship.enemyGrid.getGridContents(x2, y2) == "~") {
 			Battleship.enemyGrid.setGridContents(x2, y2, "T");
