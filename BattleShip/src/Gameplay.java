@@ -10,10 +10,6 @@ public class Gameplay {
 	 int subHP = 3;
 	 int destroyerHP = 2;
 
-	public Gameplay() {
-		
-
-	}
 
 	public String Translate(String message) {
 		

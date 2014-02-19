@@ -764,7 +764,11 @@ public class Battleship extends JFrame {
 			            
 		     			sendData(message);
 		     		} 	
+		     		//message is greater than 2 but not a GEM
+		     		else 
+		     		displayMessage(message);
 	            }
+	            //message less that 2
 	            else
 	            	displayMessage(message);
 	            
@@ -910,11 +914,14 @@ public class Battleship extends JFrame {
 		            message = game.Translate(message);
 		            System.out.println("GETS HERE****************************");
 	     			sendDataClient(message);
-	     		}            	
-            }
-            else
-            	displayMessage(message);
-            
+	     		}
+	     			//message is greater than 2 but not a GEM
+		     		else 
+		     		displayMessage(message);
+	            }
+	            //message less that 2
+	            else
+	            	displayMessage(message);
          } // end try
          catch ( ClassNotFoundException classNotFoundException ) 
          {
