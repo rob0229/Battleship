@@ -28,7 +28,7 @@ public class Gameplay {
 		m = message.charAt(1);
 		n = message.charAt(2);
 		
-		if (message.length() == 5) {
+		if (message.length() ==5) {
 			char a = message.charAt(2);
 			char b = message.charAt(4);
 
@@ -67,12 +67,12 @@ public class Gameplay {
 					// checks for sunk ship and endGame condition
 					if (battleshipHP == 0 && remainingShips != 0) {	
 						Battleship.displayMessage("\nThey sank our Battleship!");
-						return("^^0");
+						return("^^000");
 					}
 					if (remainingShips == 0) {
 						Battleship.displayMessage("\nThey Won!");
 						Battleship.gameStarted=false;
-						return(">>>");	
+						return(">>>>>");	
 					} 
 					 
 					
@@ -103,12 +103,12 @@ public class Gameplay {
 					if (carrierHP == 0 && remainingShips != 0) {	
 						Battleship.displayMessage("\nThey sank our Carrier!");
 						Battleship.playerTurn = true;
-						return("^^1");
+						return("^^111");
 					}
 					if (remainingShips == 0) {
 						Battleship.displayMessage("\nThey Won!");
 						Battleship.gameStarted=false;
-						return(">>>");	
+						return(">>>>>");	
 					} 
 				
 				
@@ -138,12 +138,12 @@ public class Gameplay {
 						Battleship.displayMessage("\nThey sank our Cruiser!");
 						Battleship.playerTurn = true;
 						Battleship.playerTurn = true;
-						return("^^2");
+						return("^^222");
 					}
 					if (remainingShips == 0) {
 						Battleship.displayMessage("\nThey Won!");
 						Battleship.gameStarted=false;
-						return(">>>");	
+						return(">>>>>");	
 					} 
 					
 					Battleship.displayMessage("\nThats a HIT!");
@@ -171,12 +171,12 @@ public class Gameplay {
 					if (subHP == 0 && remainingShips != 0) {	
 						Battleship.displayMessage("\nThey sank our Submarine!");
 						Battleship.playerTurn = true;
-						return("^^3");
+						return("^^333");
 					}
 					if (remainingShips == 0) {
 						Battleship.displayMessage("\nThey Won!");
 						Battleship.gameStarted=false;
-						return(">>>");	
+						return(">>>>>");	
 					} 
 					
 					Battleship.displayMessage("\nThats a HIT!");
@@ -205,12 +205,12 @@ public class Gameplay {
 					if (destroyerHP == 0 && remainingShips != 0) {	
 						Battleship.displayMessage("\nThey sank our Destroyer!");
 						Battleship.playerTurn = true;
-						return("^^4");
+						return("^^444");
 					}
 					if (remainingShips == 0) {
 						Battleship.displayMessage("\nThey Won!");
 						Battleship.gameStarted=false;
-						return(">>>");	
+						return(">>>>>");	
 					} 
 					
 					Battleship.displayMessage("\nThats a HIT!");
