@@ -338,19 +338,19 @@ public class Battleship extends JFrame {
 		// Ship Panel Layout
 		shipInventory.setBorder(javax.swing.BorderFactory.createTitledBorder("Ship Inventory"));
 
-		cruiserImageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("Cruiser.jpg"))); // NOI18N
+		cruiserImageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("Cruiser.png"))); // NOI18N
 		// cruiserImageLabel.setText("Crusier");
 		cruiserImageLabel.setPreferredSize(new java.awt.Dimension(120, 60));
 
-		submarineImageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("Submarine.jpg"))); // NOI18N
+		submarineImageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("Submarine.png"))); // NOI18N
 		// submarineImageLabel.setText("Submarine");
 		submarineImageLabel.setPreferredSize(new java.awt.Dimension(90, 60));
 
-		carrierImageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("carrier.jpg"))); // NOI18N
+		carrierImageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("Carrier.png"))); // NOI18N
 		// carrierImageLabel.setText("Carrier");
 		carrierImageLabel.setPreferredSize(new java.awt.Dimension(150, 60));
 
-		destroyerImageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("Destroyer.jpg"))); // NOI18N
+		destroyerImageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("Destroyer.png"))); // NOI18N
 		// destroyerImageLabel.setText("Destroyer");
 		destroyerImageLabel.setPreferredSize(new java.awt.Dimension(60, 60));
 
