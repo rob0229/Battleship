@@ -360,7 +360,7 @@ public class Battleship extends JFrame {
         
       
         enemyPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Enemy Board"));
-        enemyPanel.setLayout(new GridLayout(10,10,0,0));
+        enemyPanel.setLayout(null);
         
         playerPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Player Board"));
        
@@ -736,14 +736,39 @@ public class Battleship extends JFrame {
 	      { 
 	         try // read message and display it
 	         {
-	        
+	        	
+	     		
+	     		
 	            message = ( String ) input.readObject(); // read new message
-	            //filters the string message to determine if it is a game event or just a user message.
-	            //if it is a game event, Gameplay class handles it.
-	          
-	            message = game.Translate(message);
 	            
+	            /*
+	    		 * During the players turn, valid messages received from the enemy
+	    		 * are as follows: 
+	    		 * "!!x,y" 	//hit 
+	    		 * "??x,y 	//miss 
+	    		 * "^^z" 	//sunk ship z corresponds to ship 0,1,2,3,4 where 0 = battleship, 1 = carrier,
+	    		 * 				2 = cruiser, 3 = sub, 4 = destroyer 
+	    		 * ">>>" 	//the player has sunk all 5 enemy ships and therefore won the game
+	    		 */
+	            if ((message.length()> 2)){
+	            	char l = message.charAt(0);
+		     		char m = message.charAt(1);
+		     		
+		     		if((l == '@' && m == '@') || (l == '!' && m == '!')|| (l == '?' && m == '?')|| (l == '^' && m == '^')|| (l == '>' && m == '>')|| (l == '#' && m == '#')){
+		     			//filters the string message to determine if it is a game event or just a user message.
+			            //if it is a game event, Gameplay class handles it. 
+		     			
+		     			//*****************************************************delete this later
+		     			displayMessage(message);
+			            message = game.Translate(message);
+			            
+		     			sendData(message);
+		     		} 	
+	            }
+	            else
+	            	displayMessage(message);
 	            
+
 	         } // end try
 	         catch ( ClassNotFoundException classNotFoundException ) 
 	         {
@@ -873,11 +898,22 @@ public class Battleship extends JFrame {
          {
             message = ( String ) input.readObject(); // read new message
             
-            //filters the string message to determine if it is a game event or just a user message.
-            //if it is a game event, Gameplay class handles it.
-           
-            message = game.Translate(message);
-            
+            if ((message.length()> 2)){
+            	char l = message.charAt(0);
+	     		char m = message.charAt(1);
+	     		
+	     		if((l == '@' && m == '@') || (l == '!' && m == '!')|| (l == '?' && m == '?')|| (l == '^' && m == '^')|| (l == '>' && m == '>')|| (l == '#' && m == '#')){
+	     			//filters the string message to determine if it is a game event or just a user message.
+		            //if it is a game event, Gameplay class handles it. 
+	     			//*****************************************************delete this later
+	     			displayMessage(message);
+		            message = game.Translate(message);
+		            System.out.println("GETS HERE****************************");
+	     			sendDataClient(message);
+	     		}            	
+            }
+            else
+            	displayMessage(message);
             
          } // end try
          catch ( ClassNotFoundException classNotFoundException ) 
