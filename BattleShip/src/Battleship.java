@@ -168,18 +168,26 @@ public class Battleship extends JFrame {
     					System.out.println("Is Server = "+isServer+" Player turn = " + playerTurn);
     					if(gameStarted)
     					{
+    						System.out.println("1");
+    						
     						String message = Gameplay.attack(e.getPoint());
     						//ensures the grid square has not been chosen before
-    						if(message != null){
+    						if(!(message.equals( "*****"))){
+    							System.out.println("2");
     							if(isServer && playerTurn ){
-    								sendData(message);
     								playerTurn = false;
+    								sendData(message);
+    								
+    								
     							}
     							else if(isServer == false && playerTurn){
-    								sendDataClient(message);
+    								System.out.println("3");
     								playerTurn = false;
+    								sendDataClient(message);
+    								
     							}
     							else if (playerTurn == false){
+    								System.out.println("4");
     								displayMessage("\nIts not your turn!");	
     							}
     							//System.out.println("(not a GEM) The grid attack is " + Gameplay.attack(e.getPoint())+ " turn = " + Gameplay.playerTurn);
@@ -520,10 +528,10 @@ public class Battleship extends JFrame {
 	    		gameStarted = true;
 	    	}
 	    	if(isServer){
-	    		sendData("###");
+	    		sendData("#####");
 	    	}
 	    	else if(isServer == false){
-	    		sendDataClient("###");
+	    		sendDataClient("#####");
 	    	}
     	}
     	
@@ -750,7 +758,7 @@ public class Battleship extends JFrame {
 	    		 * 				2 = cruiser, 3 = sub, 4 = destroyer 
 	    		 * ">>>" 	//the player has sunk all 5 enemy ships and therefore won the game
 	    		 */
-	            if ((message.length()> 2)){
+	            if ((message.length()==5)){
 	            	char l = message.charAt(0);
 		     		char m = message.charAt(1);
 		     		
@@ -759,16 +767,16 @@ public class Battleship extends JFrame {
 			            //if it is a game event, Gameplay class handles it. 
 		     			
 		     			//*****************************************************delete this later
-		     			displayMessage(message);
+		     			
 			            message = game.Translate(message);
 			            
-		     			sendData(message);
+		     			sendData("\n Server says " + message);
 		     		} 	
-		     		//message is greater than 2 but not a GEM
+		     		//message is length 5 but not a GEM
 		     		else 
-		     		displayMessage(message);
+		     		displayMessage("\n Server says " + message);
 	            }
-	            //message less that 2
+	            //message is not length 5
 	            else
 	            	displayMessage(message);
 	            
@@ -902,7 +910,7 @@ public class Battleship extends JFrame {
          {
             message = ( String ) input.readObject(); // read new message
             
-            if ((message.length()> 2)){
+            if ((message.length() == 5)){
             	char l = message.charAt(0);
 	     		char m = message.charAt(1);
 	     		
@@ -910,18 +918,20 @@ public class Battleship extends JFrame {
 	     			//filters the string message to determine if it is a game event or just a user message.
 		            //if it is a game event, Gameplay class handles it. 
 	     			//*****************************************************delete this later
-	     			displayMessage(message);
+	     			
+	     			
 		            message = game.Translate(message);
-		            System.out.println("GETS HERE****************************");
-	     			sendDataClient(message);
+		         
+	     			sendDataClient("\n Server says " + message);
 	     		}
-	     			//message is greater than 2 but not a GEM
+	     			//message is length 5 but not a GEM
 		     		else 
-		     		displayMessage(message);
+		     		displayMessage("\n Server says " + message);
 	            }
-	            //message less that 2
+	            //message != 5
 	            else
 	            	displayMessage(message);
+            
          } // end try
          catch ( ClassNotFoundException classNotFoundException ) 
          {
