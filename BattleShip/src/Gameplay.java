@@ -55,15 +55,20 @@ public class Gameplay {
 				missLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("missLabel.jpg")));
 
 				battleshipHP--;
-
+				
 				// displays on playerGrid enemy shots
 				hitLabel.setBounds(x2, y2, 28, 28);
 				Battleship.playerPanel.add(hitLabel, 0);
 				Battleship.playerPanel.repaint();
 				Battleship.playerPanel.revalidate();
+				
+				if(battleshipHP == 0){
+					remainingShips--;
+				}
 				// checks for sunk ship and endGame condition
 				if (battleshipHP == 0 && remainingShips != 0) {
 					Battleship.displayMessage("\nThey sank our Battleship!");
+					remainingShips--;
 					Battleship.playerTurn = true;
 					return ("^^" + String.valueOf(x) + "0" + String.valueOf(y));
 				}
@@ -95,6 +100,10 @@ public class Gameplay {
 				Battleship.playerPanel.add(hitLabel, 0);
 				Battleship.playerPanel.repaint();
 				Battleship.playerPanel.revalidate();
+				
+				if(carrierHP == 0){
+					remainingShips--;
+				}
 
 				// checks for sunk ship and endGame condition
 				if (carrierHP == 0 && remainingShips != 0) {
@@ -128,6 +137,10 @@ public class Gameplay {
 				Battleship.playerPanel.add(hitLabel, 0);
 				Battleship.playerPanel.repaint();
 				Battleship.playerPanel.revalidate();
+				
+				if(cruiserHP == 0){
+					remainingShips--;
+				}
 				// checks for sunk ship and endGame condition
 				if (cruiserHP == 0 && remainingShips != 0) {
 					Battleship.displayMessage("\nThey sank our Cruiser!");
@@ -159,6 +172,9 @@ public class Gameplay {
 				Battleship.playerPanel.add(hitLabel, 0);
 				Battleship.playerPanel.repaint();
 				Battleship.playerPanel.revalidate();
+				if(subHP == 0){
+					remainingShips--;
+				}
 				// checks for sunk ship and endGame condition
 				if (subHP == 0 && remainingShips != 0) {
 					Battleship.displayMessage("\nThey sank our Submarine!");
@@ -191,6 +207,10 @@ public class Gameplay {
 				Battleship.playerPanel.add(hitLabel, 0);
 				Battleship.playerPanel.repaint();
 				Battleship.playerPanel.revalidate();
+				
+				if(destroyerHP == 0){
+					remainingShips--;
+				}
 				// checks for sunk ship and endGame condition
 				if (destroyerHP == 0 && remainingShips != 0) {
 					Battleship.displayMessage("\nThey sank our Destroyer!");
