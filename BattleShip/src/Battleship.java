@@ -175,19 +175,20 @@ public class Battleship extends JFrame {
     						if(!(message.equals( "*****"))){
     							System.out.println("2");
     							if(isServer && playerTurn ){
+    								System.out.println("3");
     								playerTurn = false;
     								sendData(message);
     								
     								
     							}
     							else if(isServer == false && playerTurn){
-    								System.out.println("3");
+    								System.out.println("4");
     								playerTurn = false;
     								sendDataClient(message);
     								
     							}
     							else if (playerTurn == false){
-    								System.out.println("4");
+    								System.out.println("5");
     								displayMessage("\nIts not your turn!");	
     							}
     							//System.out.println("(not a GEM) The grid attack is " + Gameplay.attack(e.getPoint())+ " turn = " + Gameplay.playerTurn);
@@ -770,7 +771,7 @@ public class Battleship extends JFrame {
 		     			
 			            message = game.Translate(message);
 			            
-		     			sendData("\n Server says " + message);
+		     			sendData( message);
 		     		} 	
 		     		//message is length 5 but not a GEM
 		     		else 
@@ -922,7 +923,7 @@ public class Battleship extends JFrame {
 	     			
 		            message = game.Translate(message);
 		         
-	     			sendDataClient("\n Server says " + message);
+	     			sendDataClient( message);
 	     		}
 	     			//message is length 5 but not a GEM
 		     		else 
