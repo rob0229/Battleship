@@ -37,7 +37,7 @@ import javax.swing.border.TitledBorder;
  * @author Rob and Charley
  */
 public class Battleship extends JFrame {
-	Gameplay game = new Gameplay();
+	private Gameplay game = new Gameplay();
 	protected boolean allShipsPlaced = false;
 	public static boolean playerReady;
 	public static boolean enemyReady;
@@ -57,8 +57,7 @@ public class Battleship extends JFrame {
     protected static JLabel carrierImageLabel;
     protected static JLabel destroyerImageLabel;
     private JLabel jLabel5;
-    private JLabel hostGameLabel;
-   
+    private JLabel hostGameLabel;   
     private JLabel hostIPAdressLabel9;
     private JPanel informationPanel;
     private JPanel enemyRemainingPanel;
@@ -85,8 +84,7 @@ public class Battleship extends JFrame {
         private ObjectInputStream inputClient; // input stream from server
         private String message = ""; // message from server
         private String chatServer; // host server for this application
-        private Socket client; // socket to communicate with server
-            
+        private Socket client; // socket to communicate with server           
         Image image;
     /**
      * Creates new form Battleship
@@ -168,7 +166,8 @@ public class Battleship extends JFrame {
     				{
     					System.out.println("GameStarted = "+ gameStarted);
     					System.out.println("Is Server = "+isServer+" Player turn = " + playerTurn);
-    					if(gameStarted){//if connected do this
+    					if(gameStarted)
+    					{
     						String message = Gameplay.attack(e.getPoint());
     						//ensures the grid square has not been chosen before
     						if(message != null){
@@ -180,15 +179,13 @@ public class Battleship extends JFrame {
     								sendDataClient(message);
     								playerTurn = false;
     							}
+    							else if (playerTurn == false){
+    								displayMessage("\nIts not your turn!");	
+    							}
     							//System.out.println("(not a GEM) The grid attack is " + Gameplay.attack(e.getPoint())+ " turn = " + Gameplay.playerTurn);
-	    						
-	    						
-    						}
-    						else
-    							displayMessage("You already chose that square, try again");
+    						}	
     					}
     				} 
-
     			}); 
                
          
@@ -712,7 +709,7 @@ public class Battleship extends JFrame {
     private void waitForConnection() throws IOException{
 	      displayMessage( "Waiting for connection\n" );
 	      connection = serverSocket.accept(); // allow server to accept connection            
-	      displayMessage( "Connection " + counter + " received from: " +
+	      displayMessage( "\nConnection " + counter + " received from: " +
 	         connection.getInetAddress().getHostName() );
 	   } // end method waitForConnection
 
@@ -730,7 +727,7 @@ public class Battleship extends JFrame {
 
 	   // process connection with client
     private void processConnection() throws IOException{
-	      String message = "Connection successful, *sent from server* ";
+	      String message = "\nConnection successful, *sent from server* ";
 	      sendData( message ); // send connection successful message
 	      // enable enterField so server user can send messages
 	      setTextFieldEditable( true );
@@ -745,7 +742,11 @@ public class Battleship extends JFrame {
 	            //if it is a game event, Gameplay class handles it.
 	          
 	            message = game.Translate(message);
-	            System.out.println("message = "+ message);
+	            if(message!=null){
+	            	System.out.println("Message Sent f/ server = "+ message);
+	            	sendData(message);
+	            }	
+	            
 	         } // end try
 	         catch ( ClassNotFoundException classNotFoundException ) 
 	         {
@@ -782,7 +783,7 @@ public class Battleship extends JFrame {
 	      {
 	         output.writeObject(message);
 	         output.flush(); // flush output to client
-	         displayMessage( "\nPLAYER 1>>> " + message );
+	         //displayMessage( "\nPLAYER 1>>> " + message );
 	      } // end try
 	      catch ( IOException ioException ) 
 	      {
@@ -835,7 +836,6 @@ public class Battleship extends JFrame {
      
       finally 
       {
-          System.out.println("  gets to here run client line 701  ");
          closeConnectionClient(); // close connection
       } // end finally
     
@@ -849,7 +849,7 @@ public class Battleship extends JFrame {
       client = new Socket( InetAddress.getByName( chatServer ), 12345 );
 
       // display connection information
-      displayMessage( "Connected to: " + 
+      displayMessage( "\nConnected to: " + 
          client.getInetAddress().getHostName() );
    } // end method connectToServer
 
@@ -880,7 +880,10 @@ public class Battleship extends JFrame {
             //if it is a game event, Gameplay class handles it.
            
             message = game.Translate(message);
-  
+            if(message!=null){
+            	System.out.println("Client message sent = "+ message);
+            	sendDataClient(message);
+            }
             
          } // end try
          catch ( ClassNotFoundException classNotFoundException ) 
@@ -914,7 +917,7 @@ public class Battleship extends JFrame {
 	      {
 	         outputClient.writeObject( message );
 	         outputClient.flush(); // flush output to client
-	         displayMessage( "\nPLAYER 2>>> " + message );
+	         //displayMessage( "\nPLAYER 2>>> " + message );
 	      } // end try
 	      catch ( IOException ioException ) 
 	      {
