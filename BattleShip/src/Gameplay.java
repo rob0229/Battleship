@@ -222,7 +222,9 @@ public class Gameplay {
 				}
 				if (remainingShips == 0) {
 					Battleship.displayMessage("\nThey sank our Destroyer!");
-					Battleship.displayMessage("\nThey Won!");
+					Battleship.displayMessage("\n !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+					Battleship.displayMessage("\n !!!!!!!!!!!!!! You Lost !!!!!!!!!!!!!");
+					Battleship.displayMessage("\n !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 					Battleship.gameStarted = false;
 					Battleship.playerTurn = false;
 					return (">>"+ String.valueOf(x) + "," + String.valueOf(y));
@@ -356,8 +358,9 @@ public class Gameplay {
 			Battleship.enemyCruiserLabel.setVisible(false);
 			Battleship.enemySubmarineLabel.setVisible(false);
 			Battleship.enemyDestroyerLabel.setVisible(false);
-			
-			Battleship.displayMessage("\n !!!!!!!!!!!!! YOU WIN !!!!!!");
+			Battleship.displayMessage("\n !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			Battleship.displayMessage("\n !!!!!!!!!!!!!! YOU WIN !!!!!!!!!!!!!!");
+			Battleship.displayMessage("\n !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 			Battleship.playerTurn = false;
 			Battleship.gameStarted = false;
 			return "\nGame Over";

@@ -489,6 +489,7 @@ public class Battleship extends JFrame {
 
 	private void userChatEnterActionPerformed(java.awt.event.ActionEvent evt) {
 		if (isServer == true) {
+			System.out.println("UserChat enter toaString() = " + evt.toString());
 			sendData(evt.getActionCommand());
 			userChatEnter.setText("");
 		} else {
@@ -499,7 +500,7 @@ public class Battleship extends JFrame {
 	}
 
 	private void ipAddressFieldActionPerformed(java.awt.event.ActionEvent evt) {
-		sendData(evt.getActionCommand());
+		
 		ipAddressField.setText("");
 		ipAddress = ipAddressField.getText();
 	}
@@ -749,11 +750,11 @@ public class Battleship extends JFrame {
 					}
 					// message is length 5 but not a GEM
 					else
-						displayMessage("\n Server says " + message);
+						displayMessage("\n Client says>>> " + message);
 				}
 				// message is not length 5
 				else
-					displayMessage(message);
+					displayMessage("\n Client says>>> "+message);
 
 			} // end try
 			catch (ClassNotFoundException classNotFoundException) {
@@ -891,11 +892,11 @@ public class Battleship extends JFrame {
 					}
 					// message is length 5 but not a GEM
 					else
-						displayMessage("\n Server says " + message);
+						displayMessage("\n Server says >>> " + message);
 				}
 				// message != 5
 				else
-					displayMessage(message);
+					displayMessage("\n Server says >>> " + message);
 
 			} // end try
 			catch (ClassNotFoundException classNotFoundException) {
