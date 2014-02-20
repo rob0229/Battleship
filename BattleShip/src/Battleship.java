@@ -558,7 +558,7 @@ public class Battleship extends JFrame {
 			GetSquareDropped dropSq = new GetSquareDropped(randPoint, "carrier");
 
 			if (GetSquareDropped.validDrop) {
-				randBSLabel.setBounds(dropSq.getX(), dropSq.getY(), 118, 28);
+				randBSLabel.setBounds(dropSq.getX(), dropSq.getY(), 148, 28);
 				playerPanel.add(randBSLabel);
 				playerPanel.repaint();
 				playerPanel.revalidate();

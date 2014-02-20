@@ -13,7 +13,7 @@ public class Gameplay {
 
 	public String Translate(String message) {
 
-		if (message.length() < 3) {
+		if (message.length() < 5) {
 			return message;
 		}
 
@@ -76,7 +76,7 @@ public class Gameplay {
 					Battleship.displayMessage("\nThey Won!");
 					Battleship.gameStarted = false;
 					Battleship.playerTurn = false;
-					return (">>>>>");
+					return (">>"+ String.valueOf(x) + "," + String.valueOf(y));
 				}
 
 				else {
@@ -116,7 +116,7 @@ public class Gameplay {
 					Battleship.displayMessage("\nThey Won!");
 					Battleship.gameStarted = false;
 					Battleship.playerTurn = false;
-					return (">>>>>");
+					return (">>"+ String.valueOf(x) + "," + String.valueOf(y));
 				}
 
 				Battleship.displayMessage("\nThats a HIT!");
@@ -153,7 +153,7 @@ public class Gameplay {
 					Battleship.displayMessage("\nThey Won!");
 					Battleship.gameStarted = false;
 					Battleship.playerTurn = false;
-					return (">>>>>");
+					return (">>"+ String.valueOf(x) + "," + String.valueOf(y));
 				}
 
 				Battleship.displayMessage("\nThats a HIT!");
@@ -188,7 +188,7 @@ public class Gameplay {
 					Battleship.displayMessage("\nThey Won!");
 					Battleship.gameStarted = false;
 					Battleship.playerTurn = false;
-					return (">>>>>");
+					return (">>"+ String.valueOf(x) + "," + String.valueOf(y));
 				}
 
 				Battleship.displayMessage("\nThats a HIT!");
@@ -225,7 +225,7 @@ public class Gameplay {
 					Battleship.displayMessage("\nThey Won!");
 					Battleship.gameStarted = false;
 					Battleship.playerTurn = false;
-					return (">>>>>");
+					return (">>"+ String.valueOf(x) + "," + String.valueOf(y));
 				}
 
 				Battleship.displayMessage("\nThats a HIT!");
@@ -278,7 +278,7 @@ public class Gameplay {
 			Battleship.enemyPanel.revalidate();
 			Battleship.displayMessage("\nYou got HIT!");
 			Battleship.playerTurn = false;
-			return "-Your Turn-";
+			return "\n-Your Turn-";
 		}
 		// miss
 		else if (l == '?' && m == '?') {
@@ -295,7 +295,7 @@ public class Gameplay {
 			Battleship.enemyPanel.revalidate();
 			Battleship.displayMessage("\nThey MISSED!");
 			Battleship.playerTurn = false;
-			return "-Your Turn-";
+			return "\n-Your Turn-";
 		}
 		// sunk
 		else if (l == '^' && m == '^') {
@@ -334,10 +334,10 @@ public class Gameplay {
 			Battleship.enemyPanel.revalidate();
 			Battleship.displayMessage("\nWe sank their ship!!!");
 			Battleship.playerTurn = false;
-			return "-Your Turn-";
+			return "\n-Your Turn-";
 			
-			
-		} else if (l == '>' && m == '>' && n == '>') {
+		//All enemy ships sunk	
+		} else if (l == '>' && m == '>' ) {
 			JLabel hitLabel = new JLabel();
 			JLabel missLabel = new JLabel();
 			hitLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("hitLabel.jpg")));
@@ -349,10 +349,18 @@ public class Gameplay {
 			Battleship.enemyPanel.add(hitLabel, 0);
 			Battleship.enemyPanel.repaint();
 			Battleship.enemyPanel.revalidate();
-			Battleship.gameStarted = false;
-			Battleship.displayMessage("\nYOU WIN!!!!!!");
+			
+			//ensures all enemyRemaining panel ships are gone ( the final sunk ship is never returned.)
+			Battleship.enemyBattleshipLabel.setVisible(false);
+			Battleship.enemyCarrierLabel.setVisible(false);
+			Battleship.enemyCruiserLabel.setVisible(false);
+			Battleship.enemySubmarineLabel.setVisible(false);
+			Battleship.enemyDestroyerLabel.setVisible(false);
+			
+			Battleship.displayMessage("\n !!!!!!!!!!!!! YOU WIN !!!!!!");
 			Battleship.playerTurn = false;
-			return "-Your Turn-";
+			Battleship.gameStarted = false;
+			return "\nGame Over";
 		}
 
 		// }
@@ -362,16 +370,16 @@ public class Gameplay {
 		 * from enemy
 		 */
 		if (l == '#' && m == '#' && n == '#') {
-			System.out.println("Ready Message Received");
+		
 			Battleship.enemyReady = true;
 			if (Battleship.playerReady == true) {
 				Battleship.gameStarted = true;
 			}
 			Battleship.displayMessage("\nOpponent is Ready!");
-			return "The opponent ready message was recieved by other player";
+			return "\nOpponent knows your ready";
 		}
 
-		return "Gameplay message translate did not catch that message";
+		return "\nGameplay message translate did not catch that message";
 
 	}
 
@@ -396,7 +404,7 @@ public class Gameplay {
 			Battleship.enemyGrid.setGridContents(x2, y2, "T");
 			return "@@" + String.valueOf(x2) + "," + String.valueOf(y2);
 		} else {
-			return "Something went wrong in the attack() method of Gameplay.java";
+			return "\nSomething went wrong in the attack() method of Gameplay.java";
 
 		}
 	}
