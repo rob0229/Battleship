@@ -55,11 +55,16 @@ public class Battleship extends JFrame {
 	protected static JLabel submarineImageLabel;
 	protected static JLabel carrierImageLabel;
 	protected static JLabel destroyerImageLabel;
+	protected static JLabel enemyBattleshipLabel;
+	protected static JLabel enemyCarrierLabel;
+	protected static JLabel enemyCruiserLabel;
+	protected static JLabel enemyDestroyerLabel;
+	protected static JLabel enemySubmarineLabel;
 	private JLabel jLabel5;
 	private JLabel hostGameLabel;
 	private JLabel hostIPAdressLabel9;
 	private JPanel informationPanel;
-	private JPanel enemyRemainingPanel;
+	public static JPanel enemyRemainingPanel;
 	private JScrollPane jScrollPane2;
 	private JPanel messagePanel;
 	private static JTextArea messageTextArea;
@@ -118,6 +123,11 @@ public class Battleship extends JFrame {
 		carrierImageLabel = new JLabel();
 		destroyerImageLabel = new JLabel();
 		battleshipImageLabel = new JLabel();
+		enemyBattleshipLabel = new JLabel();
+		enemyCarrierLabel = new JLabel();
+		enemyCruiserLabel = new JLabel();
+		enemySubmarineLabel = new JLabel();
+		enemyDestroyerLabel = new JLabel();
 		enemyRemainingPanel = new JPanel();
 		playerGrid = new PlayerGrid();
 		enemyGrid = new EnemyGrid();
@@ -293,39 +303,46 @@ public class Battleship extends JFrame {
 		javax.swing.GroupLayout controlPanelLayout = new javax.swing.GroupLayout(controlPanel);
 		controlPanel.setLayout(controlPanelLayout);
 		controlPanelLayout.setHorizontalGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-				controlPanelLayout.createSequentialGroup().addGroup(
-						controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(informationPanel, javax.swing.GroupLayout.DEFAULT_SIZE,
-								javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addGroup(
-								controlPanelLayout.createSequentialGroup().addGroup(
-										controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-												controlPanelLayout.createSequentialGroup().addGroup(
-														controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false).addComponent(hostIPAdressLabel9,
-																javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addComponent(hostGameLabel,
-																javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)).addGap(18, 18, 18).addGroup(
-														controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(ipAddressField,
-																javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE).addGroup(
-																javax.swing.GroupLayout.Alignment.TRAILING,
-																controlPanelLayout.createSequentialGroup().addComponent(hostButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85,
-																		javax.swing.GroupLayout.PREFERRED_SIZE).addGap(15, 15, 15))).addGap(18, 18, 18).addGroup(
-														controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING).addComponent(disconnectButton).addComponent(connectButton,
-																javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))).addGroup(
-												controlPanelLayout.createSequentialGroup().addGap(142, 142, 142).addComponent(readyButton)).addGroup(
-												controlPanelLayout.createSequentialGroup().addGap(92, 92, 92).addComponent(jLabel5))).addGap(0, 35, Short.MAX_VALUE))).addContainerGap()));
-		controlPanelLayout.setVerticalGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+				controlPanelLayout.createSequentialGroup()
+				.addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addComponent(informationPanel, javax.swing.GroupLayout.DEFAULT_SIZE,javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+				.addGroup(controlPanelLayout.createSequentialGroup()
+				.addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(controlPanelLayout.createSequentialGroup()
+				.addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+    				.addComponent(hostIPAdressLabel9,javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+    				.addComponent(hostGameLabel,javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+    				.addGap(18, 18, 18).addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+    				.addComponent(ipAddressField,javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING,controlPanelLayout.createSequentialGroup()
+    				.addComponent(hostButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85,javax.swing.GroupLayout.PREFERRED_SIZE)
+    				.addGap(15, 15, 15))).addGap(18, 18, 18).addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+    				.addComponent(disconnectButton).addComponent(connectButton,javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+    				.addGroup(controlPanelLayout.createSequentialGroup().addGap(142, 142, 142)
+    				.addComponent(readyButton))	
+				.addGroup(controlPanelLayout.createSequentialGroup()
+					.addGap(92, 92, 92).addComponent(jLabel5))).addGap(0, 35, Short.MAX_VALUE)))
+					.addContainerGap()));
+		
+		controlPanelLayout.setVerticalGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(
 				javax.swing.GroupLayout.Alignment.TRAILING,
-				controlPanelLayout.createSequentialGroup().addContainerGap().addGroup(
-						controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING).addComponent(hostGameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23,
-								javax.swing.GroupLayout.PREFERRED_SIZE).addGroup(
-								controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(disconnectButton).addComponent(hostButton))).addGap(21, 21, 21)
-						.addGroup(
-								controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-										controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false).addComponent(ipAddressField, javax.swing.GroupLayout.DEFAULT_SIZE,
-												javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addComponent(hostIPAdressLabel9, javax.swing.GroupLayout.DEFAULT_SIZE,
-												javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)).addComponent(connectButton))
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(informationPanel, javax.swing.GroupLayout.PREFERRED_SIZE,
-								javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED,
-								javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(readyButton)));
+				controlPanelLayout.createSequentialGroup()
+				.addContainerGap().addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+				.addComponent(hostGameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23,javax.swing.GroupLayout.PREFERRED_SIZE)
+				.addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+				.addComponent(disconnectButton).addComponent(hostButton))).addGap(21, 21, 21)
+				.addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+				.addComponent(ipAddressField, javax.swing.GroupLayout.DEFAULT_SIZE,javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+				.addComponent(hostIPAdressLabel9, javax.swing.GroupLayout.DEFAULT_SIZE,javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+				.addComponent(connectButton))
+				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+				.addComponent(informationPanel, javax.swing.GroupLayout.PREFERRED_SIZE,javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED,javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+				.addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+				.addComponent(readyButton)));
 
 		enemyPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Enemy Board"));
 		enemyPanel.setLayout(null);
@@ -339,43 +356,62 @@ public class Battleship extends JFrame {
 		shipInventory.setBorder(javax.swing.BorderFactory.createTitledBorder("Ship Inventory"));
 
 		cruiserImageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("Cruiser.png"))); // NOI18N
-		// cruiserImageLabel.setText("Crusier");
 		cruiserImageLabel.setPreferredSize(new java.awt.Dimension(120, 60));
 
 		submarineImageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("Submarine.png"))); // NOI18N
-		// submarineImageLabel.setText("Submarine");
 		submarineImageLabel.setPreferredSize(new java.awt.Dimension(90, 60));
 
 		carrierImageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("Carrier.png"))); // NOI18N
-		// carrierImageLabel.setText("Carrier");
 		carrierImageLabel.setPreferredSize(new java.awt.Dimension(150, 60));
 
 		destroyerImageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("Destroyer.png"))); // NOI18N
-		// destroyerImageLabel.setText("Destroyer");
 		destroyerImageLabel.setPreferredSize(new java.awt.Dimension(60, 60));
 
 		battleshipImageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("Battleship.png"))); // NOI18N
-		// battleshipImageLabel.setText("Battleship");
 		battleshipImageLabel.setPreferredSize(new java.awt.Dimension(120, 60));
 
+		enemyBattleshipLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("Battleship.png"))); // NOI18N
+		enemyBattleshipLabel.setPreferredSize(new java.awt.Dimension(120, 60));
+		
+		enemyCarrierLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("Carrier.png"))); // NOI18N
+		enemyCarrierLabel.setPreferredSize(new java.awt.Dimension(150, 60));
+		
+		enemyCruiserLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("Cruiser.png"))); // NOI18N
+		enemyCruiserLabel.setPreferredSize(new java.awt.Dimension(120, 60));
+		
+		enemySubmarineLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("Submarine.png"))); // NOI18N
+		enemySubmarineLabel.setPreferredSize(new java.awt.Dimension(90, 60));
+
+		enemyDestroyerLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("Destroyer.png"))); // NOI18N
+		enemyDestroyerLabel.setPreferredSize(new java.awt.Dimension(60, 60));
+		
+		
+		
 		javax.swing.GroupLayout shipInventoryLayout = new javax.swing.GroupLayout(shipInventory);
 		shipInventory.setLayout(shipInventoryLayout);
+		
 		shipInventoryLayout.setHorizontalGroup(shipInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-				shipInventoryLayout.createSequentialGroup().addContainerGap().addGroup(
-						shipInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(cruiserImageLabel, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
-								.addComponent(submarineImageLabel, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE).addComponent(carrierImageLabel, GroupLayout.PREFERRED_SIZE, 148,
-										GroupLayout.PREFERRED_SIZE).addComponent(destroyerImageLabel, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE).addComponent(battleshipImageLabel,
-										GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
-
-								.addComponent(randomButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)).addContainerGap(18, Short.MAX_VALUE)));
+				shipInventoryLayout.createSequentialGroup().addContainerGap()
+				.addGroup(shipInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addComponent(cruiserImageLabel, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
+				.addComponent(submarineImageLabel, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)
+				.addComponent(carrierImageLabel, GroupLayout.PREFERRED_SIZE, 148,GroupLayout.PREFERRED_SIZE)
+				.addComponent(destroyerImageLabel, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
+				.addComponent(battleshipImageLabel,GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
+				.addComponent(randomButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+				.addContainerGap(18, Short.MAX_VALUE)));
+		
 		shipInventoryLayout.setVerticalGroup(shipInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
 				shipInventoryLayout.createSequentialGroup().addGap(29, 29, 29).addComponent(battleshipImageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(destroyerImageLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(submarineImageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28,
-								javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(LayoutStyle.ComponentPlacement.RELATED).addComponent(carrierImageLabel, javax.swing.GroupLayout.PREFERRED_SIZE,
-								28, javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(cruiserImageLabel,
-								javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(
-								randomButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE).addGap(124, 124, 124)));
+					.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+					.addComponent(destroyerImageLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+					.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+					.addComponent(submarineImageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28,javax.swing.GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+					.addComponent(carrierImageLabel, javax.swing.GroupLayout.PREFERRED_SIZE,28, javax.swing.GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+					.addComponent(cruiserImageLabel,javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(randomButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE).addGap(124, 124, 124)));
 
 		// Adds drag listener to ship inventory panel
 		MyDragGestureListener dlistener = new MyDragGestureListener();
@@ -390,49 +426,63 @@ public class Battleship extends JFrame {
 		// destroyed
 		enemyRemainingPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Enemy Ships Remaining"));
 
-		javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(enemyRemainingPanel);
-		enemyRemainingPanel.setLayout(jPanel2Layout);
-		jPanel2Layout.setHorizontalGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 128, Short.MAX_VALUE));
-		jPanel2Layout.setVerticalGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 277, Short.MAX_VALUE));
+		javax.swing.GroupLayout enemyLeftPanelLayout = new javax.swing.GroupLayout(enemyRemainingPanel);
+		enemyRemainingPanel.setLayout(enemyLeftPanelLayout);
+		
+		enemyLeftPanelLayout.setHorizontalGroup(enemyLeftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(enemyLeftPanelLayout.createSequentialGroup().addContainerGap()
+				.addGroup(enemyLeftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addComponent(enemyCruiserLabel, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
+				.addComponent(enemySubmarineLabel, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)
+				.addComponent(enemyCarrierLabel, GroupLayout.PREFERRED_SIZE, 148,GroupLayout.PREFERRED_SIZE)
+				.addComponent(enemyDestroyerLabel, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
+				.addComponent(enemyBattleshipLabel,	GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
+				.addComponent(randomButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+				.addContainerGap(18, Short.MAX_VALUE)));
+		
+		enemyLeftPanelLayout.setVerticalGroup(enemyLeftPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addGroup(enemyLeftPanelLayout.createSequentialGroup()
+				.addGap(29, 29, 29).addComponent(enemyBattleshipLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+				.addComponent(enemyDestroyerLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+				.addComponent(enemySubmarineLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28,javax.swing.GroupLayout.PREFERRED_SIZE)
+				.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+				.addComponent(enemyCarrierLabel, javax.swing.GroupLayout.PREFERRED_SIZE,28, javax.swing.GroupLayout.PREFERRED_SIZE)
+				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+				.addComponent(enemyCruiserLabel,javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+				.addComponent(randomButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+				.addGap(124, 124, 124)));
+
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);
 		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
 				layout.createSequentialGroup().addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-
-				.addGroup(
-						layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false).addComponent(controlPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
-								.addComponent(messagePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE))
-
-				.addGroup(
-						layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false).addComponent(enemyPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE).addComponent(
-								playerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE))
-
-				.addGroup(
-						layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(shipInventory, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE).addComponent(
-								enemyRemainingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-
-		));
+				.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+				.addComponent(controlPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+				.addComponent(messagePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE))
+				.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+				.addComponent(enemyPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
+				.addComponent(playerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE))
+				.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addComponent(shipInventory, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
+				.addComponent(enemyRemainingPanel,GroupLayout.PREFERRED_SIZE, 200,GroupLayout.PREFERRED_SIZE))));
+		
 		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
 				layout.createSequentialGroup()
-
-				.addGroup(
-						layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-
-						.addGroup(
-								javax.swing.GroupLayout.Alignment.LEADING,
-								layout.createSequentialGroup().addComponent(controlPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(
-										messagePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE))
-
-						.addGroup(
-								javax.swing.GroupLayout.Alignment.LEADING,
-								layout.createSequentialGroup().addGroup(
-										layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false).addComponent(enemyRemainingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 350,
-												Short.MAX_VALUE).addComponent(enemyPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE))
-
-								.addGroup(
-										layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false).addComponent(shipInventory, javax.swing.GroupLayout.DEFAULT_SIZE, 350,
-												Short.MAX_VALUE).addComponent(playerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE))))));
+				.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+				.addGroup(javax.swing.GroupLayout.Alignment.LEADING,layout.createSequentialGroup()
+				.addComponent(controlPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+				.addComponent(messagePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE))
+				.addGroup(javax.swing.GroupLayout.Alignment.LEADING,layout.createSequentialGroup()
+				.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+				.addComponent(enemyRemainingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 350,Short.MAX_VALUE)
+				.addComponent(enemyPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE))
+				.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+				.addComponent(shipInventory, javax.swing.GroupLayout.DEFAULT_SIZE, 350,	Short.MAX_VALUE)
+				.addComponent(playerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE))))));
 
 		pack();
 	}

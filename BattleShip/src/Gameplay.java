@@ -26,7 +26,7 @@ public class Gameplay {
 		m = message.charAt(1);
 		n = message.charAt(2);
 		// ship that is sunk, 0-4
-		s = message.charAt(4);
+		s = message.charAt(3);
 
 		if (message.length() == 5) {
 			char a = message.charAt(2);
@@ -303,8 +303,30 @@ public class Gameplay {
 			JLabel missLabel = new JLabel();
 			hitLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("hitLabel.jpg")));
 			missLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("missLabel.jpg")));
+			
 			// add code here to deduct the right ship from the enemy
 			// remaining panel
+			System.out.println("S (the ship sunk ) = "+ s);
+			if(s == '0'){
+				Battleship.enemyBattleshipLabel.setVisible(false);
+			}
+			else if(s == '1'){
+				Battleship.enemyCarrierLabel.setVisible(false);
+			}
+			else if(s == '2'){
+				Battleship.enemyCruiserLabel.setVisible(false);
+			}
+			else if(s == '3'){
+				System.out.println("******************************Sank Sub");
+				Battleship.enemySubmarineLabel.setVisible(false);
+			}
+			else if(s == '4'){
+				System.out.println("******************************Sank destroyer");
+				Battleship.enemyDestroyerLabel.setVisible(false);
+			}
+			Battleship.enemyRemainingPanel.repaint();
+			Battleship.enemyRemainingPanel.revalidate();
+			
 			Battleship.enemyGrid.setGridContents(x, y, "H");
 			hitLabel.setBounds(x2, y2, 28, 28);
 			Battleship.enemyPanel.add(hitLabel, 0);
@@ -313,6 +335,8 @@ public class Gameplay {
 			Battleship.displayMessage("\nWe sank their ship!!!");
 			Battleship.playerTurn = false;
 			return "-Your Turn-";
+			
+			
 		} else if (l == '>' && m == '>' && n == '>') {
 			JLabel hitLabel = new JLabel();
 			JLabel missLabel = new JLabel();
