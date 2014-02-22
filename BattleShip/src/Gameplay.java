@@ -115,7 +115,7 @@ public class Gameplay {
 				// checks for sunk ship and endGame condition
 				if (carrierHP == 0 && remainingShips != 0) {
 					Battleship.displayMessage("\nThey sank our Carrier!");
-					sound.run(1);
+					sound.run(6);
 					Battleship.playerTurn = true;
 					return ("^^" + String.valueOf(x) + "1" + String.valueOf(y));
 				}
@@ -164,7 +164,7 @@ public class Gameplay {
 				}
 				if (remainingShips == 0) {
 					Battleship.displayMessage("\nThey sank our Cruiser!");
-					sound.run(1);
+					sound.run(6);
 					Battleship.displayMessage("\n !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 					Battleship.displayMessage("\n !!!!!!!!!!!!!! You Lost !!!!!!!!!!!!!");
 					Battleship.displayMessage("\n !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
@@ -199,7 +199,7 @@ public class Gameplay {
 				// checks for sunk ship and endGame condition
 				if (subHP == 0 && remainingShips != 0) {
 					Battleship.displayMessage("\nThey sank our Submarine!");
-					sound.run(1);
+					sound.run(6);
 					Battleship.playerTurn = true;
 					return ("^^" + String.valueOf(x) + "3" + String.valueOf(y));
 				}
@@ -242,6 +242,7 @@ public class Gameplay {
 				// checks for sunk ship and endGame condition
 				if (destroyerHP == 0 && remainingShips != 0) {
 					Battleship.displayMessage("\nThey sank our Destroyer!");
+					sound.run(6);
 					Battleship.playerTurn = true;
 					return ("^^" + String.valueOf(x) + "4" + String.valueOf(y));
 				}
@@ -365,6 +366,7 @@ public class Gameplay {
 			Battleship.enemyPanel.repaint();
 			Battleship.enemyPanel.revalidate();
 			Battleship.displayMessage("\nWe sank their ship!!!");
+			sound.run(7);
 			Battleship.playerTurn = false;
 			return "\n-Your Turn-";
 			

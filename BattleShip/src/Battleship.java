@@ -101,6 +101,7 @@ public class Battleship extends JFrame {
 	 */
 	public Battleship() {
 		initComponents();
+		//sound.laser();
 	}
 
 	@SuppressWarnings("unchecked")
