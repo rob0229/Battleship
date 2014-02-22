@@ -18,6 +18,9 @@ import java.net.Socket;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.SourceDataLine;
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -30,6 +33,8 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
+
+
 
 /**
  * 
@@ -133,6 +138,7 @@ public class Battleship extends JFrame {
 		enemyGrid = new EnemyGrid();
 		enemyPanel = new JPanel();
 
+
 		try {
 			image = ImageIO.read(this.getClass().getResource("oceanGrid.png"));
 		} catch (IOException e) {
@@ -180,12 +186,10 @@ public class Battleship extends JFrame {
 						if (!(message.equals("*****"))) {
 							System.out.println("2");
 							if (isServer && playerTurn) {
-								System.out.println("3");
 								playerTurn = false;
 								sendData(message);
 
 							} else if (isServer == false && playerTurn) {
-								System.out.println("4");
 								playerTurn = false;
 								sendDataClient(message);
 
@@ -941,6 +945,13 @@ public class Battleship extends JFrame {
 	} // end method sendData
 
 	/* end of server Methods */
+	
+	
+	
+	
+	
+	
+	
 
 	// Main Method
 	public static void main(String args[]) {
