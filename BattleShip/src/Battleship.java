@@ -274,11 +274,11 @@ public class Battleship extends JFrame {
 		connectButton.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				// if user enters ip address and clicks connect, the value in
+				// if user enters ipaddress and clicks connect, the value in
 				// ipAddress
 				// will be updated before a call to the connect function
-				// ipAddressFieldActionPerformed(evt);
 				playerTurn = false;
+				ipAddressFieldActionPerformed(evt);
 				connectButtonActionPerformed(evt);
 			}
 		});
@@ -489,10 +489,11 @@ public class Battleship extends JFrame {
 
 	private void userChatEnterActionPerformed(java.awt.event.ActionEvent evt) {
 		if (isServer == true) {
-			
+			displayMessage("\nServer says >>> " + userChatEnter.getText());
 			sendData(evt.getActionCommand());
 			userChatEnter.setText("");
 		} else {
+			displayMessage("\nClient says >>> " + userChatEnter.getText());
 			sendDataClient(evt.getActionCommand());
 			userChatEnter.setText("");
 		}
@@ -648,6 +649,7 @@ public class Battleship extends JFrame {
 		connectButton.setEnabled(false);
 		hostButton.setEnabled(false);
 		randomButton.setEnabled(true);
+		
 		{
 			Runnable serverRunnable = new Runnable() {
 				@Override
@@ -751,11 +753,11 @@ public class Battleship extends JFrame {
 					}
 					// message is length 5 but not a GEM
 					else
-						displayMessage("\n Client says>>> " + message);
+						displayMessage("\nClient says>>> " + message);
 				}
 				// message is not length 5
 				else
-					displayMessage("\n Client says>>> "+message);
+					displayMessage("\nClient says>>> "+message);
 
 			} // end try
 			catch (ClassNotFoundException classNotFoundException) {
@@ -896,11 +898,11 @@ public class Battleship extends JFrame {
 					}
 					// message is length 5 but not a GEM
 					else
-						displayMessage("\n Server says >>> " + message);
+						displayMessage("\nServer says >>> " + message);
 				}
 				// message != 5
 				else
-					displayMessage("\n Server says >>> " + message);
+					displayMessage("\nServer says >>> " + message);
 
 			} // end try
 			catch (ClassNotFoundException classNotFoundException) {
