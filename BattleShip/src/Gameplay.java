@@ -410,7 +410,7 @@ public class Gameplay {
 				Battleship.gameStarted = true;
 			}
 			Battleship.displayMessage("\nOpponent is Ready!");
-			sound.run(2);
+			
 			return "\nOpponent knows your ready";
 		}
 

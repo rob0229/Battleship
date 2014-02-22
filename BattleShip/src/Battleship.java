@@ -94,6 +94,7 @@ public class Battleship extends JFrame {
 	private String chatServer; // host server for this application
 	private Socket client; // socket to communicate with server
 	Image image;
+	final Sounds sound = new Sounds();
 
 	/**
 	 * Creates new form Battleship
@@ -137,6 +138,7 @@ public class Battleship extends JFrame {
 		playerGrid = new PlayerGrid();
 		enemyGrid = new EnemyGrid();
 		enemyPanel = new JPanel();
+		
 
 
 		try {
@@ -515,6 +517,7 @@ public class Battleship extends JFrame {
 		// check that all ships are placed
 		if (GetSquareDropped.allShipsPlaced()) {
 			playerReady = true;
+			sound.run(2);
 			readyButton.setEnabled(false);
 			if (enemyReady == true) {
 				gameStarted = true;
