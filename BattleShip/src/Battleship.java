@@ -489,7 +489,7 @@ public class Battleship extends JFrame {
 
 	private void userChatEnterActionPerformed(java.awt.event.ActionEvent evt) {
 		if (isServer == true) {
-			System.out.println("UserChat enter toaString() = " + evt.toString());
+			
 			sendData(evt.getActionCommand());
 			userChatEnter.setText("");
 		} else {
@@ -501,8 +501,8 @@ public class Battleship extends JFrame {
 
 	private void ipAddressFieldActionPerformed(java.awt.event.ActionEvent evt) {
 		
-		ipAddressField.setText("");
 		ipAddress = ipAddressField.getText();
+		System.out.println("IP Address is "+ ipAddress);
 	}
 
 	private void readyButtonActionPerformed(ActionEvent evt) {
@@ -652,6 +652,7 @@ public class Battleship extends JFrame {
 			Runnable serverRunnable = new Runnable() {
 				@Override
 				public void run() {
+				
 					runClient(ipAddress);// TODO Auto-generated method stub
 				}
 			};
@@ -822,6 +823,9 @@ public class Battleship extends JFrame {
 
 	// set up and run client
 	private void runClient(String ipAddress) {
+	
+		chatServer = ipAddress;
+		
 		try // connect to server, get streams, process connection
 		{
 			connectToServer(); // create a Socket to make connection
