@@ -3,7 +3,7 @@ import java.awt.Point;
 import javax.swing.JLabel;
 
 public class Gameplay {
-	final Sounds laser = new Sounds();
+	final Sounds sound = new Sounds();
 	
 	public static int remainingShips = 5;
 	int battleshipHP = 4;
@@ -70,6 +70,7 @@ public class Gameplay {
 				// checks for sunk ship and endGame condition
 				if (battleshipHP == 0 && remainingShips != 0) {
 					Battleship.displayMessage("\nThey sank our Battleship!");
+					sound.run(1);
 					Battleship.playerTurn = true;
 					return ("^^" + String.valueOf(x) + "0" + String.valueOf(y));
 				}
@@ -78,6 +79,7 @@ public class Gameplay {
 					Battleship.displayMessage("\n !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 					Battleship.displayMessage("\n !!!!!!!!!!!!!! You Lost !!!!!!!!!!!!!");
 					Battleship.displayMessage("\n !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+					sound.run(4);
 					Battleship.gameStarted = false;
 					Battleship.playerTurn = false;
 					return (">>"+ String.valueOf(x) + "," + String.valueOf(y));
@@ -85,7 +87,7 @@ public class Gameplay {
 
 				else {
 					Battleship.displayMessage("\nThats a HIT!");
-					laser.run(1);
+					sound.run(1);
 					Battleship.playerTurn = true;
 					return ("!!" + String.valueOf(x) + "," + String.valueOf(y));
 				}
@@ -113,21 +115,24 @@ public class Gameplay {
 				// checks for sunk ship and endGame condition
 				if (carrierHP == 0 && remainingShips != 0) {
 					Battleship.displayMessage("\nThey sank our Carrier!");
+					sound.run(1);
 					Battleship.playerTurn = true;
 					return ("^^" + String.valueOf(x) + "1" + String.valueOf(y));
 				}
 				if (remainingShips == 0) {
 					Battleship.displayMessage("\nThey sank our Carrier!");
+					sound.run(1);
 					Battleship.displayMessage("\n !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 					Battleship.displayMessage("\n !!!!!!!!!!!!!! You Lost !!!!!!!!!!!!!");
 					Battleship.displayMessage("\n !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+					sound.run(4);
 					Battleship.gameStarted = false;
 					Battleship.playerTurn = false;
 					return (">>"+ String.valueOf(x) + "," + String.valueOf(y));
 				}
 
 				Battleship.displayMessage("\nThats a HIT!");
-				laser.run(1);
+				sound.run(1);
 				Battleship.playerTurn = true;
 				return ("!!" + String.valueOf(x) + "," + String.valueOf(y));
 
@@ -153,21 +158,24 @@ public class Gameplay {
 				// checks for sunk ship and endGame condition
 				if (cruiserHP == 0 && remainingShips != 0) {
 					Battleship.displayMessage("\nThey sank our Cruiser!");
+					sound.run(1);
 					Battleship.playerTurn = true;
 					return ("^^" + String.valueOf(x) + "2" + String.valueOf(y));
 				}
 				if (remainingShips == 0) {
 					Battleship.displayMessage("\nThey sank our Cruiser!");
+					sound.run(1);
 					Battleship.displayMessage("\n !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 					Battleship.displayMessage("\n !!!!!!!!!!!!!! You Lost !!!!!!!!!!!!!");
 					Battleship.displayMessage("\n !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+					sound.run(4);
 					Battleship.gameStarted = false;
 					Battleship.playerTurn = false;
 					return (">>"+ String.valueOf(x) + "," + String.valueOf(y));
 				}
 
 				Battleship.displayMessage("\nThats a HIT!");
-				laser.run(1);
+				sound.run(1);
 				Battleship.playerTurn = true;
 				return ("!!" + String.valueOf(x) + "," + String.valueOf(y));
 			}
@@ -191,21 +199,24 @@ public class Gameplay {
 				// checks for sunk ship and endGame condition
 				if (subHP == 0 && remainingShips != 0) {
 					Battleship.displayMessage("\nThey sank our Submarine!");
+					sound.run(1);
 					Battleship.playerTurn = true;
 					return ("^^" + String.valueOf(x) + "3" + String.valueOf(y));
 				}
 				if (remainingShips == 0) {
 					Battleship.displayMessage("\nThey sank our Submarine!");
+					sound.run(1);
 					Battleship.displayMessage("\n !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 					Battleship.displayMessage("\n !!!!!!!!!!!!!! You Lost !!!!!!!!!!!!!");
 					Battleship.displayMessage("\n !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+					sound.run(4);
 					Battleship.gameStarted = false;
 					Battleship.playerTurn = false;
 					return (">>"+ String.valueOf(x) + "," + String.valueOf(y));
 				}
 
 				Battleship.displayMessage("\nThats a HIT!");
-				laser.run(1);
+				sound.run(1);
 				Battleship.playerTurn = true;
 				return ("!!" + String.valueOf(x) + "," + String.valueOf(y));
 
@@ -239,13 +250,14 @@ public class Gameplay {
 					Battleship.displayMessage("\n !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 					Battleship.displayMessage("\n !!!!!!!!!!!!!! You Lost !!!!!!!!!!!!!");
 					Battleship.displayMessage("\n !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+					sound.run(4);
 					Battleship.gameStarted = false;
 					Battleship.playerTurn = false;
 					return (">>"+ String.valueOf(x) + "," + String.valueOf(y));
 				}
 
 				Battleship.displayMessage("\nThats a HIT!");
-				laser.run(1);
+				sound.run(1);
 				Battleship.playerTurn = true;
 				return ("!!" + String.valueOf(x) + "," + String.valueOf(y));
 
@@ -264,7 +276,7 @@ public class Gameplay {
 				Battleship.playerPanel.revalidate();
 				// returns message to enemy that they missed
 				Battleship.displayMessage("\nThey Missed Us!");
-				laser.run(0);
+				sound.run(0);
 				Battleship.playerTurn = true;
 				System.out.println("SENDING A RETURN MISS MESSAGE GAMEPLAY>JAVA LINE 244");
 				return ("??" + String.valueOf(x) + "," + String.valueOf(y));
@@ -295,7 +307,7 @@ public class Gameplay {
 			Battleship.enemyPanel.repaint();
 			Battleship.enemyPanel.revalidate();
 			Battleship.displayMessage("\nYou got HIT!");
-			laser.run(1);
+			sound.run(1);
 			Battleship.playerTurn = false;
 			return "\n-Your Turn-";
 		}
@@ -313,7 +325,7 @@ public class Gameplay {
 			Battleship.enemyPanel.repaint();
 			Battleship.enemyPanel.revalidate();
 			Battleship.displayMessage("\nThey MISSED!");
-			laser.run(0);
+			sound.run(0);
 			Battleship.playerTurn = false;
 			return "\n-Your Turn-";
 		}
@@ -379,6 +391,7 @@ public class Gameplay {
 			Battleship.displayMessage("\n !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 			Battleship.displayMessage("\n !!!!!!!!!!!!!! YOU WIN !!!!!!!!!!!!!!");
 			Battleship.displayMessage("\n !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			sound.run(3);
 			Battleship.playerTurn = false;
 			Battleship.gameStarted = false;
 			return "\nGame Over";
@@ -397,6 +410,7 @@ public class Gameplay {
 				Battleship.gameStarted = true;
 			}
 			Battleship.displayMessage("\nOpponent is Ready!");
+			sound.run(2);
 			return "\nOpponent knows your ready";
 		}
 

@@ -14,13 +14,19 @@ public class Sounds extends Thread {
 			  public void run(int i) {
 				
 				switch(i){
-				case 1:
+				case 1: // hit()
 					url = this.getClass().getClassLoader().getResource("DepthCharge.wav");
 					break;
-				case 2:
-					// shoot()
+				case 2: // ready()
+					url = this.getClass().getClassLoader().getResource("Quarters.wav");
 					break;
-				default:
+				case 3: // win()
+					url = this.getClass().getClassLoader().getResource("Aweigh.wav");
+					break;
+				case 4: // lose()
+					url = this.getClass().getClassLoader().getResource("GameOver.wav");
+					break;
+				default: // miss
 					url = this.getClass().getClassLoader().getResource("Splash.wav");
 					break;
 				}
