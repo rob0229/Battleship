@@ -6,30 +6,41 @@ import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetAdapter;
 import java.awt.dnd.DropTargetDropEvent;
+import java.awt.event.InputEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
+
+import javax.swing.AbstractAction;
 import javax.swing.Icon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-class MyDropTargetListener extends DropTargetAdapter {
+class MyDropTargetListener extends DropTargetAdapter{
 
 	private DropTarget dropTarget;
 	private JPanel p;
 	private static Point dropPoint;
 	String draggedShip;
 	int shipsPlaced = 0;
+		
+   
+	
 	public MyDropTargetListener(JPanel dropPanel) {
-
+		
 		p = dropPanel;
 		dropTarget = new DropTarget(dropPanel, DnDConstants.ACTION_COPY, this,
 				true, null);
+		
 
 	}
+	
 
 	@Override
 	public void drop(DropTargetDropEvent event) {
-
-		try {
+	
+	try {
 			DropTarget shipDropped = (DropTarget) event.getSource();
 			Component ca = (Component) shipDropped.getComponent();
 			
@@ -79,4 +90,5 @@ class MyDropTargetListener extends DropTargetAdapter {
 		}
 
 	}
+
 }

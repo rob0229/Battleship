@@ -5,6 +5,10 @@ import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.dnd.DragGestureEvent;
 import java.awt.dnd.DragGestureListener;
+
+
+import java.awt.dnd.DragGestureRecognizer;
+
 import java.io.IOException;
 
 import javax.swing.Icon;
@@ -14,7 +18,8 @@ class MyDragGestureListener implements DragGestureListener {
 
     @Override
     public void dragGestureRecognized(DragGestureEvent event) {
-        JLabel shipGrabbed = (JLabel) event.getComponent();
+    	
+    	JLabel shipGrabbed = (JLabel) event.getComponent();
      
         final Icon ico = shipGrabbed.getIcon();
 			
@@ -39,7 +44,6 @@ class MyDragGestureListener implements DragGestureListener {
             }
         };
         event.startDrag(null, transferable);
-       
-    	//shipGrabbed.setVisible(false);		
+       		
     }
 }
