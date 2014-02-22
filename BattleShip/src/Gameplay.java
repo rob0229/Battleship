@@ -70,7 +70,7 @@ public class Gameplay {
 				// checks for sunk ship and endGame condition
 				if (battleshipHP == 0 && remainingShips != 0) {
 					Battleship.displayMessage("\nThey sank our Battleship!");
-					sound.run(1);
+					sound.run(5);
 					Battleship.playerTurn = true;
 					return ("^^" + String.valueOf(x) + "0" + String.valueOf(y));
 				}

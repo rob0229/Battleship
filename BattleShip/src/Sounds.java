@@ -26,6 +26,9 @@ public class Sounds extends Thread {
 				case 4: // lose()
 					url = this.getClass().getClassLoader().getResource("GameOver.wav");
 					break;
+				case 5: // battleship
+					url = this.getClass().getClassLoader().getResource("SunkB.wav");
+					break;
 				default: // miss
 					url = this.getClass().getClassLoader().getResource("Splash.wav");
 					break;
