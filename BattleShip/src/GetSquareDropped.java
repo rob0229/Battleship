@@ -4,7 +4,7 @@ import java.awt.Point;
 public class GetSquareDropped {
 	int x, y, x2, y2, minX, maxX, minY, maxY;
 	String ship;
-	int orient = 0;
+	static int orient = 0;
 	static Boolean validDrop = true;
 	static Boolean bsPlaced= false;
 	static Boolean carrierPlaced = false;
@@ -30,19 +30,34 @@ public class GetSquareDropped {
 		
 		
 		
-		//Keeps ship placement inside boarders of panel
-		if (x>getShipInfo.getMaxX()){	
+		//Keeps ship placement inside boarders of panel for horizontal ships
+		if (x>getShipInfo.getMaxX() && orient == 0 ){	
 			x=maxX;	
 		}
-		if (x<minX){	
+		if (x<minX && orient == 0  ){	
 			x=minX;	
 		}
-		if(y>maxY){
+		if(y>maxY && orient == 0 ){
 			y=maxY;
 		}
-		if(y<minY){
+		if(y<minY && orient == 0 ){
 			y=minY;
 		}
+		
+		if (x>getShipInfo.getMaxX() && orient == 1 ){	
+			x=maxX;	
+		}
+		if (x<minX && orient == 1){	
+			x=minX;	
+		}
+		if(y>maxY && orient == 1){
+			y=maxY;
+		}
+		if(y<minY && orient == 1){
+			y=minY;
+		}
+		
+		
 		//converts drop point to grid square
 		x2 = (x-21)/30;
 		y2 = (y-32)/30;
@@ -244,20 +259,10 @@ public class GetSquareDropped {
 		//write code to rotate ship image here with right click
 		
 		
-		
-		//write code to ensure ship is not overlapped here
-		
-		
-		
-		
 		//write code to reposition ship on player board here
 		
-		//write code to enter ship into gridArray here
 		
-		
-		//test code **************************************************************************
-	
-		point.setLocation(x, y);
+		//point.setLocation(x, y);
 
 		for(int i = 0; i < 10; i++)
 		{

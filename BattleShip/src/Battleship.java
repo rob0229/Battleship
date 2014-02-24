@@ -38,7 +38,7 @@ import javax.swing.border.TitledBorder;
 
 /**
  * 
- * @author Rob and Charley
+ * @author Rob and Charlie
  */
 public class Battleship extends JFrame {
 	private Gameplay game = new Gameplay();
@@ -101,7 +101,7 @@ public class Battleship extends JFrame {
 	 */
 	public Battleship() {
 		initComponents();
-		//sound.laser();
+		//sound.easteregg();
 	}
 
 	@SuppressWarnings("unchecked")
