@@ -60,6 +60,11 @@ public class Battleship extends JFrame {
 	protected static JLabel submarineImageLabel;
 	protected static JLabel carrierImageLabel;
 	protected static JLabel destroyerImageLabel;
+	protected static JLabel battleshipImageLabelVERT;
+	protected static JLabel cruiserImageLabelVERT;
+	protected static JLabel submarineImageLabelVERT;
+	protected static JLabel carrierImageLabelVERT;
+	protected static JLabel destroyerImageLabelVERT;
 	protected static JLabel enemyBattleshipLabel;
 	protected static JLabel enemyCarrierLabel;
 	protected static JLabel enemyCruiserLabel;
@@ -130,6 +135,11 @@ public class Battleship extends JFrame {
 		carrierImageLabel = new JLabel();
 		destroyerImageLabel = new JLabel();
 		battleshipImageLabel = new JLabel();
+		cruiserImageLabelVERT = new JLabel();
+		submarineImageLabelVERT = new JLabel();
+		carrierImageLabelVERT= new JLabel();
+		destroyerImageLabelVERT = new JLabel();
+		battleshipImageLabelVERT = new JLabel();
 		enemyBattleshipLabel = new JLabel();
 		enemyCarrierLabel = new JLabel();
 		enemyCruiserLabel = new JLabel();
@@ -338,7 +348,8 @@ public class Battleship extends JFrame {
 				.addContainerGap().addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
 				.addComponent(hostGameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23,javax.swing.GroupLayout.PREFERRED_SIZE)
 				.addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-				.addComponent(disconnectButton).addComponent(hostButton))).addGap(21, 21, 21)
+				.addComponent(disconnectButton).addComponent(hostButton)))
+				.addGap(21, 21, 21)
 				.addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
 				.addComponent(ipAddressField, javax.swing.GroupLayout.DEFAULT_SIZE,javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -376,6 +387,22 @@ public class Battleship extends JFrame {
 
 		battleshipImageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("Battleship.png"))); // NOI18N
 		battleshipImageLabel.setPreferredSize(new java.awt.Dimension(120, 60));
+		
+		cruiserImageLabelVERT.setIcon(new javax.swing.ImageIcon(getClass().getResource("Cruiser_r.png"))); // NOI18N
+		cruiserImageLabelVERT.setPreferredSize(new java.awt.Dimension(120, 60));
+
+		submarineImageLabelVERT.setIcon(new javax.swing.ImageIcon(getClass().getResource("Submarine_r.png"))); // NOI18N
+		submarineImageLabelVERT.setPreferredSize(new java.awt.Dimension(90, 60));
+
+		carrierImageLabelVERT.setIcon(new javax.swing.ImageIcon(getClass().getResource("Carrier_r.png"))); // NOI18N
+		carrierImageLabelVERT.setPreferredSize(new java.awt.Dimension(150, 60));
+
+		destroyerImageLabelVERT.setIcon(new javax.swing.ImageIcon(getClass().getResource("Destroyer_r.png"))); // NOI18N
+		destroyerImageLabelVERT.setPreferredSize(new java.awt.Dimension(60, 60));
+
+		battleshipImageLabelVERT.setIcon(new javax.swing.ImageIcon(getClass().getResource("Battleship_r.png"))); // NOI18N
+		battleshipImageLabelVERT.setPreferredSize(new java.awt.Dimension(120, 60));
+		
 
 		enemyBattleshipLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("Battleship.png"))); // NOI18N
 		enemyBattleshipLabel.setPreferredSize(new java.awt.Dimension(120, 60));
@@ -405,11 +432,17 @@ public class Battleship extends JFrame {
 				.addComponent(carrierImageLabel, GroupLayout.PREFERRED_SIZE, 148,GroupLayout.PREFERRED_SIZE)
 				.addComponent(destroyerImageLabel, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
 				.addComponent(battleshipImageLabel,GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
+				.addComponent(cruiserImageLabelVERT, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+				.addComponent(submarineImageLabelVERT, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+				.addComponent(carrierImageLabelVERT, GroupLayout.PREFERRED_SIZE, 28,GroupLayout.PREFERRED_SIZE)
+				.addComponent(destroyerImageLabelVERT, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+				.addComponent(battleshipImageLabelVERT,GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
 				.addComponent(randomButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
 				.addContainerGap(18, Short.MAX_VALUE)));
 		
 		shipInventoryLayout.setVerticalGroup(shipInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-				shipInventoryLayout.createSequentialGroup().addGap(29, 29, 29).addComponent(battleshipImageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+				shipInventoryLayout.createSequentialGroup().addGap(29, 29, 29)
+					.addComponent(battleshipImageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 					.addComponent(destroyerImageLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
 					.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -418,8 +451,20 @@ public class Battleship extends JFrame {
 					.addComponent(carrierImageLabel, javax.swing.GroupLayout.PREFERRED_SIZE,28, javax.swing.GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 					.addComponent(cruiserImageLabel,javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(randomButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE).addGap(124, 124, 124)));
+					.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(randomButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE).addGap(124, 124, 124)
+            		.addComponent(battleshipImageLabelVERT, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            		.addComponent(destroyerImageLabelVERT, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
+            		.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            		.addComponent(submarineImageLabelVERT, javax.swing.GroupLayout.PREFERRED_SIZE, 88,javax.swing.GroupLayout.PREFERRED_SIZE)
+            		.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+            		.addComponent(carrierImageLabelVERT, javax.swing.GroupLayout.PREFERRED_SIZE,148, javax.swing.GroupLayout.PREFERRED_SIZE)
+            		.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            		.addComponent(cruiserImageLabelVERT,javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+            		.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(randomButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE).addGap(124, 124, 124)));
 
+		
+		
 		// Adds drag listener to ship inventory panel
 		MyDragGestureListener dlistener = new MyDragGestureListener();
 		DragSource ds1 = new DragSource();
@@ -429,6 +474,15 @@ public class Battleship extends JFrame {
 		ds1.createDefaultDragGestureRecognizer(destroyerImageLabel, DnDConstants.ACTION_COPY, dlistener);
 		ds1.createDefaultDragGestureRecognizer(submarineImageLabel, DnDConstants.ACTION_COPY, dlistener);
 
+		ds1.createDefaultDragGestureRecognizer(battleshipImageLabelVERT, DnDConstants.ACTION_COPY, dlistener);
+		ds1.createDefaultDragGestureRecognizer(carrierImageLabelVERT, DnDConstants.ACTION_COPY, dlistener);
+		ds1.createDefaultDragGestureRecognizer(cruiserImageLabelVERT, DnDConstants.ACTION_COPY, dlistener);
+		ds1.createDefaultDragGestureRecognizer(destroyerImageLabelVERT, DnDConstants.ACTION_COPY, dlistener);
+		ds1.createDefaultDragGestureRecognizer(submarineImageLabelVERT, DnDConstants.ACTION_COPY, dlistener);
+
+		
+		
+		
 		// populate this panel with ship images and turn red once they have been
 		// destroyed
 		enemyRemainingPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Enemy Ships Remaining"));
@@ -474,7 +528,7 @@ public class Battleship extends JFrame {
 				.addComponent(enemyPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
 				.addComponent(playerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE))
 				.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addComponent(shipInventory, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
+				.addComponent(shipInventory, GroupLayout.PREFERRED_SIZE, 400, GroupLayout.PREFERRED_SIZE)
 				.addComponent(enemyRemainingPanel,GroupLayout.PREFERRED_SIZE, 200,GroupLayout.PREFERRED_SIZE))));
 		
 		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(

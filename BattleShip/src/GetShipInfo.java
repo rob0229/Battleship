@@ -60,52 +60,52 @@ public class GetShipInfo {
 		//assigns parameters for vertical ships
 		else if(GetSquareDropped.orient == 1){
 			if (draggedShip
-					.equals(ConstantData.BATTLESHIP) || draggedShip.equals(ConstantData.PBS) ||draggedShip.equals("battleShip") ) {
+					.equals(ConstantData.BATTLESHIPVERT) || draggedShip.equals(ConstantData.PBSVERT) ||draggedShip.equals("battleShip_r") ) {
 				maxX = 320;
 				maxY = 229;
 				minY = 20;
 				minX = 8;
 				shipLength = 118;
 				shipWidth = 28;
-				ship = "Battleship";
+				ship = "Battleship_r";
 
 			} else if (draggedShip
-					.equals(ConstantData.CARRIER) || draggedShip.equals(ConstantData.PCA)||draggedShip.equals("carrier")) {
+					.equals(ConstantData.CARRIERVERT) || draggedShip.equals(ConstantData.PCAVERT)||draggedShip.equals("carrier_r")) {
 				maxX = 320;
 				maxY = 199;
 				minY = 20;
 				minX = 8;
 				shipLength = 148;
 				shipWidth = 28;
-				ship = "Carrier";
+				ship = "Carrier_r";
 
 			} else if (draggedShip
-					.equals(ConstantData.CRUISER) || draggedShip.equals(ConstantData.PCR)||draggedShip.equals("cruiser")) {
+					.equals(ConstantData.CRUISERVERT) || draggedShip.equals(ConstantData.PCRVERT)||draggedShip.equals("cruiser_r")) {
 				maxX = 320;
 				maxY = 229;
 				minY = 20;
 				minX = 8;
 				shipLength = 118;
 				shipWidth = 28;
-				ship = "Cruiser";
+				ship = "Cruiser_r";
 			} else if (draggedShip
-					.equals(ConstantData.DESTROYER) || draggedShip.equals(ConstantData.PD)||draggedShip.equals("destroyer")) {
+					.equals(ConstantData.DESTROYERVERT) || draggedShip.equals(ConstantData.PDVERT)||draggedShip.equals("destroyer_r")) {
 				maxX = 320;
 				maxY = 289;
 				minY = 20;
 				minX = 8;
 				shipLength = 58;
 				shipWidth = 28;
-				ship = "Destroyer";
+				ship = "Destroyer_r";
 			} else if (draggedShip
-					.equals(ConstantData.SUBMARINE) || draggedShip.equals(ConstantData.PS)||draggedShip.equals("sub")) {
+					.equals(ConstantData.SUBMARINEVERT) || draggedShip.equals(ConstantData.PSVERT)||draggedShip.equals("sub_r")) {
 				maxX = 320;
 				maxY = 260;
 				minY = 20;
 				minX = 8;
 				shipLength = 88;
 				shipWidth = 28;
-				ship = "Submarine";
+				ship = "Submarine_r";
 			} else
 				System.out.println("The ship is not recognized and will not move correctly");
 			
