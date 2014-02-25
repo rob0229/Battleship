@@ -265,7 +265,7 @@ public class Battleship extends JFrame {
 			}
 
 		});
-		randomButton.setEnabled(false);
+		randomButton.setEnabled(true);
 		jLabel5.setText("Position Ships and push when ready");
 
 		hostGameLabel.setText("Host Game:");
@@ -426,52 +426,43 @@ public class Battleship extends JFrame {
 		javax.swing.GroupLayout shipInventoryLayout = new javax.swing.GroupLayout(shipInventory);
 		shipInventory.setLayout(shipInventoryLayout);
 		
-		shipInventoryLayout.setHorizontalGroup(shipInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-				shipInventoryLayout.createSequentialGroup().addContainerGap()
-				.addGroup(shipInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addComponent(carrierImageLabel, GroupLayout.PREFERRED_SIZE, 148,GroupLayout.PREFERRED_SIZE)
-				.addComponent(battleshipImageLabel,GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
-				.addComponent(destroyerImageLabel, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
-				.addComponent(cruiserImageLabel, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
-				.addComponent(submarineImageLabel, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)
-				.addComponent(randomButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-				//.addGroup(shipInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				//.addComponent(cruiserImageLabelVERT, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)					
-				//.addComponent(submarineImageLabelVERT, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
-				//.addComponent(carrierImageLabelVERT, GroupLayout.PREFERRED_SIZE, 28,GroupLayout.PREFERRED_SIZE)
-				//.addComponent(destroyerImageLabelVERT, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
-				//.addComponent(battleshipImageLabelVERT,GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))		
-				.addContainerGap(18, Short.MAX_VALUE)));
-		
-		shipInventoryLayout.setVerticalGroup(shipInventoryLayout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(
-				shipInventoryLayout.createSequentialGroup()
+		shipInventoryLayout.setHorizontalGroup(shipInventoryLayout.createSequentialGroup()	
+				.addGroup(shipInventoryLayout.createSequentialGroup()
 				
-						.addGap(29, 29, 29)
-					.addComponent(carrierImageLabel, GroupLayout.PREFERRED_SIZE,28, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-					.addComponent(battleshipImageLabel, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-					.addComponent(cruiserImageLabel,GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)					
-					.addComponent(submarineImageLabel, GroupLayout.PREFERRED_SIZE, 28,GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-					.addComponent(destroyerImageLabel, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
-					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)				
-					.addComponent(randomButton, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-					.addGap(124, 124, 124)
-            		//.addGroup(shipInventoryLayout.createSequentialGroup().addComponent(battleshipImageLabelVERT, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE))
-					//.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            		//.addComponent(destroyerImageLabelVERT, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
-            		//.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            		//.addComponent(submarineImageLabelVERT, javax.swing.GroupLayout.PREFERRED_SIZE, 88,javax.swing.GroupLayout.PREFERRED_SIZE)
-            		//.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-            		//.addComponent(carrierImageLabelVERT, javax.swing.GroupLayout.PREFERRED_SIZE,148, javax.swing.GroupLayout.PREFERRED_SIZE)
-            		//.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            		//.addComponent(cruiserImageLabelVERT,javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-            		//.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            		//.addComponent(randomButton, GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-            		.addGap(124, 124, 124)));
-
+					.addGroup(shipInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+							.addComponent(carrierImageLabel, GroupLayout.PREFERRED_SIZE, 148,GroupLayout.PREFERRED_SIZE)
+							.addComponent(battleshipImageLabel,GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)							
+							.addComponent(cruiserImageLabel, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
+							.addComponent(submarineImageLabel, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)
+							.addComponent(destroyerImageLabel, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)	
+							.addComponent(randomButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+							
+					.addGroup(shipInventoryLayout.createSequentialGroup()
+							.addComponent(carrierImageLabelVERT, GroupLayout.PREFERRED_SIZE, 28,GroupLayout.PREFERRED_SIZE)
+							.addComponent(battleshipImageLabelVERT,GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+							.addComponent(cruiserImageLabelVERT, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)				
+							.addComponent(submarineImageLabelVERT, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+							.addComponent(destroyerImageLabelVERT, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))));
+							
+					
+					
+		
+		shipInventoryLayout.setVerticalGroup(shipInventoryLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+				
+				.addGroup(shipInventoryLayout.createSequentialGroup()												
+					.addComponent(carrierImageLabel, GroupLayout.PREFERRED_SIZE,28, GroupLayout.PREFERRED_SIZE)					
+					.addComponent(battleshipImageLabel, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)					
+					.addComponent(cruiserImageLabel,GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)										
+					.addComponent(submarineImageLabel, GroupLayout.PREFERRED_SIZE, 28,GroupLayout.PREFERRED_SIZE)					
+					.addComponent(destroyerImageLabel, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)					
+					.addComponent(randomButton, GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+					
+    			.addGroup(shipInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)               		
+              		.addComponent(carrierImageLabelVERT, javax.swing.GroupLayout.PREFERRED_SIZE,148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                		.addComponent(battleshipImageLabelVERT, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)						
+    					.addComponent(cruiserImageLabelVERT,javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+    					.addComponent(submarineImageLabelVERT, javax.swing.GroupLayout.PREFERRED_SIZE, 88,javax.swing.GroupLayout.PREFERRED_SIZE)                				
+    					.addComponent(destroyerImageLabelVERT, javax.swing.GroupLayout.PREFERRED_SIZE, 58,GroupLayout.PREFERRED_SIZE)));
 		
 		
 		// Adds drag listener to ship inventory panel
@@ -506,9 +497,7 @@ public class Battleship extends JFrame {
 				.addComponent(enemyBattleshipLabel,	GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
 				.addComponent(enemyCruiserLabel, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
 				.addComponent(enemySubmarineLabel, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)
-				.addComponent(enemyDestroyerLabel, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
-				
-				.addComponent(randomButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+				.addComponent(enemyDestroyerLabel, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE))		
 				.addContainerGap(18, Short.MAX_VALUE)));
 		
 		enemyLeftPanelLayout.setVerticalGroup(enemyLeftPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -523,9 +512,7 @@ public class Battleship extends JFrame {
 				.addComponent(enemySubmarineLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28,javax.swing.GroupLayout.PREFERRED_SIZE)
 				.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 				.addComponent(enemyDestroyerLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
-				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-				
-				.addComponent(randomButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)		
 				.addGap(124, 124, 124)));
 
 
@@ -540,7 +527,7 @@ public class Battleship extends JFrame {
 				.addComponent(enemyPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
 				.addComponent(playerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE))
 				.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addComponent(shipInventory, GroupLayout.PREFERRED_SIZE, 400, GroupLayout.PREFERRED_SIZE)
+				.addComponent(shipInventory, GroupLayout.PREFERRED_SIZE, 325, GroupLayout.PREFERRED_SIZE)
 				.addComponent(enemyRemainingPanel,GroupLayout.PREFERRED_SIZE, 200,GroupLayout.PREFERRED_SIZE))));
 		
 		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
@@ -558,6 +545,12 @@ public class Battleship extends JFrame {
 				.addComponent(playerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE))))));
 
 		pack();
+	}
+	
+	public static int randInt(int min, int max) {
+		Random rand = new Random();
+		int randomNum = rand.nextInt((max - min) + 1) + min;
+		return randomNum;
 	}
 
 	private void userChatEnterActionPerformed(java.awt.event.ActionEvent evt) {
@@ -606,16 +599,22 @@ public class Battleship extends JFrame {
 
 		int randomX = randInt(21, 319);
 		int randomY = randInt(30, 300);
-
+		int randOrient = randInt(0,1);
+		
 		// set Battleship
 		while (bsD == false) {
-			JLabel randBSLabel = new JLabel();
+			randOrient = randInt(0,1);	
+			System.out.println("Random orientation = " + randOrient);
+			GetShipInfo.setOrientation(randOrient);
+			
+			if(randOrient == 0){
+				JLabel randBSLabel = new JLabel();
 			randBSLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(ConstantData.bsImage)));
 			randomX = randInt(21, 319);
-			randomY = randInt(30, 300);
+			randomY = randInt(30, 300);	
 			Point randPoint = new Point(randomX, randomY);
 			GetSquareDropped dropSq = new GetSquareDropped(randPoint, "battleShip");
-
+			
 			if (GetSquareDropped.validDrop) {
 				randBSLabel.setBounds(dropSq.getX(), dropSq.getY(), 118, 28);
 				playerPanel.add(randBSLabel);
@@ -623,16 +622,36 @@ public class Battleship extends JFrame {
 				playerPanel.revalidate();
 				bsD = true;
 			}
+			}
+			else if (randOrient == 1){
+				JLabel randBSLabel = new JLabel();
+				randBSLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(ConstantData.bsImageVERT)));
+				randomX = randInt(21, 319);
+				randomY = randInt(30, 300);
+				Point randPoint = new Point(randomX, randomY);
+				GetSquareDropped dropSq = new GetSquareDropped(randPoint, "battleShip_r");
+			
+				if (GetSquareDropped.validDrop) {
+				randBSLabel.setBounds(dropSq.getX(), dropSq.getY(), 28, 118);
+				playerPanel.add(randBSLabel);
+				playerPanel.repaint();
+				playerPanel.revalidate();
+				bsD = true;
+				}
+			}
 		}
 		// Set Carrier
 		while (caD == false) {
-			JLabel randBSLabel = new JLabel();
-			randBSLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(ConstantData.caImage)));
-			randomX = randInt(21, 319);
-			randomY = randInt(30, 300);
-			Point randPoint = new Point(randomX, randomY);
-			GetSquareDropped dropSq = new GetSquareDropped(randPoint, "carrier");
-
+			randOrient = randInt(0,1);	
+			System.out.println("Random orientation = " + randOrient);
+			if(randOrient == 0){
+				JLabel randBSLabel = new JLabel();
+    			randBSLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(ConstantData.caImage)));
+    			randomX = randInt(21, 319);
+    			randomY = randInt(30, 300);	
+    			Point randPoint = new Point(randomX, randomY);
+    			GetSquareDropped dropSq = new GetSquareDropped(randPoint, "carrier");
+			
 			if (GetSquareDropped.validDrop) {
 				randBSLabel.setBounds(dropSq.getX(), dropSq.getY(), 148, 28);
 				playerPanel.add(randBSLabel);
@@ -640,17 +659,38 @@ public class Battleship extends JFrame {
 				playerPanel.revalidate();
 				caD = true;
 			}
+			}
+			else if (randOrient == 1){
+				JLabel randBSLabel = new JLabel();
+				randBSLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(ConstantData.caImageVERT)));
+				randomX = randInt(21, 319);
+				randomY = randInt(30, 300);
+				Point randPoint = new Point(randomX, randomY);
+				GetSquareDropped dropSq = new GetSquareDropped(randPoint, "carrier_r");
+			
+				if (GetSquareDropped.validDrop) {					
+				randBSLabel.setBounds(dropSq.getX(), dropSq.getY(), 28, 148);
+				playerPanel.add(randBSLabel);
+				playerPanel.repaint();
+				playerPanel.revalidate();
+				caD = true;
+				}
+			}
 		}
 
 		// Set Cruiser
 		while (crD == false) {
-			JLabel randBSLabel = new JLabel();
-			randBSLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(ConstantData.crImage)));
-			randomX = randInt(21, 319);
-			randomY = randInt(30, 300);
-			Point randPoint = new Point(randomX, randomY);
-			GetSquareDropped dropSq = new GetSquareDropped(randPoint, "cruiser");
-
+			
+			randOrient = randInt(0,1);	
+			System.out.println("Random orientation = " + randOrient);
+			if(randOrient == 0){
+				JLabel randBSLabel = new JLabel();
+    			randBSLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(ConstantData.crImage)));
+    			randomX = randInt(21, 319);
+    			randomY = randInt(30, 300);	
+    			Point randPoint = new Point(randomX, randomY);
+    			GetSquareDropped dropSq = new GetSquareDropped(randPoint, "cruiser");
+			
 			if (GetSquareDropped.validDrop) {
 				randBSLabel.setBounds(dropSq.getX(), dropSq.getY(), 118, 28);
 				playerPanel.add(randBSLabel);
@@ -658,51 +698,108 @@ public class Battleship extends JFrame {
 				playerPanel.revalidate();
 				crD = true;
 			}
+			}
+			else if (randOrient == 1){
+				JLabel randBSLabel = new JLabel();
+				randBSLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(ConstantData.crImageVERT)));
+				randomX = randInt(21, 319);
+				randomY = randInt(30, 300);
+				Point randPoint = new Point(randomX, randomY);
+				GetSquareDropped dropSq = new GetSquareDropped(randPoint, "cruiser_r");
+			
+				if (GetSquareDropped.validDrop) {
+				randBSLabel.setBounds(dropSq.getX(), dropSq.getY(), 28, 118);
+				playerPanel.add(randBSLabel);
+				playerPanel.repaint();
+				playerPanel.revalidate();
+				crD = true;
+				}
+			}
 		}
 
 		// Set Submarine
 		while (sD == false) {
-			JLabel randBSLabel = new JLabel();
-			randBSLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(ConstantData.subImage)));
-			randomX = randInt(21, 319);
-			randomY = randInt(30, 300);
-			Point randPoint = new Point(randomX, randomY);
-			GetSquareDropped dropSq = new GetSquareDropped(randPoint, "sub");
-
-			if (GetSquareDropped.validDrop) {
-				randBSLabel.setBounds(dropSq.getX(), dropSq.getY(), 118, 28);
-				playerPanel.add(randBSLabel);
-				playerPanel.repaint();
-				playerPanel.revalidate();
-				sD = true;
+			randOrient = randInt(0,1);	
+			System.out.println("Random orientation = " + randOrient);
+			if(randOrient == 0){
+				JLabel randBSLabel = new JLabel();
+    			randBSLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(ConstantData.subImage)));
+    			randomX = randInt(21, 319);
+    			randomY = randInt(30, 300);	
+    			Point randPoint = new Point(randomX, randomY);
+    			GetSquareDropped dropSq = new GetSquareDropped(randPoint, "sub");
+			
+    			if (GetSquareDropped.validDrop) {
+    				randBSLabel.setBounds(dropSq.getX(), dropSq.getY(), 88, 28);
+    				playerPanel.add(randBSLabel);
+    				playerPanel.repaint();
+    				playerPanel.revalidate();
+    				sD = true;
+			}
+			}
+			else if (randOrient == 1){
+				JLabel randBSLabel = new JLabel();
+				randBSLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(ConstantData.subImageVERT)));
+				randomX = randInt(21, 319);
+				randomY = randInt(30, 300);
+				Point randPoint = new Point(randomX, randomY);
+				GetSquareDropped dropSq = new GetSquareDropped(randPoint, "sub_r");
+			
+				if (GetSquareDropped.validDrop) {
+    				randBSLabel.setBounds(dropSq.getX(), dropSq.getY(), 28, 88);
+    				playerPanel.add(randBSLabel);
+    				playerPanel.repaint();
+    				playerPanel.revalidate();
+    				sD = true;
+				}
 			}
 		}
 
 		// Set Destroyer
 		while (dD == false) {
-			JLabel randBSLabel = new JLabel();
-			randBSLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(ConstantData.dImage)));
-			randomX = randInt(21, 319);
-			randomY = randInt(30, 300);
-			Point randPoint = new Point(randomX, randomY);
-			GetSquareDropped dropSq = new GetSquareDropped(randPoint, "destroyer");
-
+			randOrient = randInt(0,1);	
+			System.out.println("Random orientation = " + randOrient);
+			if(randOrient == 0){
+				JLabel randBSLabel = new JLabel();
+    			randBSLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(ConstantData.dImage)));
+    			randomX = randInt(21, 319);
+    			randomY = randInt(30, 300);	
+    			Point randPoint = new Point(randomX, randomY);
+    			GetSquareDropped dropSq = new GetSquareDropped(randPoint, "destroyer");
+			
 			if (GetSquareDropped.validDrop) {
-				randBSLabel.setBounds(dropSq.getX(), dropSq.getY(), 118, 28);
+				randBSLabel.setBounds(dropSq.getX(), dropSq.getY(), 58, 28);
 				playerPanel.add(randBSLabel);
 				playerPanel.repaint();
 				playerPanel.revalidate();
 				dD = true;
 			}
+			}
+			else if (randOrient == 1){
+				JLabel randBSLabel = new JLabel();
+				randBSLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(ConstantData.dImageVERT)));
+				randomX = randInt(21, 319);
+				randomY = randInt(30, 300);
+				Point randPoint = new Point(randomX, randomY);
+				GetSquareDropped dropSq = new GetSquareDropped(randPoint, "destroyer_r");
+			
+				if (GetSquareDropped.validDrop) {
+				randBSLabel.setBounds(dropSq.getX(), dropSq.getY(), 28, 58);
+				playerPanel.add(randBSLabel);
+				playerPanel.repaint();
+				playerPanel.revalidate();
+				dD = true;
+				}
+			}
 		}
+		
 		readyButton.setEnabled(true);
 
 	}
 
 	private void hostButtonActionPerformed(ActionEvent evt) {
 		hostButton.setEnabled(false);
-		connectButton.setEnabled(false);
-		randomButton.setEnabled(true);
+		connectButton.setEnabled(false);		
 		isServer = true;
 		playerTurn = true;
 		{
@@ -722,7 +819,6 @@ public class Battleship extends JFrame {
 	private void connectButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		connectButton.setEnabled(false);
 		hostButton.setEnabled(false);
-		randomButton.setEnabled(true);
 		
 		{
 			Runnable serverRunnable = new Runnable() {
@@ -1063,10 +1159,6 @@ public class Battleship extends JFrame {
 
 	}
 
-	public static int randInt(int min, int max) {
-		Random rand = new Random();
-		int randomNum = rand.nextInt((max - min) + 1) + min;
-		return randomNum;
-	}
+	
 
 }

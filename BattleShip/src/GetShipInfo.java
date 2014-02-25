@@ -1,12 +1,13 @@
 public class GetShipInfo {
-	private int minX, minY, maxX, maxY, shipLength, shipWidth, orientation;
+	private int minX, minY, maxX, maxY, shipLength, shipWidth;
+	private static int orientation;
 	private String ship;
 	public GetShipInfo(String draggedShip) {
 		// determines panel boundary for specific ships
 
 		// This value changes depending on which computer I am on...
 		// Sets layout information for each ship horizontal ship
-		if(GetSquareDropped.orient == 0){
+		
     		if (draggedShip
     				.equals(ConstantData.BATTLESHIP) || draggedShip.equals(ConstantData.PBS) ||draggedShip.equals("battleShip") ) {
     			maxX = 229;
@@ -16,6 +17,7 @@ public class GetShipInfo {
     			shipLength = 118;
     			shipWidth = 28;
     			ship = "Battleship";
+    			orientation = 0;
     
     		} else if (draggedShip
     				.equals(ConstantData.CARRIER) || draggedShip.equals(ConstantData.PCA)||draggedShip.equals("carrier")) {
@@ -26,6 +28,7 @@ public class GetShipInfo {
     			shipLength = 148;
     			shipWidth = 28;
     			ship = "Carrier";
+    			orientation = 0;
     
     		} else if (draggedShip
     				.equals(ConstantData.CRUISER) || draggedShip.equals(ConstantData.PCR)||draggedShip.equals("cruiser")) {
@@ -33,9 +36,10 @@ public class GetShipInfo {
     			maxY = 320;
     			minY = 20;
     			minX = 8;
-    			shipLength = 118;
+			shipLength = 118;
     			shipWidth = 28;
     			ship = "Cruiser";
+    			orientation = 0;
     		} else if (draggedShip
     				.equals(ConstantData.DESTROYER) || draggedShip.equals(ConstantData.PD)||draggedShip.equals("destroyer")) {
     			maxX = 289;
@@ -45,6 +49,7 @@ public class GetShipInfo {
     			shipLength = 58;
     			shipWidth = 28;
     			ship = "Destroyer";
+    			orientation = 0;
     		} else if (draggedShip
     				.equals(ConstantData.SUBMARINE) || draggedShip.equals(ConstantData.PS)||draggedShip.equals("sub")) {
     			maxX = 260;
@@ -54,20 +59,22 @@ public class GetShipInfo {
     			shipLength = 88;
     			shipWidth = 28;
     			ship = "Submarine";
-    		} else
-    			System.out.println("The ship is not recognized and will not move correctly");
-		}
+    			orientation = 0;
+    		} 
+    			
+		
 		//assigns parameters for vertical ships
-		else if(GetSquareDropped.orient == 1){
-			if (draggedShip
+		
+    		else if (draggedShip
 					.equals(ConstantData.BATTLESHIPVERT) || draggedShip.equals(ConstantData.PBSVERT) ||draggedShip.equals("battleShip_r") ) {
 				maxX = 320;
 				maxY = 229;
 				minY = 20;
 				minX = 8;
-				shipLength = 118;
-				shipWidth = 28;
+				shipLength = 28;
+				shipWidth = 118;
 				ship = "Battleship_r";
+				orientation = 1;
 
 			} else if (draggedShip
 					.equals(ConstantData.CARRIERVERT) || draggedShip.equals(ConstantData.PCAVERT)||draggedShip.equals("carrier_r")) {
@@ -75,9 +82,10 @@ public class GetShipInfo {
 				maxY = 199;
 				minY = 20;
 				minX = 8;
-				shipLength = 148;
-				shipWidth = 28;
+				shipLength = 28;
+				shipWidth = 148;
 				ship = "Carrier_r";
+				orientation = 1;
 
 			} else if (draggedShip
 					.equals(ConstantData.CRUISERVERT) || draggedShip.equals(ConstantData.PCRVERT)||draggedShip.equals("cruiser_r")) {
@@ -85,31 +93,34 @@ public class GetShipInfo {
 				maxY = 229;
 				minY = 20;
 				minX = 8;
-				shipLength = 118;
-				shipWidth = 28;
+				shipLength = 28;
+				shipWidth = 118;
 				ship = "Cruiser_r";
+				orientation = 1;
 			} else if (draggedShip
 					.equals(ConstantData.DESTROYERVERT) || draggedShip.equals(ConstantData.PDVERT)||draggedShip.equals("destroyer_r")) {
 				maxX = 320;
 				maxY = 289;
 				minY = 20;
 				minX = 8;
-				shipLength = 58;
-				shipWidth = 28;
+				shipLength = 28;
+				shipWidth = 58;
 				ship = "Destroyer_r";
+				orientation = 1;
 			} else if (draggedShip
 					.equals(ConstantData.SUBMARINEVERT) || draggedShip.equals(ConstantData.PSVERT)||draggedShip.equals("sub_r")) {
 				maxX = 320;
 				maxY = 260;
 				minY = 20;
 				minX = 8;
-				shipLength = 88;
-				shipWidth = 28;
+				shipLength = 28;
+				shipWidth = 88;
 				ship = "Submarine_r";
+				orientation = 1;
 			} else
 				System.out.println("The ship is not recognized and will not move correctly");
 			
-		}
+		
 	}
 
 	public int getMinX() {
@@ -142,7 +153,7 @@ public class GetShipInfo {
 	public int getOrientation(){
 		return orientation;
 	}
-	public void setOrientation(int or){
+	public static void setOrientation(int or){
 		orientation = or;
 		
 	}

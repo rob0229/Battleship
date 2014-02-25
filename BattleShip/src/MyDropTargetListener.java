@@ -10,74 +10,69 @@ import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-
 import javax.swing.AbstractAction;
 import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-class MyDropTargetListener extends DropTargetAdapter{
+class MyDropTargetListener extends DropTargetAdapter {
 
 	private DropTarget dropTarget;
 	private JPanel p;
 	private static Point dropPoint;
 	String draggedShip;
 	int shipsPlaced = 0;
-		
-   
-	
+
 	public MyDropTargetListener(JPanel dropPanel) {
-		
+
 		p = dropPanel;
-		dropTarget = new DropTarget(dropPanel, DnDConstants.ACTION_COPY, this,
-				true, null);
-		
+		dropTarget = new DropTarget(dropPanel, DnDConstants.ACTION_COPY, this, true, null);
 
 	}
-	
 
 	@Override
 	public void drop(DropTargetDropEvent event) {
-	
-	try {
+
+		try {
 			DropTarget shipDropped = (DropTarget) event.getSource();
 			Component ca = (Component) shipDropped.getComponent();
-			
-			//gets the pixel point where the ship was dropped
+
+			// gets the pixel point where the ship was dropped
 			dropPoint = ca.getMousePosition();
 			// data that is transfered to new panel (ship image file)
 			Transferable tr = event.getTransferable();
 
 			// checks that the data being dragged is an imageFlavor
 			if (event.isDataFlavorSupported(DataFlavor.imageFlavor)) {
-				//resets validDrop to evaluate each move independently
+				// resets validDrop to evaluate each move independently
 				GetSquareDropped.validDrop = true;
 				Icon ico = (Icon) tr.getTransferData(DataFlavor.imageFlavor);
-				//gets the ship being dragged, this is not a great way to do this, but it is functional for this project
+				// gets the ship being dragged, this is not a great way to do
+				// this, but it is functional for this project
 				draggedShip = ico.toString();
-				
+
 				GetShipInfo getShipInfo = new GetShipInfo(draggedShip);
-			
+
 				if (ico != null) {
-					//determines and corrects square ship is dropped on
+					// determines and corrects square ship is dropped on
 					GetSquareDropped getSquareDropped = new GetSquareDropped(dropPoint, draggedShip);
-					//If a drop is valid(determined in GetSquareDropped Class) adds image to player panel
-					if(GetSquareDropped.validDrop){
+					// If a drop is valid(determined in GetSquareDropped Class)
+					// adds image to player panel
+					if (GetSquareDropped.validDrop) {
 						Battleship.randomButton.setEnabled(false);
 						JLabel shipDragged = new JLabel(ico);
-						shipDragged.setBounds(getSquareDropped.getX(), getSquareDropped.getY(),	getShipInfo.getShipLength(), getShipInfo.getShipWidth());
-						p.add(shipDragged);				
+						shipDragged.setBounds(getSquareDropped.getX(), getSquareDropped.getY(), getShipInfo.getShipLength(), getShipInfo.getShipWidth());
+						p.add(shipDragged);
 						p.repaint();
 						p.revalidate();
 						event.dropComplete(true);
 						shipsPlaced++;
-						
-						if(shipsPlaced ==5){
+
+						if (shipsPlaced == 5) {
 							Battleship.readyButton.setEnabled(true);
 						}
-						
-					
+
 					}
 				}
 			} else {
