@@ -27,7 +27,7 @@ public class GetSquareDropped {
 		String shipName = getShipInfo.getShip();
 
 		// Keeps ship placement inside boarders of panel for horizontal ships
-		if (x > getShipInfo.getMaxX() && orient == 0) {
+		if (x > maxX && orient == 0) {
 			x = maxX;
 		}
 		if (x < minX && orient == 0) {
@@ -40,7 +40,7 @@ public class GetSquareDropped {
 			y = minY;
 		}
 
-		if (x > getShipInfo.getMaxX() && orient == 1) {
+		if (x > maxX && orient == 1) {
 			x = maxX;
 		}
 		if (x < minX && orient == 1) {
@@ -64,7 +64,7 @@ public class GetSquareDropped {
 		// Prevents ships from being placed on top of each other
 		if (shipName.equals("Battleship") && orient == 0) {
 
-			for (int i = 0; i < 2; i++) {
+			for (int i = 0; i < 4; i++) {
 				if (Battleship.playerGrid.getGridContents(x2 + i, y2) != "~") {
 					validDrop = false;
 				}
