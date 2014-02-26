@@ -180,8 +180,10 @@ public class Battleship extends JFrame {
 		playerPanel = new JPanel() {
 			// paints grid background but causes shadows of entire JFrame to
 			// appear under oceanGrid.png
+		
 			@Override
 			public void paintComponent(Graphics d) {
+				super.paintComponent(d);
 				d.drawImage(image, 20, 30, 300, 300, null);
 			}
 		};
@@ -190,6 +192,7 @@ public class Battleship extends JFrame {
 		enemyPanel = new JPanel() {
 			@Override
 			public void paintComponent(Graphics d) {
+				super.paintComponent(d);
 				d.drawImage(image, 20, 30, 300, 300, null);
 			}
 		};
@@ -590,7 +593,7 @@ public class Battleship extends JFrame {
             
             System.out.print("ActionEvent received: ");
             if (e.getActionCommand() == "Horizontal") {
-                System.out.println( "Horizontal pressed.");
+               //checks to see if each ship has been placed and displays it if not
                 if(GetSquareDropped.bsPlaced == false){
                 	Battleship.battleshipImageLabel.setVisible(true);	
                 }
@@ -606,6 +609,7 @@ public class Battleship extends JFrame {
                 if(GetSquareDropped.destroyerPlaced == false){
                 	Battleship.destroyerImageLabel.setVisible(true);	
                 }
+                //hides vertical ships
                 Battleship.battleshipImageLabelVERT.setVisible(false);
                 Battleship.carrierImageLabelVERT.setVisible(false);
                 Battleship.cruiserImageLabelVERT.setVisible(false);
@@ -613,7 +617,7 @@ public class Battleship extends JFrame {
                 Battleship.destroyerImageLabelVERT.setVisible(false);
                 
             }else {
-                System.out.println("Vertical pressed.");
+            	//checks to see if each ship has been placed and displays it if not
                 if(GetSquareDropped.bsPlaced == false){
                 	Battleship.battleshipImageLabelVERT.setVisible(true);
                 }
@@ -629,6 +633,7 @@ public class Battleship extends JFrame {
                 if(GetSquareDropped.destroyerPlaced == false){
                 	Battleship.destroyerImageLabelVERT.setVisible(true);
                 }
+                //hides Horizontal ships
                 Battleship.battleshipImageLabel.setVisible(false);
                 Battleship.carrierImageLabel.setVisible(false);
                 Battleship.cruiserImageLabel.setVisible(false);
@@ -636,13 +641,13 @@ public class Battleship extends JFrame {
                 Battleship.destroyerImageLabel.setVisible(false);
             }
         }
-
+        //Required from super class
 		@Override
 		public void itemStateChanged(ItemEvent e) {
 			// TODO Auto-generated method stub
 			
 		}
-
+		//Required from super class
 		@Override
 		public void stateChanged(ChangeEvent e) {
 			// TODO Auto-generated method stub
