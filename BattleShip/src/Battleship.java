@@ -6,6 +6,8 @@ import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragSource;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.EOFException;
@@ -22,17 +24,22 @@ import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.SourceDataLine;
 import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.JToggleButton;
 import javax.swing.LayoutStyle;
 import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 
 
@@ -48,6 +55,7 @@ public class Battleship extends JFrame {
 	public static boolean gameStarted = false;
 	public static boolean isServer = false;
 	public static boolean playerTurn = false;
+	private JToggleButton shipOrientButton1, shipOrientButton2;
 	private JButton connectButton;
 	private JPanel controlPanel;
 	private JButton disconnectButton;
@@ -125,6 +133,10 @@ public class Battleship extends JFrame {
 		hostGameLabel = new JLabel();
 		hostIPAdressLabel9 = new JLabel();
 		ipAddressField = new java.awt.TextField();
+		shipOrientButton1 = new JRadioButton("Horizontal");
+		
+		
+		shipOrientButton2 = new JRadioButton("Vertical");
 		disconnectButton = new JButton();
 		connectButton = new JButton();
 		hostButton = new JButton();
@@ -255,9 +267,28 @@ public class Battleship extends JFrame {
 
 			}
 		});
-
+		
+		shipOrientButton1.setActionCommand("Horizontal");
+		shipOrientButton1.setSelected(true);
+		shipOrientButton2.setActionCommand("Vertical");
+		//shipOrientButton2.setSelected(false);
+		
+		  // Group the radio buttons.
+	    ButtonGroup group = new ButtonGroup();
+	    group.add(shipOrientButton1);
+	    group.add(shipOrientButton2);
+		
+	    RadioListener myListener = new RadioListener();
+	    shipOrientButton1.addActionListener(myListener);
+	    shipOrientButton1.addChangeListener(myListener);
+	    shipOrientButton1.addItemListener(myListener);
+	    shipOrientButton2.addActionListener(myListener);
+	    shipOrientButton2.addChangeListener(myListener);
+	    shipOrientButton2.addItemListener(myListener);
+		
+		
 		randomButton.setText("Random");
-		randomButton.addActionListener(new java.awt.event.ActionListener() {
+		randomButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				randomButtonActionPerformed(evt);
@@ -435,18 +466,19 @@ public class Battleship extends JFrame {
 							.addComponent(cruiserImageLabel, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
 							.addComponent(submarineImageLabel, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)
 							.addComponent(destroyerImageLabel, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)	
-							.addComponent(randomButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+							
 							
 					.addGroup(shipInventoryLayout.createSequentialGroup()
 							.addComponent(carrierImageLabelVERT, GroupLayout.PREFERRED_SIZE, 28,GroupLayout.PREFERRED_SIZE)
 							.addComponent(battleshipImageLabelVERT,GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
 							.addComponent(cruiserImageLabelVERT, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)				
 							.addComponent(submarineImageLabelVERT, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
-							.addComponent(destroyerImageLabelVERT, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))));
-							
-					
-					
-		
+							.addComponent(destroyerImageLabelVERT, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))	
+							//next parallel entry
+                    		.addComponent(shipOrientButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    		.addComponent(shipOrientButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)		
+                    		.addComponent(randomButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))));
+
 		shipInventoryLayout.setVerticalGroup(shipInventoryLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 				
 				.addGroup(shipInventoryLayout.createSequentialGroup()												
@@ -454,16 +486,17 @@ public class Battleship extends JFrame {
 					.addComponent(battleshipImageLabel, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)					
 					.addComponent(cruiserImageLabel,GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)										
 					.addComponent(submarineImageLabel, GroupLayout.PREFERRED_SIZE, 28,GroupLayout.PREFERRED_SIZE)					
-					.addComponent(destroyerImageLabel, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)					
-					.addComponent(randomButton, GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-					
-    			.addGroup(shipInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)               		
-              		.addComponent(carrierImageLabelVERT, javax.swing.GroupLayout.PREFERRED_SIZE,148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                		.addComponent(battleshipImageLabelVERT, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)						
-    					.addComponent(cruiserImageLabelVERT,javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-    					.addComponent(submarineImageLabelVERT, javax.swing.GroupLayout.PREFERRED_SIZE, 88,javax.swing.GroupLayout.PREFERRED_SIZE)                				
-    					.addComponent(destroyerImageLabelVERT, javax.swing.GroupLayout.PREFERRED_SIZE, 58,GroupLayout.PREFERRED_SIZE)));
-		
+					.addComponent(destroyerImageLabel, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+				.addGroup(shipInventoryLayout.createParallelGroup()
+              		.addComponent(carrierImageLabelVERT, GroupLayout.PREFERRED_SIZE,148, GroupLayout.PREFERRED_SIZE)
+                	.addComponent(battleshipImageLabelVERT, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)						
+    				.addComponent(cruiserImageLabelVERT,javax.swing.GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
+    				.addComponent(submarineImageLabelVERT, javax.swing.GroupLayout.PREFERRED_SIZE, 88,javax.swing.GroupLayout.PREFERRED_SIZE)                				
+    				.addComponent(destroyerImageLabelVERT, javax.swing.GroupLayout.PREFERRED_SIZE, 58,GroupLayout.PREFERRED_SIZE))
+    				
+            		.addComponent(shipOrientButton1, GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+            		.addComponent(shipOrientButton2, GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+            		.addComponent(randomButton, GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)	)); 
 		
 		// Adds drag listener to ship inventory panel
 		MyDragGestureListener dlistener = new MyDragGestureListener();
@@ -481,7 +514,7 @@ public class Battleship extends JFrame {
 		ds1.createDefaultDragGestureRecognizer(submarineImageLabelVERT, DnDConstants.ACTION_COPY, dlistener);
 
 		
-		
+		System.out.println("ds1 to string is " + ds1.toString()); 
 		
 		// populate this panel with ship images and turn red once they have been
 		// destroyed
@@ -527,7 +560,7 @@ public class Battleship extends JFrame {
 				.addComponent(enemyPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
 				.addComponent(playerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE))
 				.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addComponent(shipInventory, GroupLayout.PREFERRED_SIZE, 325, GroupLayout.PREFERRED_SIZE)
+				.addComponent(shipInventory, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
 				.addComponent(enemyRemainingPanel,GroupLayout.PREFERRED_SIZE, 200,GroupLayout.PREFERRED_SIZE))));
 		
 		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
@@ -543,8 +576,79 @@ public class Battleship extends JFrame {
 				.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
 				.addComponent(shipInventory, javax.swing.GroupLayout.DEFAULT_SIZE, 350,	Short.MAX_VALUE)
 				.addComponent(playerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE))))));
-
+		Battleship.battleshipImageLabelVERT.setVisible(false);
+        Battleship.carrierImageLabelVERT.setVisible(false);
+        Battleship.cruiserImageLabelVERT.setVisible(false);
+        Battleship.submarineImageLabelVERT.setVisible(false);
+        Battleship.destroyerImageLabelVERT.setVisible(false);
 		pack();
+	}
+	
+	class RadioListener implements ActionListener, ChangeListener, ItemListener {  //for curiosity only
+        public void actionPerformed(ActionEvent e) {
+            //String factoryName = null;
+            
+            System.out.print("ActionEvent received: ");
+            if (e.getActionCommand() == "Horizontal") {
+                System.out.println( "Horizontal pressed.");
+                if(GetSquareDropped.bsPlaced == false){
+                	Battleship.battleshipImageLabel.setVisible(true);	
+                }
+                if(GetSquareDropped.carrierPlaced == false){
+                	Battleship.carrierImageLabel.setVisible(true); 	
+                }
+                if(GetSquareDropped.cruiserPlaced == false){
+                	Battleship.cruiserImageLabel.setVisible(true);	
+                }
+                if(GetSquareDropped.subPlaced == false){
+                	Battleship.submarineImageLabel.setVisible(true);	
+                }
+                if(GetSquareDropped.destroyerPlaced == false){
+                	Battleship.destroyerImageLabel.setVisible(true);	
+                }
+                Battleship.battleshipImageLabelVERT.setVisible(false);
+                Battleship.carrierImageLabelVERT.setVisible(false);
+                Battleship.cruiserImageLabelVERT.setVisible(false);
+                Battleship.submarineImageLabelVERT.setVisible(false);
+                Battleship.destroyerImageLabelVERT.setVisible(false);
+                
+            }else {
+                System.out.println("Vertical pressed.");
+                if(GetSquareDropped.bsPlaced == false){
+                	Battleship.battleshipImageLabelVERT.setVisible(true);
+                }
+                if(GetSquareDropped.carrierPlaced == false){
+                	Battleship.carrierImageLabelVERT.setVisible(true);
+                }
+                if(GetSquareDropped.cruiserPlaced == false){
+                	Battleship.cruiserImageLabelVERT.setVisible(true);
+                }
+                if(GetSquareDropped.subPlaced == false){
+                	Battleship.submarineImageLabelVERT.setVisible(true);
+                }
+                if(GetSquareDropped.destroyerPlaced == false){
+                	Battleship.destroyerImageLabelVERT.setVisible(true);
+                }
+                Battleship.battleshipImageLabel.setVisible(false);
+                Battleship.carrierImageLabel.setVisible(false);
+                Battleship.cruiserImageLabel.setVisible(false);
+                Battleship.submarineImageLabel.setVisible(false);
+                Battleship.destroyerImageLabel.setVisible(false);
+            }
+        }
+
+		@Override
+		public void itemStateChanged(ItemEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void stateChanged(ChangeEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+    
 	}
 	
 	public static int randInt(int min, int max) {

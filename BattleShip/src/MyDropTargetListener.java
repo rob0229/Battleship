@@ -51,7 +51,7 @@ class MyDropTargetListener extends DropTargetAdapter {
 				// gets the ship being dragged, this is not a great way to do
 				// this, but it is functional for this project
 				draggedShip = ico.toString();
-
+System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@   DraggedShip string is "+ draggedShip);
 				GetShipInfo getShipInfo = new GetShipInfo(draggedShip);
 
 				if (ico != null) {
