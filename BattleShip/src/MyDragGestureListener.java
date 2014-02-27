@@ -22,6 +22,7 @@ class MyDragGestureListener implements DragGestureListener {
     	JLabel shipGrabbed = (JLabel) event.getComponent();
      
         final Icon ico = shipGrabbed.getIcon();
+   
 			
         Transferable transferable = new Transferable() {
             @Override

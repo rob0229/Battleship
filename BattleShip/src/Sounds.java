@@ -13,28 +13,28 @@ public class Sounds extends Thread {
 				
 				switch(i){
 				case 1: // hit()
-					url = this.getClass().getClassLoader().getResource("DepthCharge.wav");
+					url = this.getClass().getClassLoader().getResource("soundFiles/DepthCharge.wav");
 					break;
 				case 2: // ready()
-					url = this.getClass().getClassLoader().getResource("Quarters.wav");
+					url = this.getClass().getClassLoader().getResource("soundFiles/Quarters.wav");
 					break;
 				case 3: // win()
-					url = this.getClass().getClassLoader().getResource("Aweigh.wav");
+					url = this.getClass().getClassLoader().getResource("soundFiles/Aweigh.wav");
 					break;
 				case 4: // lose()
-					url = this.getClass().getClassLoader().getResource("GameOver.wav");
+					url = this.getClass().getClassLoader().getResource("soundFiles/GameOver.wav");
 					break;
 				case 5: // battleship
-					url = this.getClass().getClassLoader().getResource("SunkB.wav");
+					url = this.getClass().getClassLoader().getResource("soundFiles/SunkB.wav");
 					break;
 				case 6:	// sunk ship
-					url = this.getClass().getClassLoader().getResource("Doh.wav");
+					url = this.getClass().getClassLoader().getResource("soundFiles/Doh.wav");
 					break;
 				case 7:
-					url = this.getClass().getClassLoader().getResource("Bacon.wav");
+					url = this.getClass().getClassLoader().getResource("soundFiles/Bacon.wav");
 					break;
 				default: // miss
-					url = this.getClass().getClassLoader().getResource("Splash.wav");
+					url = this.getClass().getClassLoader().getResource("soundFiles/Splash.wav");
 					break;
 				}
 			  
@@ -96,7 +96,7 @@ public class Sounds extends Thread {
 	
 		
 		public void shoot(){
-			URL url = this.getClass().getClassLoader().getResource("DepthCharge.wav");
+			URL url = this.getClass().getClassLoader().getResource("soundFiles/DepthCharge.wav");
 			try {
 			AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
 			

@@ -77,11 +77,11 @@ public class GetSquareDropped {
 				bsPlaced = true;
 				Battleship.battleshipImageLabel.setVisible(false);
 				Battleship.battleshipImageLabelVERT.setVisible(false);
-			} else
-				System.out.println("You cannot place the ship there");
+			} //else
+				//System.out.println("You cannot place the ship there");
 		}
 
-		if (shipName.equals("Battleship_r") && orient == 1) {
+		if (shipName.equals("BattleshipV") && orient == 1) {
 
 			for (int i = 0; i < 4; i++) {
 				if (Battleship.playerGrid.getGridContents(x2, y2 + i) != "~") {
@@ -96,8 +96,8 @@ public class GetSquareDropped {
 				bsPlaced = true;
 				Battleship.battleshipImageLabel.setVisible(false);
 				Battleship.battleshipImageLabelVERT.setVisible(false);
-			} else
-				System.out.println("You cannot place the ship there");
+			} //else
+				//System.out.println("You cannot place the ship there");
 		}
 
 		if (shipName.equals("Carrier") && orient == 0) {
@@ -114,11 +114,11 @@ public class GetSquareDropped {
 				carrierPlaced = true;
 				Battleship.carrierImageLabel.setVisible(false);
 				Battleship.carrierImageLabelVERT.setVisible(false);
-			} else
-				System.out.println("You cannot place the ship there");
+			} //else
+				//System.out.println("You cannot place the ship there");
 		}
 
-		if (shipName.equals("Carrier_r") && orient == 1) {
+		if (shipName.equals("CarrierV") && orient == 1) {
 
 			for (int i = 0; i < 5; i++) {
 
@@ -135,8 +135,8 @@ public class GetSquareDropped {
 
 				Battleship.carrierImageLabel.setVisible(false);
 				Battleship.carrierImageLabelVERT.setVisible(false);
-			} else
-				System.out.println("You cannot place the ship there");
+			} //else
+				//System.out.println("You cannot place the ship there");
 		}
 
 		if (shipName.equals("Cruiser") && orient == 0) {
@@ -153,10 +153,10 @@ public class GetSquareDropped {
 				cruiserPlaced = true;
 				Battleship.cruiserImageLabel.setVisible(false);
 				Battleship.cruiserImageLabelVERT.setVisible(false);
-			} else
-				System.out.println("You cannot place the ship there");
+			} //else
+				//System.out.println("You cannot place the ship there");
 		}
-		if (shipName.equals("Cruiser_r") && orient == 1) {
+		if (shipName.equals("CruiserV") && orient == 1) {
 
 			for (int i = 0; i < 4; i++) {
 				if (Battleship.playerGrid.getGridContents(x2, y2 + i) != "~") {
@@ -171,8 +171,8 @@ public class GetSquareDropped {
 				cruiserPlaced = true;
 				Battleship.cruiserImageLabel.setVisible(false);
 				Battleship.cruiserImageLabelVERT.setVisible(false);
-			} else
-				System.out.println("You cannot place the ship there");
+			} //else
+				//System.out.println("You cannot place the ship there");
 		}
 		if (shipName.equals("Submarine") && orient == 0) {
 
@@ -188,11 +188,11 @@ public class GetSquareDropped {
 				subPlaced = true;
 				Battleship.submarineImageLabel.setVisible(false);
 				Battleship.submarineImageLabelVERT.setVisible(false);
-			} else
-				System.out.println("You cannot place the ship there");
+			} //else
+				//System.out.println("You cannot place the ship there");
 		}
 
-		if (shipName.equals("Submarine_r") && orient == 1) {
+		if (shipName.equals("SubmarineV") && orient == 1) {
 
 			for (int i = 0; i < 3; i++) {
 				if (Battleship.playerGrid.getGridContents(x2, y2 + i) != "~") {
@@ -207,8 +207,8 @@ public class GetSquareDropped {
 				subPlaced = true;
 				Battleship.submarineImageLabel.setVisible(false);
 				Battleship.submarineImageLabelVERT.setVisible(false);
-			} else
-				System.out.println("You cannot place the ship there");
+			} //else
+				//System.out.println("You cannot place the ship there");
 		}
 
 		if (shipName.equals("Destroyer") && orient == 0) {
@@ -226,11 +226,11 @@ public class GetSquareDropped {
 				destroyerPlaced = true;
 				Battleship.destroyerImageLabel.setVisible(false);
 				Battleship.destroyerImageLabelVERT.setVisible(false);
-			} else
-				System.out.println("You cannot place the ship there");
+			} //else
+				//System.out.println("You cannot place the ship there");
 		}
 
-		if (shipName.equals("Destroyer_r") && orient == 1) {
+		if (shipName.equals("DestroyerV") && orient == 1) {
 
 			for (int i = 0; i < 2; i++) {
 				if (Battleship.playerGrid.getGridContents(x2, y2 + i) != "~") {
@@ -245,17 +245,20 @@ public class GetSquareDropped {
 				destroyerPlaced = true;
 				Battleship.destroyerImageLabel.setVisible(false);
 				Battleship.destroyerImageLabelVERT.setVisible(false);
-			} else
-				System.out.println("You cannot place the ship there");
+			} //else
+				//System.out.println("You cannot place the ship there");
 
 		}
 
+		//test code prints grid
+		/*
 		for (int i = 0; i < 10; i++) {
 			System.out.println();
 			for (int j = 0; j < 10; j++) {
 				System.out.print(" " + Battleship.playerGrid.getGridContents(j, i) + " ");
 			}
 		}
+		*/
 
 	}
 

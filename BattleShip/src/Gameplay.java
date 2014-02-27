@@ -12,6 +12,7 @@ public class Gameplay {
 	int subHP = 3;
 	int destroyerHP = 2;
 	char s;
+	
 
 	public String Translate(String message) {
 
@@ -53,8 +54,8 @@ public class Gameplay {
 			if (pGridContents == "B") {
 				JLabel hitLabel = new JLabel();
 				JLabel missLabel = new JLabel();
-				hitLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("hitLabel.jpg")));
-				missLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("missLabel.jpg")));
+				hitLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(ConstantData.HITLABEL)));
+				missLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(ConstantData.MISSLABEL)));
 
 				battleshipHP--;
 				
@@ -72,8 +73,8 @@ public class Gameplay {
 					
 					sound.run(5);
 					Battleship.playerTurn = true;
-					Battleship.yourTurnLabel.setVisible(true);
-					Battleship.enemyTurnLabel.setVisible(false);
+					Battleship.yourTurnMessage.setVisible(true);
+					Battleship.enemyTurnMessage.setVisible(false);
 					return ("^^" + String.valueOf(x) + "0" + String.valueOf(y));
 				}
 				if (remainingShips == 0) {
@@ -81,9 +82,9 @@ public class Gameplay {
 					Battleship.displayMessage("\n !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 					Battleship.displayMessage("\n !!!!!!!!!!!!!! You Lost !!!!!!!!!!!!!");
 					Battleship.displayMessage("\n !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-					Battleship.yourTurnLabel.setVisible(false);
-					Battleship.enemyTurnLabel.setVisible(false);
-					Battleship.youLoseLabel.setVisible(true);
+					Battleship.yourTurnMessage.setVisible(false);
+					Battleship.enemyTurnMessage.setVisible(false);
+					Battleship.youLoseMessage.setVisible(true);
 					sound.run(4);
 					Battleship.gameStarted = false;
 					Battleship.playerTurn = false;
@@ -94,8 +95,8 @@ public class Gameplay {
 				
 					sound.run(1);
 					Battleship.playerTurn = true;
-					Battleship.yourTurnLabel.setVisible(true);
-					Battleship.enemyTurnLabel.setVisible(false);
+					Battleship.yourTurnMessage.setVisible(true);
+					Battleship.enemyTurnMessage.setVisible(false);
 					return ("!!" + String.valueOf(x) + "," + String.valueOf(y));
 				}
 
@@ -104,8 +105,8 @@ public class Gameplay {
 			else if (pGridContents == "C") {
 				JLabel hitLabel = new JLabel();
 				JLabel missLabel = new JLabel();
-				hitLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("hitLabel.jpg")));
-				missLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("missLabel.jpg")));
+				hitLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(ConstantData.HITLABEL)));
+				missLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(ConstantData.MISSLABEL)));
 
 				carrierHP--;
 
@@ -124,8 +125,8 @@ public class Gameplay {
 				
 					sound.run(6);
 					Battleship.playerTurn = true;
-					Battleship.yourTurnLabel.setVisible(true);
-					Battleship.enemyTurnLabel.setVisible(false);
+					Battleship.yourTurnMessage.setVisible(true);
+					Battleship.enemyTurnMessage.setVisible(false);
 					return ("^^" + String.valueOf(x) + "1" + String.valueOf(y));
 				}
 				if (remainingShips == 0) {
@@ -134,9 +135,9 @@ public class Gameplay {
 					Battleship.displayMessage("\n !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 					Battleship.displayMessage("\n !!!!!!!!!!!!!! You Lost !!!!!!!!!!!!!");
 					Battleship.displayMessage("\n !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-					Battleship.yourTurnLabel.setVisible(false);
-					Battleship.enemyTurnLabel.setVisible(false);
-					Battleship.youLoseLabel.setVisible(true);
+					Battleship.yourTurnMessage.setVisible(false);
+					Battleship.enemyTurnMessage.setVisible(false);
+					Battleship.youLoseMessage.setVisible(true);
 					sound.run(4);
 					Battleship.gameStarted = false;
 					Battleship.playerTurn = false;
@@ -146,8 +147,8 @@ public class Gameplay {
 			
 				sound.run(1);
 				Battleship.playerTurn = true;
-				Battleship.yourTurnLabel.setVisible(true);
-				Battleship.enemyTurnLabel.setVisible(false);
+				Battleship.yourTurnMessage.setVisible(true);
+				Battleship.enemyTurnMessage.setVisible(false);
 				return ("!!" + String.valueOf(x) + "," + String.valueOf(y));
 
 			}
@@ -155,8 +156,8 @@ public class Gameplay {
 			else if (pGridContents == "Z") {
 				JLabel hitLabel = new JLabel();
 				JLabel missLabel = new JLabel();
-				hitLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("hitLabel.jpg")));
-				missLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("missLabel.jpg")));
+				hitLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(ConstantData.HITLABEL)));
+				missLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(ConstantData.MISSLABEL)));
 
 				cruiserHP--;
 
@@ -174,8 +175,8 @@ public class Gameplay {
 				
 					sound.run(1);
 					Battleship.playerTurn = true;
-					Battleship.yourTurnLabel.setVisible(true);
-					Battleship.enemyTurnLabel.setVisible(false);
+					Battleship.yourTurnMessage.setVisible(true);
+					Battleship.enemyTurnMessage.setVisible(false);
 					return ("^^" + String.valueOf(x) + "2" + String.valueOf(y));
 				}
 				if (remainingShips == 0) {
@@ -184,9 +185,9 @@ public class Gameplay {
 					Battleship.displayMessage("\n !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 					Battleship.displayMessage("\n !!!!!!!!!!!!!! You Lost !!!!!!!!!!!!!");
 					Battleship.displayMessage("\n !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-					Battleship.yourTurnLabel.setVisible(false);
-					Battleship.enemyTurnLabel.setVisible(false);
-					Battleship.youLoseLabel.setVisible(true);
+					Battleship.yourTurnMessage.setVisible(false);
+					Battleship.enemyTurnMessage.setVisible(false);
+					Battleship.youLoseMessage.setVisible(true);
 					sound.run(4);
 					Battleship.gameStarted = false;
 					Battleship.playerTurn = false;
@@ -196,8 +197,8 @@ public class Gameplay {
 			
 				sound.run(1);
 				Battleship.playerTurn = true;
-				Battleship.yourTurnLabel.setVisible(true);
-				Battleship.enemyTurnLabel.setVisible(false);
+				Battleship.yourTurnMessage.setVisible(true);
+				Battleship.enemyTurnMessage.setVisible(false);
 				return ("!!" + String.valueOf(x) + "," + String.valueOf(y));
 			}
 
@@ -205,8 +206,8 @@ public class Gameplay {
 			else if (pGridContents == "S") {
 				JLabel hitLabel = new JLabel();
 				JLabel missLabel = new JLabel();
-				hitLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("hitLabel.jpg")));
-				missLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("missLabel.jpg")));
+				hitLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(ConstantData.HITLABEL)));
+				missLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(ConstantData.MISSLABEL)));
 				subHP--;
 
 				// displays on playerGrid enemy shots
@@ -222,8 +223,8 @@ public class Gameplay {
 					
 					sound.run(6);
 					Battleship.playerTurn = true;
-					Battleship.yourTurnLabel.setVisible(true);
-					Battleship.enemyTurnLabel.setVisible(false);
+					Battleship.yourTurnMessage.setVisible(true);
+					Battleship.enemyTurnMessage.setVisible(false);
 					return ("^^" + String.valueOf(x) + "3" + String.valueOf(y));
 				}
 				if (remainingShips == 0) {
@@ -232,9 +233,9 @@ public class Gameplay {
 					Battleship.displayMessage("\n !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 					Battleship.displayMessage("\n !!!!!!!!!!!!!! You Lost !!!!!!!!!!!!!");
 					Battleship.displayMessage("\n !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-					Battleship.yourTurnLabel.setVisible(false);
-					Battleship.enemyTurnLabel.setVisible(false);
-					Battleship.youLoseLabel.setVisible(true);
+					Battleship.yourTurnMessage.setVisible(false);
+					Battleship.enemyTurnMessage.setVisible(false);
+					Battleship.youLoseMessage.setVisible(true);
 					sound.run(4);
 					Battleship.gameStarted = false;
 					Battleship.playerTurn = false;
@@ -243,8 +244,8 @@ public class Gameplay {
 
 				sound.run(1);
 				Battleship.playerTurn = true;
-				Battleship.yourTurnLabel.setVisible(true);
-				Battleship.enemyTurnLabel.setVisible(false);
+				Battleship.yourTurnMessage.setVisible(true);
+				Battleship.enemyTurnMessage.setVisible(false);
 				return ("!!" + String.valueOf(x) + "," + String.valueOf(y));
 
 			}
@@ -252,8 +253,8 @@ public class Gameplay {
 			else if (pGridContents == "D") {
 				JLabel hitLabel = new JLabel();
 				JLabel missLabel = new JLabel();
-				hitLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("hitLabel.jpg")));
-				missLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("missLabel.jpg")));
+				hitLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(ConstantData.HITLABEL)));
+				missLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(ConstantData.MISSLABEL)));
 
 				destroyerHP--;
 
@@ -270,8 +271,8 @@ public class Gameplay {
 				if (destroyerHP == 0 && remainingShips != 0) {
 					sound.run(6);
 					Battleship.playerTurn = true;
-					Battleship.yourTurnLabel.setVisible(true);
-					Battleship.enemyTurnLabel.setVisible(false);
+					Battleship.yourTurnMessage.setVisible(true);
+					Battleship.enemyTurnMessage.setVisible(false);
 					return ("^^" + String.valueOf(x) + "4" + String.valueOf(y));
 				}
 				if (remainingShips == 0) {
@@ -279,9 +280,9 @@ public class Gameplay {
 					Battleship.displayMessage("\n !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 					Battleship.displayMessage("\n !!!!!!!!!!!!!! You Lost !!!!!!!!!!!!!");
 					Battleship.displayMessage("\n !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-					Battleship.yourTurnLabel.setVisible(false);
-					Battleship.enemyTurnLabel.setVisible(false);
-					Battleship.youLoseLabel.setVisible(true);
+					Battleship.yourTurnMessage.setVisible(false);
+					Battleship.enemyTurnMessage.setVisible(false);
+					Battleship.youLoseMessage.setVisible(true);
 					sound.run(4);
 					Battleship.gameStarted = false;
 					Battleship.playerTurn = false;
@@ -291,8 +292,8 @@ public class Gameplay {
 			
 				sound.run(1);
 				Battleship.playerTurn = true;
-				Battleship.yourTurnLabel.setVisible(true);
-				Battleship.enemyTurnLabel.setVisible(false);
+				Battleship.yourTurnMessage.setVisible(true);
+				Battleship.enemyTurnMessage.setVisible(false);
 				return ("!!" + String.valueOf(x) + "," + String.valueOf(y));
 
 			}
@@ -300,8 +301,8 @@ public class Gameplay {
 			else if (pGridContents == "~") {
 				JLabel hitLabel = new JLabel();
 				JLabel missLabel = new JLabel();
-				hitLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("hitLabel.jpg")));
-				missLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("missLabel.jpg")));
+				hitLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(ConstantData.HITLABEL)));
+				missLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(ConstantData.MISSLABEL)));
 				// displays on playerGrid enemy shots
 				Battleship.playerGrid.setGridContents(x, y, "M");
 				missLabel.setBounds(x2, y2, 28, 28);
@@ -312,8 +313,8 @@ public class Gameplay {
 			
 				sound.run(0);
 				Battleship.playerTurn = true;
-				Battleship.yourTurnLabel.setVisible(true);
-				Battleship.enemyTurnLabel.setVisible(false);
+				Battleship.yourTurnMessage.setVisible(true);
+				Battleship.enemyTurnMessage.setVisible(false);
 				return ("??" + String.valueOf(x) + "," + String.valueOf(y));
 
 			}
@@ -333,8 +334,8 @@ public class Gameplay {
 		if (l == '!' && m == '!') {
 			JLabel hitLabel = new JLabel();
 			JLabel missLabel = new JLabel();
-			hitLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("hitLabel.jpg")));
-			missLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("missLabel.jpg")));
+			hitLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(ConstantData.HITLABEL)));
+			missLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(ConstantData.MISSLABEL)));
 
 			Battleship.enemyGrid.setGridContents(x, y, "H");
 			hitLabel.setBounds(x2, y2, 28, 28);
@@ -344,16 +345,16 @@ public class Gameplay {
 		
 			sound.run(1);
 			Battleship.playerTurn = false;
-			Battleship.yourTurnLabel.setVisible(false);
-			Battleship.enemyTurnLabel.setVisible(true);
+			Battleship.yourTurnMessage.setVisible(false);
+			Battleship.enemyTurnMessage.setVisible(true);
 			return "\n-Your Turn-";
 		}
 		// miss
 		else if (l == '?' && m == '?') {
 			JLabel hitLabel = new JLabel();
 			JLabel missLabel = new JLabel();
-			hitLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("hitLabel.jpg")));
-			missLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("missLabel.jpg")));
+			hitLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(ConstantData.HITLABEL)));
+			missLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(ConstantData.MISSLABEL)));
 
 			Battleship.enemyGrid.setGridContents(x, y, "M");
 
@@ -364,16 +365,16 @@ public class Gameplay {
 		
 			sound.run(0);
 			Battleship.playerTurn = false;
-			Battleship.yourTurnLabel.setVisible(false);
-			Battleship.enemyTurnLabel.setVisible(true);
+			Battleship.yourTurnMessage.setVisible(false);
+			Battleship.enemyTurnMessage.setVisible(true);
 			return "\n-Your Turn-";
 		}
 		// sunk
 		else if (l == '^' && m == '^') {
 			JLabel hitLabel = new JLabel();
 			JLabel missLabel = new JLabel();
-			hitLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("hitLabel.jpg")));
-			missLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("missLabel.jpg")));
+			hitLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(ConstantData.HITLABEL)));
+			missLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(ConstantData.MISSLABEL)));
 			
 			// add code here to deduct the right ship from the enemy
 			// remaining panel
@@ -406,16 +407,16 @@ public class Gameplay {
 		
 			sound.run(7);
 			Battleship.playerTurn = false;
-			Battleship.yourTurnLabel.setVisible(false);
-			Battleship.enemyTurnLabel.setVisible(true);
+			Battleship.yourTurnMessage.setVisible(false);
+			Battleship.enemyTurnMessage.setVisible(true);
 			return "\n-Your Turn-";
 			
 		//All enemy ships sunk	
 		} else if (l == '>' && m == '>' ) {
 			JLabel hitLabel = new JLabel();
 			JLabel missLabel = new JLabel();
-			hitLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("hitLabel.jpg")));
-			missLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("missLabel.jpg")));
+			hitLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(ConstantData.HITLABEL)));
+			missLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(ConstantData.MISSLABEL)));
 			// add code here to deduct the right ship from the enemy
 			// remaining panel
 			Battleship.enemyGrid.setGridContents(x, y, "H");
@@ -433,9 +434,9 @@ public class Gameplay {
 			Battleship.displayMessage("\n !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 			Battleship.displayMessage("\n !!!!!!!!!!!!!! YOU WIN !!!!!!!!!!!!!!");
 			Battleship.displayMessage("\n !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");		
-			Battleship.yourTurnLabel.setVisible(false);
-			Battleship.enemyTurnLabel.setVisible(false);
-			Battleship.youWinLabel.setVisible(true);
+			Battleship.yourTurnMessage.setVisible(false);
+			Battleship.enemyTurnMessage.setVisible(false);
+			Battleship.youWinMessage.setVisible(true);
 			sound.run(3);
 			Battleship.playerTurn = false;
 			Battleship.gameStarted = false;
