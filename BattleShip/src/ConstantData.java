@@ -37,4 +37,5 @@ public class ConstantData {
 	public static String crImageVERT = "Cruiser_r.png";
 	public static String dImageVERT = "Destroyer_r.png";
 	public static String subImageVERT = "Submarine_r.png";
+	public static String INSTRUCTIONS = "Place your ships and then press the ready  button. You must sink all the enemy ships  before they sink yours.";
 }

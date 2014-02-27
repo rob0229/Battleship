@@ -1,3 +1,5 @@
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
@@ -63,6 +65,11 @@ public class Battleship extends JFrame {
 	private JButton hostButton;
 	private TextField ipAddressField;
 	private JLabel messageLabel1;
+	protected static JTextArea instructions;
+	protected static JTextArea yourTurnLabel;
+	protected static JTextArea enemyTurnLabel;
+	protected static JTextArea youWinLabel;
+	protected static JTextArea youLoseLabel;
 	protected static JLabel battleshipImageLabel;
 	protected static JLabel cruiserImageLabel;
 	protected static JLabel submarineImageLabel;
@@ -78,7 +85,7 @@ public class Battleship extends JFrame {
 	protected static JLabel enemyCruiserLabel;
 	protected static JLabel enemyDestroyerLabel;
 	protected static JLabel enemySubmarineLabel;
-	private JLabel jLabel5;
+	private JLabel readyButtonInstLabel;
 	private JLabel hostGameLabel;
 	private JLabel hostIPAdressLabel9;
 	private JPanel informationPanel;
@@ -129,13 +136,16 @@ public class Battleship extends JFrame {
 		controlPanel = new JPanel();
 		readyButton = new JButton();
 		randomButton = new JButton();
-		jLabel5 = new JLabel();
+		readyButtonInstLabel = new JLabel();
 		hostGameLabel = new JLabel();
 		hostIPAdressLabel9 = new JLabel();
 		ipAddressField = new java.awt.TextField();
 		shipOrientButton1 = new JRadioButton("Horizontal");
-		
-		
+		yourTurnLabel = new JTextArea("      Your Turn");
+		enemyTurnLabel = new JTextArea("   Opponents Turn");
+		youWinLabel = new JTextArea("     You Win!!!!");
+		youLoseLabel = new JTextArea("     You Lost!!!!");
+		instructions = new JTextArea(ConstantData.INSTRUCTIONS);
 		shipOrientButton2 = new JRadioButton("Vertical");
 		disconnectButton = new JButton();
 		connectButton = new JButton();
@@ -300,7 +310,7 @@ public class Battleship extends JFrame {
 
 		});
 		randomButton.setEnabled(true);
-		jLabel5.setText("Position Ships and push when ready");
+		readyButtonInstLabel.setText("Position Ships and push when ready");
 
 		hostGameLabel.setText("Host Game:");
 
@@ -343,17 +353,46 @@ public class Battleship extends JFrame {
 				hostButtonActionPerformed(evt);
 			}
 		});
-
+		instructions.setColumns(2);
+		instructions.setLineWrap(true);
+		instructions.setRows(5);
+		instructions.setFont(new Font("Serif", Font.BOLD, 16));
+		instructions.setBackground(Color.gray.brighter());
+		
+		yourTurnLabel.setFont(new Font("Serif", Font.BOLD, 36));
+		yourTurnLabel.setBackground(Color.green.brighter());
+		
+		enemyTurnLabel.setFont(new Font("Serif", Font.BOLD, 32));
+		enemyTurnLabel.setBackground(Color.red.brighter());
+		
+		youWinLabel.setFont(new Font("Serif", Font.BOLD, 36));
+		youWinLabel.setBackground(Color.green.brighter());
+		
+		youLoseLabel.setFont(new Font("Serif", Font.BOLD, 36));
+		youLoseLabel.setBackground(Color.red.brighter());
+		
 		informationPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 		informationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Information"));
 		javax.swing.GroupLayout informationPanelLayout = new javax.swing.GroupLayout(informationPanel);
 		informationPanel.setLayout(informationPanelLayout);
-		informationPanelLayout.setHorizontalGroup(informationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 0, Short.MAX_VALUE));
-		informationPanelLayout.setVerticalGroup(informationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 101, Short.MAX_VALUE));
+		informationPanelLayout.setHorizontalGroup(informationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(informationPanelLayout.createSequentialGroup()
+    				.addComponent(instructions, GroupLayout.PREFERRED_SIZE, 300,GroupLayout.PREFERRED_SIZE)	
+    				.addComponent(yourTurnLabel, GroupLayout.PREFERRED_SIZE, 300,GroupLayout.PREFERRED_SIZE)
+    				.addComponent(enemyTurnLabel, GroupLayout.PREFERRED_SIZE, 300,GroupLayout.PREFERRED_SIZE)
+    				.addComponent(youWinLabel, GroupLayout.PREFERRED_SIZE, 300,GroupLayout.PREFERRED_SIZE)
+    				.addComponent(youLoseLabel, GroupLayout.PREFERRED_SIZE, 300,GroupLayout.PREFERRED_SIZE)));
+		informationPanelLayout.setVerticalGroup(informationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addComponent(instructions, GroupLayout.PREFERRED_SIZE, 100,GroupLayout.PREFERRED_SIZE)
+				.addComponent(yourTurnLabel, GroupLayout.PREFERRED_SIZE, 100,GroupLayout.PREFERRED_SIZE)
+				.addComponent(enemyTurnLabel, GroupLayout.PREFERRED_SIZE, 100,GroupLayout.PREFERRED_SIZE)
+				.addComponent(youWinLabel, GroupLayout.PREFERRED_SIZE, 100,GroupLayout.PREFERRED_SIZE)
+				.addComponent(youLoseLabel, GroupLayout.PREFERRED_SIZE, 100,GroupLayout.PREFERRED_SIZE));
 
 		javax.swing.GroupLayout controlPanelLayout = new javax.swing.GroupLayout(controlPanel);
 		controlPanel.setLayout(controlPanelLayout);
-		controlPanelLayout.setHorizontalGroup(controlPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(
+		controlPanelLayout.setHorizontalGroup(controlPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addGroup(
 				controlPanelLayout.createSequentialGroup()
 				.addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addComponent(informationPanel, javax.swing.GroupLayout.DEFAULT_SIZE,javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -370,10 +409,13 @@ public class Battleship extends JFrame {
     				.addComponent(hostButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85,javax.swing.GroupLayout.PREFERRED_SIZE)
     				.addGap(15, 15, 15))).addGap(18, 18, 18).addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
     				.addComponent(disconnectButton).addComponent(connectButton,javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
-    				.addGroup(controlPanelLayout.createSequentialGroup().addGap(142, 142, 142)
+    				.addGroup(controlPanelLayout.createSequentialGroup()
+    						.addGap(142, 142, 142)
     				.addComponent(readyButton))	
 				.addGroup(controlPanelLayout.createSequentialGroup()
-					.addGap(92, 92, 92).addComponent(jLabel5))).addGap(0, 35, Short.MAX_VALUE)))
+					.addGap(0, 5, 75)
+					.addComponent(readyButtonInstLabel)))
+					.addGap(10, 35, 70)))
 					.addContainerGap()));
 		
 		controlPanelLayout.setVerticalGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -392,9 +434,9 @@ public class Battleship extends JFrame {
 				.addComponent(hostIPAdressLabel9, javax.swing.GroupLayout.DEFAULT_SIZE,javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 				.addComponent(connectButton))
 				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-				.addComponent(informationPanel, javax.swing.GroupLayout.PREFERRED_SIZE,javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+				.addComponent(informationPanel, javax.swing.GroupLayout.PREFERRED_SIZE,150, javax.swing.GroupLayout.PREFERRED_SIZE)
 				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED,javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-				.addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+				.addComponent(readyButtonInstLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
 				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 				.addComponent(readyButton)));
 
@@ -584,9 +626,14 @@ public class Battleship extends JFrame {
         Battleship.cruiserImageLabelVERT.setVisible(false);
         Battleship.submarineImageLabelVERT.setVisible(false);
         Battleship.destroyerImageLabelVERT.setVisible(false);
+        yourTurnLabel.setVisible(false);
+        enemyTurnLabel.setVisible(false);
+        youWinLabel.setVisible(false);
+        youLoseLabel.setVisible(false);
 		pack();
 	}
 	
+	//Displays Horizontal or Vertical ships for player placement
 	class RadioListener implements ActionListener, ChangeListener, ItemListener {  //for curiosity only
         public void actionPerformed(ActionEvent e) {
             //String factoryName = null;
@@ -656,12 +703,14 @@ public class Battleship extends JFrame {
     
 	}
 	
+	//generates a randomm integer
 	public static int randInt(int min, int max) {
 		Random rand = new Random();
 		int randomNum = rand.nextInt((max - min) + 1) + min;
 		return randomNum;
 	}
-
+	
+	//gets user messages
 	private void userChatEnterActionPerformed(java.awt.event.ActionEvent evt) {
 		if (isServer == true) {
 			displayMessage("\nServer says >>> " + userChatEnter.getText());
@@ -675,26 +724,30 @@ public class Battleship extends JFrame {
 
 	}
 
+	//takes ipAddress
 	private void ipAddressFieldActionPerformed(java.awt.event.ActionEvent evt) {
 		
 		ipAddress = ipAddressField.getText();
-		System.out.println("IP Address is "+ ipAddress);
+		
 	}
 
 	private void readyButtonActionPerformed(ActionEvent evt) {
-		System.out.println("All ships placed = " + GetSquareDropped.allShipsPlaced());
+		
 		// check that all ships are placed
 		if (GetSquareDropped.allShipsPlaced()) {
 			playerReady = true;
+			instructions.setVisible(false);
 			sound.run(2);
 			readyButton.setEnabled(false);
 			if (enemyReady == true) {
 				gameStarted = true;
 			}
 			if (isServer) {
+				yourTurnLabel.setVisible(true);
 				sendData("#####");
 			} else if (isServer == false) {
 				sendDataClient("#####");
+				enemyTurnLabel.setVisible(true);
 			}
 		}
 
