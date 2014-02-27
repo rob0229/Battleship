@@ -471,6 +471,14 @@ public class Battleship extends JFrame {
 				carrierImageLabelVERT= new JLabel(carrierV.getIcon());
 				destroyerImageLabelVERT = new JLabel(destroyerV.getIcon());
 				battleshipImageLabelVERT = new JLabel(battleshipV.getIcon());
+				
+				//enemy ships horizontal
+				enemyCruiserLabel = new JLabel(cruiser.getIcon());
+				enemySubmarineLabel = new JLabel(submarine.getIcon());
+				enemyCarrierLabel = new JLabel(carrier.getIcon());
+				enemyDestroyerLabel = new JLabel(destroyer.getIcon());
+				enemyBattleshipLabel = new JLabel(battleship.getIcon());
+			
 
 		
 		cruiserImageLabel.setPreferredSize(new java.awt.Dimension(120, 60));
