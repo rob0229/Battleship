@@ -181,7 +181,7 @@ public class Gameplay {
 				}
 				if (remainingShips == 0) {
 					
-					sound.run(6);
+					sound.run(1);
 					Battleship.displayMessage("\n !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 					Battleship.displayMessage("\n !!!!!!!!!!!!!! You Lost !!!!!!!!!!!!!");
 					Battleship.displayMessage("\n !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
@@ -221,7 +221,7 @@ public class Gameplay {
 				// checks for sunk ship and endGame condition
 				if (subHP == 0 && remainingShips != 0) {
 					
-					sound.run(6);
+					sound.run(1);
 					Battleship.playerTurn = true;
 					Battleship.yourTurnMessage.setVisible(true);
 					Battleship.enemyTurnMessage.setVisible(false);
@@ -269,7 +269,7 @@ public class Gameplay {
 				}
 				// checks for sunk ship and endGame condition
 				if (destroyerHP == 0 && remainingShips != 0) {
-					sound.run(6);
+					sound.run(1);
 					Battleship.playerTurn = true;
 					Battleship.yourTurnMessage.setVisible(true);
 					Battleship.enemyTurnMessage.setVisible(false);
