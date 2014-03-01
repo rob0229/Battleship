@@ -173,7 +173,7 @@ public class Gameplay {
 				// checks for sunk ship and endGame condition
 				if (cruiserHP == 0 && remainingShips != 0) {
 				
-					sound.run(1);
+					sound.run(6);
 					Battleship.playerTurn = true;
 					Battleship.yourTurnMessage.setVisible(true);
 					Battleship.enemyTurnMessage.setVisible(false);
@@ -221,7 +221,7 @@ public class Gameplay {
 				// checks for sunk ship and endGame condition
 				if (subHP == 0 && remainingShips != 0) {
 					
-					sound.run(1);
+					sound.run(6);
 					Battleship.playerTurn = true;
 					Battleship.yourTurnMessage.setVisible(true);
 					Battleship.enemyTurnMessage.setVisible(false);
@@ -269,7 +269,7 @@ public class Gameplay {
 				}
 				// checks for sunk ship and endGame condition
 				if (destroyerHP == 0 && remainingShips != 0) {
-					sound.run(1);
+					sound.run(6);
 					Battleship.playerTurn = true;
 					Battleship.yourTurnMessage.setVisible(true);
 					Battleship.enemyTurnMessage.setVisible(false);
@@ -380,20 +380,23 @@ public class Gameplay {
 			// remaining panel
 			System.out.println("S (the ship sunk ) = "+ s);
 			if(s == '0'){
+				sound.run(8);
 				Battleship.enemyBattleshipLabel.setVisible(false);
 			}
 			else if(s == '1'){
+				sound.run(7);
 				Battleship.enemyCarrierLabel.setVisible(false);
 			}
 			else if(s == '2'){
+				sound.run(8);
 				Battleship.enemyCruiserLabel.setVisible(false);
 			}
 			else if(s == '3'){
-			
+				sound.run(8);
 				Battleship.enemySubmarineLabel.setVisible(false);
 			}
 			else if(s == '4'){
-				
+				sound.run(8);
 				Battleship.enemyDestroyerLabel.setVisible(false);
 			}
 			Battleship.enemyRemainingPanel.repaint();
@@ -405,7 +408,6 @@ public class Gameplay {
 			Battleship.enemyPanel.repaint();
 			Battleship.enemyPanel.revalidate();
 		
-			sound.run(7);
 			Battleship.playerTurn = false;
 			Battleship.yourTurnMessage.setVisible(false);
 			Battleship.enemyTurnMessage.setVisible(true);

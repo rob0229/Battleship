@@ -33,6 +33,9 @@ public class Sounds extends Thread {
 				case 7:
 					url = this.getClass().getClassLoader().getResource("soundFiles/Bacon.wav");
 					break;
+				case 8:
+					url = this.getClass().getClassLoader().getResource("soundFiles/Hasta.wav");
+					break;
 				default: // miss
 					url = this.getClass().getClassLoader().getResource("soundFiles/Splash.wav");
 					break;
