@@ -61,7 +61,6 @@ public class Battleship extends JFrame {
 	private JToggleButton shipOrientButton1, shipOrientButton2;
 	private JButton connectButton;
 	private JPanel controlPanel;
-	private JButton disconnectButton;
 	public static JPanel enemyPanel;
 	private JButton hostButton;
 	private TextField ipAddressField;
@@ -158,7 +157,6 @@ public class Battleship extends JFrame {
 		//Buttons
 		shipOrientButton1 = new JRadioButton("Horizontal");
 		shipOrientButton2 = new JRadioButton("Vertical");
-		disconnectButton = new JButton();
 		connectButton = new JButton();
 		readyButton = new JButton();
 		randomButton = new JButton();
@@ -330,14 +328,6 @@ public class Battleship extends JFrame {
 			}
 		});
 
-		disconnectButton.setText("Disconnect");
-		disconnectButton.addActionListener(new java.awt.event.ActionListener() {
-			@Override
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				disconnectButtonActionPerformed(evt);
-			}
-		});
-
 		connectButton.setText("Connect");
 		connectButton.addActionListener(new java.awt.event.ActionListener() {
 			@Override
@@ -415,7 +405,7 @@ public class Battleship extends JFrame {
 				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING,controlPanelLayout.createSequentialGroup()
     				.addComponent(hostButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85,javax.swing.GroupLayout.PREFERRED_SIZE)
     				.addGap(15, 15, 15))).addGap(18, 18, 18).addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-    				.addComponent(disconnectButton).addComponent(connectButton,javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+    				.addComponent(connectButton,javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
     				.addGroup(controlPanelLayout.createSequentialGroup()
     						.addGap(142, 142, 142)
     				.addComponent(readyButton))	
@@ -433,7 +423,7 @@ public class Battleship extends JFrame {
 				.addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
 				.addComponent(hostGameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23,javax.swing.GroupLayout.PREFERRED_SIZE)
 				.addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-				.addComponent(disconnectButton).addComponent(hostButton)))
+				.addComponent(hostButton)))
 				.addGap(21, 21, 21)
 				.addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
