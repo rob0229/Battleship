@@ -61,7 +61,7 @@ public class Gameplay {
 				
 				// displays on playerGrid enemy shots
 				hitLabel.setBounds(x2, y2, 28, 28);
-				Battleship.playerPanel.add(hitLabel, 0);
+				Battleship.playerPanel.add(hitLabel, -1);
 				Battleship.playerPanel.repaint();
 				Battleship.playerPanel.revalidate();
 				
@@ -112,7 +112,7 @@ public class Gameplay {
 
 				// displays on playerGrid enemy shots
 				hitLabel.setBounds(x2, y2, 28, 28);
-				Battleship.playerPanel.add(hitLabel, 0);
+				Battleship.playerPanel.add(hitLabel, -1);
 				Battleship.playerPanel.repaint();
 				Battleship.playerPanel.revalidate();
 				
@@ -163,7 +163,7 @@ public class Gameplay {
 
 				// displays on playerGrid enemy shots
 				hitLabel.setBounds(x2, y2, 28, 28);
-				Battleship.playerPanel.add(hitLabel, 0);
+				Battleship.playerPanel.add(hitLabel, -1);
 				Battleship.playerPanel.repaint();
 				Battleship.playerPanel.revalidate();
 				
@@ -212,7 +212,7 @@ public class Gameplay {
 
 				// displays on playerGrid enemy shots
 				hitLabel.setBounds(x2, y2, 28, 28);
-				Battleship.playerPanel.add(hitLabel, 0);
+				Battleship.playerPanel.add(hitLabel, -1);
 				Battleship.playerPanel.repaint();
 				Battleship.playerPanel.revalidate();
 				if(subHP == 0){
@@ -260,7 +260,7 @@ public class Gameplay {
 
 				// displays on playerGrid enemy shots
 				hitLabel.setBounds(x2, y2, 28, 28);
-				Battleship.playerPanel.add(hitLabel, 0);
+				Battleship.playerPanel.add(hitLabel, -1);
 				Battleship.playerPanel.repaint();
 				Battleship.playerPanel.revalidate();
 				
