@@ -13,7 +13,7 @@ public class ConstantData {
 	public static String DESTROYERVERT = "src/img/Destroyer_r.png";
 	public static String SUBMARINEVERT = "src/img/Submarine_r.png";
 	
-	public static String HITLABEL = "img/hitLabel.jpg";
+	public static String HITLABEL = "img/hitLabel.gif";
 	public static String MISSLABEL = "img/missLabel.jpg";
 	
 	public static String INSTRUCTIONS = "Place your ships and then press the ready \nbutton. You must sink all the enemy \nships before they sink yours.";
