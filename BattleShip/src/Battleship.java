@@ -1064,26 +1064,31 @@ public class Battleship extends JFrame {
 				 * ">>>" //the player has sunk all 5 enemy ships and therefore
 				 * won the game
 				 */
-				if ((message.length() == 5)) {
-					char l = message.charAt(0);
-					char m = message.charAt(1);
+				
+				if (!message.equals("*Comment*")) {
+					if ((message.length() == 5)) {
+						char l = message.charAt(0);
+						char m = message.charAt(1);
 
-					if ((l == '@' && m == '@') || (l == '!' && m == '!') || (l == '?' && m == '?') || (l == '^' && m == '^') || (l == '>' && m == '>') || (l == '#' && m == '#')) {
-						// filters the string message to determine if it is a
-						// game event or just a user message.
-						// if it is a game event, Gameplay class handles it.
+						if ((l == '@' && m == '@') || (l == '!' && m == '!') || (l == '?' && m == '?') || 
+								(l == '^' && m == '^') || (l == '>' && m == '>') || (l == '#' && m == '#')) {
+							// filters the string message to determine if it is
+							// a
+							// game event or just a user message.
+							// if it is a game event, Gameplay class handles it.
 
-						message = game.Translate(message);
+							message = game.Translate(message);
 
-						sendData(message);
+							sendData(message);
+						}
+						// message is length 5 but not a GEM
+						else
+							displayMessage("\nClient says>>> " + message);
 					}
-					// message is length 5 but not a GEM
-					else
+					// message is not length 5
+					else if (message != null)
 						displayMessage("\nClient says>>> " + message);
 				}
-				// message is not length 5
-				else if (message != null)
-					displayMessage("\nClient says>>> "+message);
 
 			} // end try
 			catch (ClassNotFoundException classNotFoundException) {
@@ -1207,29 +1212,30 @@ public class Battleship extends JFrame {
 			try // read message and display it
 			{
 				message = (String) input.readObject(); // read new message
+				if (!message.equals("*Comment*")) {
+					if ((message.length() == 5)) {
+						char l = message.charAt(0);
+						char m = message.charAt(1);
 
-				if ((message.length() == 5)) {
-					char l = message.charAt(0);
-					char m = message.charAt(1);
+						if ((l == '@' && m == '@') || (l == '!' && m == '!') || (l == '?' && m == '?') || 
+								(l == '^' && m == '^') || (l == '>' && m == '>') || (l == '#' && m == '#')) {
+							// filters the string message to determine if it is
+							// a
+							// game event or just a user message.
+							// if it is a game event, Gameplay class handles it.
 
-					if ((l == '@' && m == '@') || (l == '!' && m == '!') || (l == '?' && m == '?') || 
-							(l == '^' && m == '^') || (l == '>' && m == '>') || (l == '#' && m == '#')) {
-						// filters the string message to determine if it is a
-						// game event or just a user message.
-						// if it is a game event, Gameplay class handles it.
+							message = game.Translate(message);
 
-						
-						message = game.Translate(message);
-
-						sendDataClient(message);
+							sendDataClient(message);
+						}
+						// message is length 5 but not a GEM
+						else
+							displayMessage("\nServer says >>> " + message);
 					}
-					// message is length 5 but not a GEM
-					else
+					// message != 5
+					else if (message != null)
 						displayMessage("\nServer says >>> " + message);
 				}
-				// message != 5
-				else if (message != null)
-					displayMessage("\nServer says >>> " + message);
 
 			} // end try
 			catch (ClassNotFoundException classNotFoundException) {
