@@ -57,12 +57,10 @@ class MyDropTargetListener extends DropTargetAdapter {
 				GetSquareDropped.validDrop = true;
 				Icon ico = (Icon) tr.getTransferData(DataFlavor.imageFlavor);
 				
-				//Icon ico = (Icon) tr.getTransferData(DataFlavor.imageFlavor);
 				// gets the ship being dragged, this is not a great way to do
 				// this, but it is functional for this project
 				draggedShip = ico.toString();
 				
-				System.out.println("ICON to string is " +draggedShip);
 				GetShipInfo getShipInfo = new GetShipInfo(draggedShip);
 
 				if (ico != null) {

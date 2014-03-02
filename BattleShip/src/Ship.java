@@ -15,7 +15,6 @@ public class Ship {
 	public Ship(String name, String constantData, int o) {
 		shipName = name;
 		ico = new ImageIcon(constantData);
-		//ico = new ImageIcon(getClass().getResource(constantData));
 		ori=o;
 	}
 	
