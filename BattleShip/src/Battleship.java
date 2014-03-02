@@ -22,13 +22,9 @@ import java.net.Socket;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.SourceDataLine;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -135,8 +131,9 @@ public class Battleship extends JFrame {
 		//sound.easteregg();
 	}
 
-	@SuppressWarnings("unchecked")
+	
 	// <editor-fold default state="collapsed" desc="Generated Code">
+	@SuppressWarnings("serial")
 	private void initComponents() {
 		//JTextFields
 		userChatEnter = new JTextField();
@@ -1085,7 +1082,7 @@ public class Battleship extends JFrame {
 						displayMessage("\nClient says>>> " + message);
 				}
 				// message is not length 5
-				else
+				else if (message != null)
 					displayMessage("\nClient says>>> "+message);
 
 			} // end try
@@ -1119,9 +1116,10 @@ public class Battleship extends JFrame {
 	public void sendData(String message) {
 		try // send object to client
 		{
+			
 			output.writeObject(message);
 			output.flush(); // flush output to client
-			// displayMessage( "\nPLAYER 1>>> " + message );
+			
 		} // end try
 		catch (IOException ioException) {
 			messageTextArea.append("\nError writing object");
@@ -1230,7 +1228,7 @@ public class Battleship extends JFrame {
 						displayMessage("\nServer says >>> " + message);
 				}
 				// message != 5
-				else
+				else if (message != null)
 					displayMessage("\nServer says >>> " + message);
 
 			} // end try
@@ -1262,7 +1260,7 @@ public class Battleship extends JFrame {
 		{
 			outputClient.writeObject(message);
 			outputClient.flush(); // flush output to client
-			// displayMessage( "\nPLAYER 2>>> " + message );
+			
 		} // end try
 		catch (IOException ioException) {
 			messageTextArea.append("\nError writing object");

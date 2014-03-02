@@ -347,7 +347,7 @@ public class Gameplay {
 			Battleship.playerTurn = false;
 			Battleship.yourTurnMessage.setVisible(false);
 			Battleship.enemyTurnMessage.setVisible(true);
-			return "\n-Your Turn-";
+			return "Your Move, Dirt Bag";
 		}
 		// miss
 		else if (l == '?' && m == '?') {
@@ -367,7 +367,7 @@ public class Gameplay {
 			Battleship.playerTurn = false;
 			Battleship.yourTurnMessage.setVisible(false);
 			Battleship.enemyTurnMessage.setVisible(true);
-			return "\n-Your Turn-";
+			return "Your Move, Dirt Bag";
 		}
 		// sunk
 		else if (l == '^' && m == '^') {
@@ -411,7 +411,7 @@ public class Gameplay {
 			Battleship.playerTurn = false;
 			Battleship.yourTurnMessage.setVisible(false);
 			Battleship.enemyTurnMessage.setVisible(true);
-			return "\n-Your Turn-";
+			return "Your Move, Dirt Bag";
 			
 		//All enemy ships sunk	
 		} else if (l == '>' && m == '>' ) {

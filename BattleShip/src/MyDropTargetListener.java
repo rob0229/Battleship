@@ -43,17 +43,20 @@ class MyDropTargetListener extends DropTargetAdapter {
 			dropPoint = ca.getMousePosition();
 			// data that is transfered to new panel (ship image file)
 			Transferable tr = event.getTransferable();
+			
 
 			// checks that the data being dragged is an imageFlavor
 			if (event.isDataFlavorSupported(DataFlavor.imageFlavor)) {
 				// resets validDrop to evaluate each move independently
 				GetSquareDropped.validDrop = true;
 				Icon ico = (Icon) tr.getTransferData(DataFlavor.imageFlavor);
+				
+				//Icon ico = (Icon) tr.getTransferData(DataFlavor.imageFlavor);
 				// gets the ship being dragged, this is not a great way to do
 				// this, but it is functional for this project
 				draggedShip = ico.toString();
 				
-				System.out.println(draggedShip);
+				System.out.println("ICON to string is " +draggedShip);
 				GetShipInfo getShipInfo = new GetShipInfo(draggedShip);
 
 				if (ico != null) {
