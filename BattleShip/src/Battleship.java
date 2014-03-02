@@ -1089,6 +1089,8 @@ public class Battleship extends JFrame {
 					else if (message != null)
 						displayMessage("\nClient says>>> " + message);
 				}
+				if(message.equals("pew pew"))
+					sound.easteregg();
 
 			} // end try
 			catch (ClassNotFoundException classNotFoundException) {
@@ -1236,6 +1238,9 @@ public class Battleship extends JFrame {
 					else if (message != null)
 						displayMessage("\nServer says >>> " + message);
 				}
+				
+				if(message.equals("pew pew"))
+					sound.easteregg();
 
 			} // end try
 			catch (ClassNotFoundException classNotFoundException) {
