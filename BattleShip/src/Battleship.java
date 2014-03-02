@@ -168,6 +168,8 @@ public class Battleship extends JFrame {
 		enemyCruiserLabel = new JLabel();
 		enemySubmarineLabel = new JLabel();
 		enemyDestroyerLabel = new JLabel();
+		
+		
 		//Panels
 		messagePanel = new JPanel();
 		controlPanel = new JPanel();
@@ -468,7 +470,7 @@ public class Battleship extends JFrame {
 				enemyCarrierLabel = new JLabel(carrier.getIcon());
 				enemyDestroyerLabel = new JLabel(destroyer.getIcon());
 				enemyBattleshipLabel = new JLabel(battleship.getIcon());
-			
+				
 
 		
 		cruiserImageLabel.setPreferredSize(new java.awt.Dimension(120, 60));
@@ -772,6 +774,7 @@ public class Battleship extends JFrame {
 			if(randOrient == 0){
 				JLabel randBSLabel = new JLabel();
 			randBSLabel.setIcon(battleship.getIcon());
+			
 			randomX = randInt(21, 319);
 			randomY = randInt(30, 300);	
 			Point randPoint = new Point(randomX, randomY);
@@ -993,12 +996,6 @@ public class Battleship extends JFrame {
 			Thread serverThread = new Thread(serverRunnable);
 			serverThread.start(); // run server application
 		}
-	}
-
-	private void disconnectButtonActionPerformed(java.awt.event.ActionEvent evt) {
-
-		closeConnection();
-
 	}
 
 	/* Start of server Methods */
