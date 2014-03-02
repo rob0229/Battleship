@@ -1,3 +1,8 @@
+/*
+ Battleship
+ Copyright: Rob Close and Charlie Sun
+ Created on: 03/01/2014
+ */
 
 public class ConstantData {
 		

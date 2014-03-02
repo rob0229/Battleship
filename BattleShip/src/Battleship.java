@@ -1,3 +1,9 @@
+/**
+ Battleship
+ Copyright: Rob Close and Charlie Sun
+ Created on: 03/01/2014
+ */
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -42,11 +48,8 @@ import javax.swing.event.ChangeListener;
 
 
 
-/**
- * 
- * @author Rob and Charlie
- */
 public class Battleship extends JFrame {
+	
 	private Gameplay game = new Gameplay();
 	protected boolean allShipsPlaced = false;
 	public static boolean playerReady;
@@ -111,6 +114,7 @@ public class Battleship extends JFrame {
 	private Socket client; // socket to communicate with server
 	Image image;
 	final Sounds sound = new Sounds();
+	
 	//Ships
 	private Ship battleship = new Ship("Battleship", ConstantData.BATTLESHIP, 0);
 	private Ship carrier = new Ship("Carrier", ConstantData.CARRIER,0);
@@ -124,6 +128,7 @@ public class Battleship extends JFrame {
 	private Ship destroyerV = new Ship("DestroyerV", ConstantData.DESTROYERVERT, 1);
 
 	/**
+	 * Constructor
 	 * Creates new form Battleship
 	 */
 	public Battleship() {
@@ -137,12 +142,14 @@ public class Battleship extends JFrame {
 	private void initComponents() {
 		//JTextFields
 		userChatEnter = new JTextField();
+		
 		//JLabels
 		messageLabel1 = new JLabel();
 		readyButtonInstLabel = new JLabel();
 		hostGameLabel = new JLabel();
 		hostIPAdressLabel9 = new JLabel();
 		ipAddressField = new java.awt.TextField();
+		
 		//JText Areas
 		jScrollPane2 = new JScrollPane();
 		messageTextArea = new JTextArea();
@@ -151,6 +158,7 @@ public class Battleship extends JFrame {
 		youWinMessage = new JTextArea("      You Win!!!!");
 		youLoseMessage = new JTextArea("      You Lost!!!!");
 		instructions = new JTextArea(ConstantData.INSTRUCTIONS);
+		
 		//Buttons
 		shipOrientButton1 = new JRadioButton("Horizontal");
 		shipOrientButton2 = new JRadioButton("Vertical");
@@ -165,8 +173,7 @@ public class Battleship extends JFrame {
 		enemyCruiserLabel = new JLabel();
 		enemySubmarineLabel = new JLabel();
 		enemyDestroyerLabel = new JLabel();
-		
-		
+				
 		//Panels
 		messagePanel = new JPanel();
 		controlPanel = new JPanel();
@@ -174,11 +181,12 @@ public class Battleship extends JFrame {
 		shipInventory = new JPanel();
 		enemyRemainingPanel = new JPanel();
 		enemyPanel = new JPanel();
+		
 		//Grids
 		playerGrid = new PlayerGrid();
 		enemyGrid = new EnemyGrid();
 		
-
+		// Ocean image
 		try {
 			image = ImageIO.read(this.getClass().getResource("img/oceanGrid.png"));
 		} catch (IOException e) {
@@ -218,15 +226,15 @@ public class Battleship extends JFrame {
 		enemyPanel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+
 				if (gameStarted) {
-					
+
 					String message;
 					if (playerTurn == true) {
 						message = Gameplay.attack(e.getPoint());
 						// ensures the grid square has not been chosen before
 						if (!(message.equals("*****"))) {
-							
+
 							if (isServer && playerTurn) {
 								playerTurn = false;
 								sendData(message);
@@ -236,7 +244,7 @@ public class Battleship extends JFrame {
 								sendDataClient(message);
 
 							} else if (playerTurn == false) {
-								
+
 								displayMessage("\nIts not your turn!");
 							}
 						}
@@ -245,6 +253,9 @@ public class Battleship extends JFrame {
 			}
 		});
 
+		
+		// GUI components
+		
 		messagePanel.setBorder(BorderFactory.createTitledBorder(null, "Message Center", TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION));
 		messageLabel1.setText("Message: ");
 
@@ -290,7 +301,7 @@ public class Battleship extends JFrame {
 		shipOrientButton2.setActionCommand("Vertical");
 		//shipOrientButton2.setSelected(false);
 		
-		  // Group the radio buttons.
+		 // Group the radio buttons.
 	    ButtonGroup group = new ButtonGroup();
 	    group.add(shipOrientButton1);
 	    group.add(shipOrientButton2);
@@ -448,28 +459,27 @@ public class Battleship extends JFrame {
 		shipInventory.setBorder(javax.swing.BorderFactory.createTitledBorder("Ship Inventory"));
 		
 		//player ships horizontal
-				cruiserImageLabel = new JLabel(cruiser.getIcon());
-				submarineImageLabel = new JLabel(submarine.getIcon());
-				carrierImageLabel = new JLabel(carrier.getIcon());
-				destroyerImageLabel = new JLabel(destroyer.getIcon());
-				battleshipImageLabel = new JLabel(battleship.getIcon());
-			
-				//player ships vertical
-				cruiserImageLabelVERT = new JLabel(cruiserV.getIcon());
-				submarineImageLabelVERT = new JLabel(submarineV.getIcon());
-				carrierImageLabelVERT= new JLabel(carrierV.getIcon());
-				destroyerImageLabelVERT = new JLabel(destroyerV.getIcon());
-				battleshipImageLabelVERT = new JLabel(battleshipV.getIcon());
-				
-				//enemy ships horizontal
-				enemyCruiserLabel = new JLabel(cruiser.getIcon());
-				enemySubmarineLabel = new JLabel(submarine.getIcon());
-				enemyCarrierLabel = new JLabel(carrier.getIcon());
-				enemyDestroyerLabel = new JLabel(destroyer.getIcon());
-				enemyBattleshipLabel = new JLabel(battleship.getIcon());
+		cruiserImageLabel = new JLabel(cruiser.getIcon());
+		submarineImageLabel = new JLabel(submarine.getIcon());
+		carrierImageLabel = new JLabel(carrier.getIcon());
+		destroyerImageLabel = new JLabel(destroyer.getIcon());
+		battleshipImageLabel = new JLabel(battleship.getIcon());
+	
+		//player ships vertical
+		cruiserImageLabelVERT = new JLabel(cruiserV.getIcon());
+		submarineImageLabelVERT = new JLabel(submarineV.getIcon());
+		carrierImageLabelVERT= new JLabel(carrierV.getIcon());
+		destroyerImageLabelVERT = new JLabel(destroyerV.getIcon());
+		battleshipImageLabelVERT = new JLabel(battleshipV.getIcon());
+		
+		//enemy ships horizontal
+		enemyCruiserLabel = new JLabel(cruiser.getIcon());
+		enemySubmarineLabel = new JLabel(submarine.getIcon());
+		enemyCarrierLabel = new JLabel(carrier.getIcon());
+		enemyDestroyerLabel = new JLabel(destroyer.getIcon());
+		enemyBattleshipLabel = new JLabel(battleship.getIcon());
 				
 
-		
 		cruiserImageLabel.setPreferredSize(new java.awt.Dimension(120, 60));
 		submarineImageLabel.setPreferredSize(new java.awt.Dimension(90, 60));
 		carrierImageLabel.setPreferredSize(new java.awt.Dimension(150, 60));
@@ -488,8 +498,7 @@ public class Battleship extends JFrame {
 		enemySubmarineLabel.setPreferredSize(new java.awt.Dimension(90, 60));
 		enemyDestroyerLabel.setPreferredSize(new java.awt.Dimension(60, 60));
 		
-		
-		
+
 		javax.swing.GroupLayout shipInventoryLayout = new javax.swing.GroupLayout(shipInventory);
 		shipInventory.setLayout(shipInventoryLayout);
 		
@@ -592,7 +601,6 @@ public class Battleship extends JFrame {
 				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)		
 				.addGap(124, 124, 124)));
 
-
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);
 		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
@@ -633,10 +641,8 @@ public class Battleship extends JFrame {
 	}
 	
 	//Displays Horizontal or Vertical ships for player placement
-	class RadioListener implements ActionListener, ChangeListener, ItemListener {  //for curiosity only
-        public void actionPerformed(ActionEvent e) {
-            //String factoryName = null;
-            
+	class RadioListener implements ActionListener, ChangeListener, ItemListener {  
+        public void actionPerformed(ActionEvent e) {  
             
             if (e.getActionCommand() == "Horizontal") {
                //checks to see if each ship has been placed and displays it if not
@@ -690,19 +696,17 @@ public class Battleship extends JFrame {
         //Required from super class
 		@Override
 		public void itemStateChanged(ItemEvent e) {
-			// TODO Auto-generated method stub
 			
 		}
 		//Required from super class
 		@Override
 		public void stateChanged(ChangeEvent e) {
-			// TODO Auto-generated method stub
 			
 		}
     
 	}
 	
-	//generates a randomm integer
+	//generates a random integer
 	public static int randInt(int min, int max) {
 		Random rand = new Random();
 		int randomNum = rand.nextInt((max - min) + 1) + min;
@@ -726,8 +730,7 @@ public class Battleship extends JFrame {
 	//takes ipAddress
 	private void ipAddressFieldActionPerformed(java.awt.event.ActionEvent evt) {
 		
-		ipAddress = ipAddressField.getText();
-		
+		ipAddress = ipAddressField.getText();	
 	}
 
 	private void readyButtonActionPerformed(ActionEvent evt) {
@@ -802,6 +805,7 @@ public class Battleship extends JFrame {
 				}
 			}
 		}
+		
 		// Set Carrier
 		while (caD == false) {
 			randOrient = randInt(0,1);	
@@ -968,26 +972,23 @@ public class Battleship extends JFrame {
 			Runnable serverRunnable = new Runnable() {
 				@Override
 				public void run() {
-					runServer();// TODO Auto-generated method stub
+					runServer();
 				}
-
 			};
 			Thread serverThread = new Thread(serverRunnable);
-			serverThread.start(); // run server application
-
+			serverThread.start(); 
 		}
 	}
 
 	private void connectButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		connectButton.setEnabled(false);
 		hostButton.setEnabled(false);
-		
 		{
 			Runnable serverRunnable = new Runnable() {
 				@Override
 				public void run() {
 				
-					runClient(ipAddress);// TODO Auto-generated method stub
+					runClient(ipAddress);
 				}
 			};
 			Thread serverThread = new Thread(serverRunnable);
@@ -995,8 +996,8 @@ public class Battleship extends JFrame {
 		}
 	}
 
-	/* Start of server Methods */
-
+	
+	/******** Start of server Methods *************/
 	// set up and run server
 	private void runServer() {
 		try // set up server to receive connections; process connections
@@ -1116,10 +1117,8 @@ public class Battleship extends JFrame {
 	public void sendData(String message) {
 		try // send object to client
 		{
-			
 			output.writeObject(message);
 			output.flush(); // flush output to client
-			
 		} // end try
 		catch (IOException ioException) {
 			messageTextArea.append("\nError writing object");
@@ -1150,6 +1149,8 @@ public class Battleship extends JFrame {
 				); // end call to SwingUtilities.invokeLater
 	} // end method setTextFieldEditable
 
+	
+	/******** Start of client Methods *************/
 	// set up and run client
 	private void runClient(String ipAddress) {
 	
@@ -1212,13 +1213,13 @@ public class Battleship extends JFrame {
 					char l = message.charAt(0);
 					char m = message.charAt(1);
 
-					if ((l == '@' && m == '@') || (l == '!' && m == '!') || (l == '?' && m == '?') || (l == '^' && m == '^') || (l == '>' && m == '>') || (l == '#' && m == '#')) {
+					if ((l == '@' && m == '@') || (l == '!' && m == '!') || (l == '?' && m == '?') || 
+							(l == '^' && m == '^') || (l == '>' && m == '>') || (l == '#' && m == '#')) {
 						// filters the string message to determine if it is a
 						// game event or just a user message.
 						// if it is a game event, Gameplay class handles it.
-						// *****************************************************delete
-						// this later
 
+						
 						message = game.Translate(message);
 
 						sendDataClient(message);
@@ -1266,16 +1267,11 @@ public class Battleship extends JFrame {
 			messageTextArea.append("\nError writing object");
 		} // end catch
 	} // end method sendData
-
-	/* end of server Methods */
 	
 	
 	
 	
 	
-	
-	
-
 	// Main Method
 	public static void main(String args[]) {
 
@@ -1314,8 +1310,5 @@ public class Battleship extends JFrame {
 			}
 		});
 
-	}
-
-	
-
+	}	
 }
