@@ -1,3 +1,9 @@
+/**
+ Listens to when mouse is unclicked
+ Copyright: Rob Close and Charlie Sun
+ Created on: 03/01/2014
+ */
+
 import java.awt.Component;
 import java.awt.Point;
 import java.awt.datatransfer.DataFlavor;

@@ -729,7 +729,6 @@ public class Battleship extends JFrame {
 
 	//takes ipAddress
 	private void ipAddressFieldActionPerformed(java.awt.event.ActionEvent evt) {
-		
 		ipAddress = ipAddressField.getText();	
 	}
 

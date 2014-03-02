@@ -1,3 +1,8 @@
+/**
+ Create player grid which is just an 2D string array
+ Copyright: Rob Close and Charlie Sun
+ Created on: 03/01/2014
+ */
 
 public class PlayerGrid {
 	private String[][] playerGrid;
@@ -12,7 +17,6 @@ public class PlayerGrid {
 
 			}
 		}
-
 	}
 
 	public String getGridContents(int x, int y) {

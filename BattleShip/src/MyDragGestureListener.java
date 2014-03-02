@@ -1,4 +1,8 @@
-
+/**
+ Listens to when drag starts
+ Copyright: Rob Close and Charlie Sun
+ Created on: 03/01/2014
+ */
 
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;

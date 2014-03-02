@@ -1,3 +1,9 @@
+/**
+ Handles the game logic
+ Copyright: Rob Close and Charlie Sun
+ Created on: 03/01/2014
+ */
+
 import java.awt.Point;
 
 import javax.swing.JLabel;

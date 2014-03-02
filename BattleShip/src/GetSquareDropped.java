@@ -1,3 +1,9 @@
+/**
+ Gets where the ship is dropped
+ Copyright: Rob Close and Charlie Sun
+ Created on: 03/01/2014
+ */
+
 import java.awt.Point;
 
 public class GetSquareDropped {
