@@ -1,6 +1,9 @@
 Battleship
 ==========
 
+*** Code is scheduled for rework to follow better OOP design standards...
+
+
 "Battleship" network game for COSC 330
 
 This was my first attempt at a network game. It was a class project that I completed with Charlie Sun. To play the game, run the .jar on 2 computers that are connected to the same network. 
